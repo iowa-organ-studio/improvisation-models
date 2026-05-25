@@ -125,55 +125,46 @@ function accidentalOffset(acc) {
 }
 
 function offsetToAccidental(o) {
-    if (o === 0) return 'n';
-    if (o > 0) return '#'.repeat(o);
-    return '-'.repeat(Math.abs(o));
+
+    if (o === 1) return '#';
+    if (o === 2) return '##';
+
+    if (o === -1) return '-';
+    if (o === -2) return '--';
+
+    return '';
 }
 
 // ----------------------------
 
-export function computeUpperNotesReferenced(bass, figure, tonic, mode) {
+export function computeNewUpperNotesReferenced(din, dfd) {
 
-    const din =
-        computeDiatonicIntervalNotes(bass, figure, tonic, mode)
-            .trim()
-            .split(/\s+/);
+    const notes =
+        din.split(' ');
 
-    const numerals =
-        getFigureNumerals(figure);
+    const devs =
+        dfd.split(' ').map(Number);
 
-    // extract accidental tokens IN ORDER
-    const accidentalTokens =
-        [...figure.matchAll(/(--|##|#|-|n)/g)]
-            .map(m => m[0]);
+    return notes.map((note, i) => {
 
-    const result = [];
+        const letter =
+            note[0];
 
-    let accIndex = 0;
+        const baseAcc =
+            note.slice(1);
 
-    for (let i = 0; i < din.length; i++) {
+        const baseOffset =
+            accidentalOffset(baseAcc);
 
-        const base = din[i];
+        const finalOffset =
+            baseOffset + devs[i];
 
-        // default: keep diatonic accidental
-        let accidental = base.slice(1);
+        return (
+            letter +
+            offsetToAccidental(finalOffset)
+        );
 
-        // if figure explicitly specifies accidental, override
-        if (accIndex < accidentalTokens.length) {
-
-            const figAcc = accidentalTokens[accIndex++];
-
-            // ✅ THIS is the key rule:
-            // replace, not adjust
-            accidental = figAcc === 'n'
-                ? 'n'
-                : figAcc;
-        }
-
-        result.push(base[0] + accidental);
-    }
-
-    return result.join(' ');
+    }).join(' ');
 }
 
 // ----------------------------
