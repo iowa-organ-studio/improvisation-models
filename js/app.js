@@ -35,7 +35,7 @@ function getModelFromURL() {
 }
 
 async function loadConfig() {
-    const module = await import(`/tunes/${currentModel}/config.js`);
+    const module = await import(`./tunes/${currentModel}/config.js`);
     config = module.default;
 
 
