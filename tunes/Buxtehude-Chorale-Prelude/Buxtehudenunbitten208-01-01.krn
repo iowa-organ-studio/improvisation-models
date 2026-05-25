@@ -2,32 +2,32 @@
 !!! Title: Nun Bitten 208
 !!! Number: 1
 !!! Level: 1
-**kern	**fb	**kern	**text
-*clefF4	*clefF4	*clefG2	*
-*k[f#]	*k[f#]	*k[f#]	*
-*met(c)	*met(c)	*met(c)	*
-*G:	*G:	*G:	*
+**kern	**fb	**text	**kern
+*clefF4	*clefF4	*	*clefG2
+*k[f#]	*k[f#]	*	*k[f#]
+*met(c)	*met(c)	*	*met(c)
+*G:	*G:	*	*G:
 =1	=1	=1	=1
-2G	5	1g	.
+2G	5	.	1g
 2C	5	.	.
 =2	=2	=2	=2
-2C	6	2a	.
-4AA	5	2a	.
+2C	6	.	2a
+4AA	5	.	2a
 4D	5	.	.
 =3	=3	=3	=3
-4E	5	2g	.
+4E	5	.	2g
 4BB	6	.	.
-4C	9	2e	.
+4C	9	.	2e
 4AA	5	.	.
 =4	=4	=4	=4
-2.BB	9 7	2d	.
+2.BB	9 7	.	2d
 .	8 6	.	.
-.	.	2g	.
+.	.	.	2g
 4C	.	.	.
 =5	=5	=5	=5
-1D	6 4	2g	.
-.	5 3	2f#	.
+1D	6 4	.	2g
+.	5 3	.	2f#
 =6	=6	=6	=6
-GG	.	g	.
+GG	.	.	g
 ==	==	==	==
 *-	*-	*-	*-
