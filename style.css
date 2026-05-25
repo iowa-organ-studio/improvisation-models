@@ -1,0 +1,828 @@
+/* =====================================================
+   ROOT DESIGN SYSTEM
+===================================================== */
+
+:root{
+
+   /* =====================================================
+   TRAINER HERO
+===================================================== */
+
+.trainer-hero{
+
+  position:relative;
+
+  display:flex;
+
+  align-items:stretch;
+
+  min-height:220px;
+
+  overflow:hidden;
+
+  border-radius:28px;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      #1f1f1f 0%,
+      #111 45%,
+      #070707 100%
+    );
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+  margin-bottom:10px;
+}
+
+
+/* =====================================================
+   LEFT SIDE
+===================================================== */
+
+.trainer-hero-left{
+
+  width:52%;
+
+  padding:20px 20px 18px 20px;
+
+  position:relative;
+
+  z-index:3;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:space-between;
+}
+
+
+/* =====================================================
+   TITLE ROW
+===================================================== */
+
+.trainer-title-row{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:24px;
+
+  flex-wrap:wrap;
+}
+
+
+.trainer-model-title{
+
+  font-family:'Cormorant Garamond', serif;
+
+  font-size:clamp(26px,3vw,38px);
+
+  line-height:0.95;
+
+  font-weight:600;
+
+  color:white;
+
+  letter-spacing:-0.02em;
+}
+
+
+/* =====================================================
+   KEY PILL
+===================================================== */
+
+.hero-key-pill{
+
+  padding:6px 10px;
+
+  border-radius:10px;
+
+  background:rgba(255,255,255,0.92);
+
+  border:1px solid rgba(255,255,255,0.16);
+
+  color:#111;
+
+  font-size:.9rem;
+
+  font-weight:600;
+
+  white-space:nowrap;
+}
+
+
+/* =====================================================
+   TOOLBAR ROW
+===================================================== */
+
+.hero-toolbar-row{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  flex-wrap:wrap;
+
+  margin-top:18px;
+
+  margin-bottom:18px;
+}
+
+
+/* =====================================================
+   WHITE TOOL CARDS
+===================================================== */
+
+.key-toolbar-card,
+.transpose-toolbar-card{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  padding:8px 10px;
+
+  border-radius:14px;
+
+  background:rgba(255,255,255,0.94);
+
+  border:1px solid rgba(255,255,255,0.14);
+
+  backdrop-filter:blur(4px);
+}
+
+
+/* =====================================================
+   CTA BUTTON
+===================================================== */
+.hero-random-btn{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  align-self:flex-start;
+
+  margin-top:2px;
+
+  padding:13px 22px !important;
+
+  border-radius:999px !important;
+
+  background:#FFCD00 !important;
+
+  color:#111 !important;
+
+  border:none !important;
+
+  font-size:14px !important;
+
+  font-weight:700 !important;
+
+  letter-spacing:0.08em !important;
+
+  text-transform:uppercase !important;
+
+  line-height:normal !important;
+
+  box-shadow:none !important;
+
+  min-height:auto !important;
+
+  min-width:auto !important;
+
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
+}
+
+.hero-random-btn:hover{
+
+  transform:translateX(4px);
+
+  filter:brightness(108%);
+
+  background:#FFCD00 !important;
+}
+
+.hero-random-btn:active{
+
+  transform:translateX(1px);
+
+  background:#FFCD00 !important;
+}
+/* =====================================================
+   RIGHT SIDE
+===================================================== */
+
+.trainer-hero-right{
+
+  position:relative;
+
+  width:48%;
+
+  min-height:220px;
+}
+
+
+/* =====================================================
+   MUSIC IMAGE
+===================================================== */
+
+.music-image{
+
+  position:absolute;
+
+  inset:0;
+
+  width:100%;
+
+  height:100%;
+
+  object-fit:cover;
+
+  object-position:center;
+
+  opacity:0.58;
+
+  filter:
+    sepia(10%)
+    contrast(118%)
+    brightness(108%);
+}
+
+
+/* =====================================================
+   OVERLAY
+===================================================== */
+
+.trainer-hero-right::before{
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  z-index:1;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(10,10,10,0.94) 0%,
+      rgba(10,10,10,0.40) 36%,
+      rgba(10,10,10,0.08) 100%
+    );
+}
+
+
+/* =====================================================
+   COMPOSER IMAGE
+===================================================== */
+
+.composer-image{
+
+  position:absolute;
+
+  right:0;
+
+  bottom:0;
+
+  height:100%;
+
+  width:auto;
+
+  object-fit:contain;
+
+  z-index:2;
+
+  opacity:0.92;
+
+  filter:
+    grayscale(10%)
+    contrast(108%)
+    drop-shadow(
+      0 8px 24px rgba(0,0,0,0.45)
+    );
+
+  -webkit-mask-image:
+    linear-gradient(
+      to left,
+      rgba(0,0,0,1) 72%,
+      rgba(0,0,0,0) 100%
+    );
+
+  mask-image:
+    linear-gradient(
+      to left,
+      rgba(0,0,0,1) 72%,
+      rgba(0,0,0,0) 100%
+    );
+} 
+
+  --bg: #f3f2ed;
+  --card: #ffffff;
+  --border: #d6d3cf;
+
+  --ink: #1b1b1f;
+  --muted: #4b4d53;
+
+  --silver: #d6d3cf;
+  --pewter: #b7b4b0;
+
+  --selected-bg: #c4ccd9;
+  --selected-border: #808899;
+  --selected-ink: #1b1b1f;
+
+  --grey: #e2e0da;
+}
+
+
+/* =====================================================
+   GLOBAL
+===================================================== */
+
+html,
+body{
+  height:100%;
+}
+
+body{
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  margin:12px;
+  background:var(--bg);
+  color:var(--ink);
+}
+
+
+/* =====================================================
+   TYPOGRAPHY
+===================================================== */
+
+h1,
+h2{
+  margin:0;
+}
+
+.small{
+  font-size:.82rem;
+  color:var(--muted);
+}
+
+
+/* =====================================================
+   GENERIC LAYOUT
+===================================================== */
+
+
+
+
+/* =====================================================
+   GENERIC GROUP CARD
+===================================================== */
+
+.key-toolbar-card,
+.transpose-toolbar-card,
+.clef-card,
+.summary-controls{
+
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  background:#fff;
+
+  border:1px solid var(--border);
+
+  border-radius:10px;
+
+  padding:6px 8px;
+}
+
+
+
+/* =====================================================
+   BUTTON SYSTEM
+===================================================== */
+
+button{
+
+  padding:4px 8px;
+
+  border-radius:999px;
+
+  border:1px solid var(--grey);
+
+  background:var(--grey);
+
+  color:#222;
+
+  cursor:pointer;
+
+  font-size:.82rem;
+
+  line-height:1;
+
+  transition:
+    background .15s ease,
+    transform .15s ease,
+    border-color .15s ease;
+}
+
+
+button:hover{
+  transform:translateY(-1px);
+}
+
+button:active{
+  transform:translateY(1px);
+}
+
+
+/* =====================================================
+   PRIMARY ACTION BUTTON
+===================================================== */
+
+#randomBtn{
+
+  padding:8px 14px;
+
+  border-radius:999px;
+
+  background:linear-gradient(
+    to bottom,
+    #2e3137,
+    #1b1b1f
+  );
+
+  color:#fff;
+
+  border:1px solid #0f1012;
+
+  font-weight:600;
+
+  box-shadow:
+    0 1px 0 rgba(0,0,0,0.4),
+    0 6px 12px rgba(0,0,0,0.25);
+}
+
+#randomBtn:hover{
+  background:linear-gradient(to bottom,#353941,#1b1b1f);
+}
+
+#randomBtn:active{
+  background:linear-gradient(to bottom,#1b1b1f,#141417);
+}
+
+
+/* =====================================================
+   SELECTED STATE SYSTEM
+===================================================== */
+
+.selected,
+.key-btn.selected,
+.mode-toggle.selected,
+.clef-toggle.selected{
+
+  background:var(--selected-bg) !important;
+
+  border-color:var(--selected-border) !important;
+
+  color:var(--selected-ink) !important;
+}
+
+
+/* =====================================================
+   KEY BUTTONS
+===================================================== */
+
+.key-btn{
+  min-width:36px;
+}
+
+
+/* =====================================================
+   ALL/NONE BUTTONS
+===================================================== */
+
+#selectAllKeysBtn,
+#selectNoneKeysBtn{
+
+  background:#fff;
+
+  border-color:var(--border);
+
+  font-weight:600;
+}
+
+
+/* =====================================================
+   DETAILS PANELS
+===================================================== */
+
+details{
+
+  margin-bottom:8px;
+
+  background:var(--card);
+
+  border:1px solid var(--border);
+
+  border-radius:10px;
+
+  padding:8px;
+}
+
+summary{
+  list-style:none;
+  cursor:pointer;
+}
+
+summary::-webkit-details-marker{
+  display:none;
+}
+
+
+/* =====================================================
+   SUMMARY ROW
+===================================================== */
+
+.summary-row{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+  flex-wrap:wrap;
+}
+
+.summary-title{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  font-weight:700;
+
+  font-size:.95rem;
+
+  white-space:nowrap;
+}
+
+
+/* =====================================================
+   MINI CONTROLS
+===================================================== */
+
+.mini-control-group{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:6px;
+
+  white-space:nowrap;
+}
+
+.mini-control-group span{
+
+  font-size:.82rem;
+
+  font-weight:700;
+
+  color:#333;
+}
+
+.mini-control-group input{
+
+  width:46px;
+
+  padding:4px 6px;
+
+  border-radius:8px;
+
+  border:1px solid var(--border);
+
+  text-align:center;
+
+  font-size:.82rem;
+
+  background:#fff;
+
+  color:var(--ink);
+}
+
+
+/* =====================================================
+   VIEWERS
+===================================================== */
+
+.score-viewer{
+  overflow-x:auto;
+}
+
+.score-viewer svg{
+  width:100%;
+  height:auto;
+  background:#fff;
+}
+
+#level0,
+#level1,
+#level2{
+  margin-top:4px;
+}
+
+
+/* =====================================================
+   MODE TOGGLES
+===================================================== */
+
+.mode-toggle-group{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.mode-toggle{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:6px;
+
+  padding:4px 8px;
+
+  border-radius:999px;
+
+  border:1px solid var(--grey);
+
+  background:var(--grey);
+
+  color:#222;
+
+  font-size:.82rem;
+
+  line-height:1;
+
+  cursor:pointer;
+}
+
+.mode-toggle input{
+  display:none;
+}
+
+
+/* =====================================================
+   CLEF TOOLBAR
+===================================================== */
+
+.clef-toolbar{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  margin-top:8px;
+
+  flex-wrap:wrap;
+}
+
+.clef-label{
+
+  font-size:.82rem;
+
+  font-weight:700;
+}
+
+
+/* =====================================================
+   CLEF TOGGLES
+===================================================== */
+
+.clef-toggle{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  width:36px;
+
+  height:36px;
+
+  border-radius:10px;
+
+  border:1px solid var(--grey);
+
+  background:var(--grey);
+
+  cursor:pointer;
+
+  font-size:24px;
+
+  line-height:1;
+}
+
+.clef-toggle input{
+  display:none;
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.bottom-logo-wrap{
+
+  display:flex;
+
+  justify-content:center;
+
+  margin-top:18px;
+
+  padding-top:6px;
+}
+
+.logo-card{
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+}
+
+.logo-card img{
+
+  height:105px;
+
+  width:auto;
+
+  display:block;
+}
+
+
+/* =====================================================
+   REMOVE HR HEAVINESS
+===================================================== */
+
+hr{
+
+  border:none;
+
+  border-top:1px solid var(--border);
+
+  margin:8px 0;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 900px){
+
+  .summary-row{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .summary-controls{
+    width:100%;
+    flex-wrap:wrap;
+  }
+
+  .top-toolbar{
+    align-items:flex-start;
+  }
+
+  .logo-card{
+    width:100%;
+  }
+
+  .logo-card img{
+    height:64px;
+  }
+}

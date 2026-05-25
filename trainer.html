@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Trainer</title>
+
+  <link rel="stylesheet" href="./style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+
+  <script src="https://www.verovio.org/javascript/latest/verovio-toolkit-wasm.js"></script>
+  <script src="https://www.verovio.org/javascript/latest/verovio-toolkit-hum.js"></script>
+</head>
+
+<body>
+
+  <!-- ===================================================== -->
+  <!-- TOP HEADER -->
+  <!-- ===================================================== -->
+
+  <!-- ===================================================== -->
+  <!-- TRAINER HERO -->
+  <!-- ===================================================== -->
+
+  <div class="trainer-hero">
+
+    <!-- LEFT SIDE -->
+
+    <div class="trainer-hero-left">
+
+      <!-- TITLE ROW -->
+
+      <div class="trainer-title-row">
+
+        <div id="modelTitle" class="trainer-model-title">
+          Buxtehude Chorale Prelude
+        </div>
+
+        <div id="keyDisplay" class="hero-key-pill">
+          Current key:
+        </div>
+
+      </div>
+
+
+      <!-- TOOLBAR ROW -->
+
+      <div class="hero-toolbar-row">
+
+        <!-- KEY FILTERS -->
+
+        <div class="key-toolbar-card">
+
+          <button class="key-btn" data-count="0">0♯/♭</button>
+          <button class="key-btn" data-count="1">1♯/♭</button>
+          <button class="key-btn" data-count="2">2♯/♭</button>
+          <button class="key-btn" data-count="3">3♯/♭</button>
+          <button class="key-btn" data-count="4">4♯/♭</button>
+          <button class="key-btn" data-count="5">5♯/♭</button>
+          <button class="key-btn" data-count="6">6♯/♭</button>
+          <button class="key-btn" data-count="7">7♯/♭</button>
+
+          <button id="selectAllKeysBtn">All</button>
+
+          <button id="selectNoneKeysBtn">None</button>
+
+        </div>
+
+
+        <!-- TRANSPOSITION -->
+
+        <div class="transpose-toolbar-card">
+
+          <button id="downKey">–</button>
+
+          <button id="upKey">+</button>
+
+          <button id="enharmonicBtn">
+            ♯/♭
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- CTA -->
+
+      <button id="randomBtn" class="hero-random-btn">
+        Random Phrase →
+      </button>
+
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+
+    <div class="trainer-hero-right">
+
+      <img id="heroMusicImage" class="music-image" src="">
+
+      <img id="heroComposerImage" class="composer-image" src="">
+
+    </div>
+
+  </div>
+  <!-- ===================================================== -->
+  <!-- LEVEL 0 -->
+  <!-- ===================================================== -->
+
+  <div id="level0Wrap">
+
+    <details id="level0Details">
+
+      <summary>
+
+        <div class="summary-row">
+
+          <div class="summary-title">
+            Chorale
+          </div>
+
+          <div class="summary-controls">
+
+            <div class="mini-control-group">
+
+              <span>Scale</span>
+
+              <button id="l0ScaleMinus">−</button>
+
+              <input id="l0ScaleValue" type="text" value="42">
+
+              <button id="l0ScalePlus">+</button>
+
+            </div>
+
+            <div class="mini-control-group">
+
+              <span>Space</span>
+
+              <button id="l0SpacingMinus">−</button>
+
+              <input id="l0SpacingValue" type="text" value="1.00">
+
+              <button id="l0SpacingPlus">+</button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </summary>
+
+      <div id="level0"></div>
+
+    </details>
+
+  </div>
+
+  <!-- ===================================================== -->
+  <!-- LEVEL 1 -->
+  <!-- ===================================================== -->
+
+  <details id="level1Details">
+
+    <summary>
+
+      <div class="summary-row">
+
+        <div class="summary-title">
+
+          Harmonic Reduction
+
+          <span class="mode-toggle-group">
+
+            <label id="historicLabel" class="mode-toggle selected">
+
+              <input type="radio" name="fbMode" value="historic" checked>
+
+              Historic
+
+            </label>
+
+            <label id="modernLabel" class="mode-toggle">
+
+              <input type="radio" name="fbMode" value="modern">
+
+              Modern
+
+            </label>
+
+          </span>
+
+        </div>
+
+        <div class="summary-controls">
+
+          <div class="mini-control-group">
+
+            <span>Scale</span>
+
+            <button id="l1ScaleMinus">−</button>
+
+            <input id="l1ScaleValue" type="text" value="42">
+
+            <button id="l1ScalePlus">+</button>
+
+          </div>
+
+          <div class="mini-control-group">
+
+            <span>Space</span>
+
+            <button id="l1SpacingMinus">−</button>
+
+            <input id="l1SpacingValue" type="text" value="0.80">
+
+            <button id="l1SpacingPlus">+</button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </summary>
+
+    <div id="level1"></div>
+
+  </details>
+
+  <!-- ===================================================== -->
+  <!-- LEVEL 2 -->
+  <!-- ===================================================== -->
+
+  <details id="level2Details">
+
+    <summary>
+
+      <div class="summary-row">
+
+        <div class="summary-title">
+          Foreground
+        </div>
+
+        <div class="summary-controls">
+
+          <div class="mini-control-group">
+
+            <span>Scale</span>
+
+            <button id="l2ScaleMinus">−</button>
+
+            <input id="l2ScaleValue" type="text" value="42">
+
+            <button id="l2ScalePlus">+</button>
+
+          </div>
+
+          <div class="mini-control-group">
+
+            <span>Space</span>
+
+            <button id="l2SpacingMinus">−</button>
+
+            <input id="l2SpacingValue" type="text" value="0.50">
+
+            <button id="l2SpacingPlus">+</button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </summary>
+
+    <div id="level2"></div>
+
+    <div class="clef-toolbar">
+
+      <!-- ALTO -->
+
+      <div class="clef-card">
+
+        <span class="clef-label">
+          Alto
+        </span>
+
+        <label id="altoTrebleLabel" class="clef-toggle selected">
+
+          <input type="radio" id="altoTrebleRadio" name="altoClef">
+
+          𝄞
+
+        </label>
+
+        <label id="altoBassLabel" class="clef-toggle">
+
+          <input type="radio" id="altoBassRadio" name="altoClef">
+
+          𝄢
+
+        </label>
+
+      </div>
+
+
+      <!-- TENOR -->
+
+      <div class="clef-card">
+
+        <span class="clef-label">
+          Tenor
+        </span>
+
+        <label id="tenorTrebleLabel" class="clef-toggle selected">
+
+          <input type="radio" id="tenorTrebleRadio" name="tenorClef">
+
+          𝄞
+
+        </label>
+
+        <label id="tenorBassLabel" class="clef-toggle">
+
+          <input type="radio" id="tenorBassRadio" name="tenorClef">
+
+          𝄢
+
+        </label>
+
+      </div>
+
+    </div>
+
+
+
+
+
+  </details>
+
+  <!-- ===================================================== -->
+  <!-- APP -->
+  <!-- ===================================================== -->
+
+  <!-- LOGO -->
+
+  <div class="logo-card">
+
+    <img src="./img/Organ-Studio-LockupStacked-RGB.svg" alt="Organ Studio Logo">
+
+  </div>
+
+  <script type="module" src="./js/app.js"></script>
+
+</body>
+
+</html>

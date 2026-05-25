@@ -1,0 +1,384 @@
+/* =====================================================
+   LANDING PAGE ONLY
+===================================================== */
+
+body.landing-page {
+
+    margin: 0;
+
+    background: #dfdcd4;
+    
+
+    font-family: 'Inter', sans-serif;
+}
+
+
+/* =====================================================
+   GLOBAL
+===================================================== */
+
+.landing-page * {
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   PAGE TITLE
+===================================================== */
+
+.page-title {
+
+    padding-top: 70px;
+
+    padding-bottom: 34px;
+
+    text-align: center;
+}
+
+
+.page-title h1 {
+
+    margin: 0;
+
+    font-family: 'Cormorant Garamond', serif;
+
+    font-size: clamp(36px, 8vw, 52px);
+
+    font-weight: 600;
+
+    letter-spacing: -0.03em;
+}
+
+
+/* =====================================================
+   MODELS CONTAINER
+===================================================== */
+
+.models-container {
+
+    width: min(1400px, calc(100% - 40px));
+
+    margin: 0 auto 80px auto;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 32px;
+}
+
+
+/* =====================================================
+   MODEL CARD
+===================================================== */
+
+.model-card {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    min-height: 200px;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    text-decoration: none;
+
+    color: white;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            #1f1f1f 0%,
+            #111 45%,
+            #070707 100%
+        );
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+
+.model-card:hover {
+
+    transform: translateY(-4px);
+
+    border-color:
+        rgba(255,255,255,0.18);
+
+    box-shadow:
+        0 24px 60px rgba(0,0,0,0.45);
+}
+
+
+/* =====================================================
+   LEFT SIDE
+===================================================== */
+
+.model-left {
+
+    width: 44%;
+
+    padding: 20px 20px 20px 20px;
+
+    position: relative;
+
+    z-index: 3;
+}
+
+
+.model-left h2 {
+
+    margin-top: 0;
+
+    margin-bottom: 14px;
+
+    max-width: 440px;
+
+    font-family: 'Cormorant Garamond', serif;
+
+    font-size: clamp(20px, 3.5vw, 28px);
+
+    line-height: 0.95;
+
+    font-weight: 600;
+}
+
+
+.model-left p {
+
+    max-width: 420px;
+
+    font-size: 18px;
+
+    line-height: 1.5;
+
+    color:
+        rgba(255,255,255,0.78);
+}
+
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+.launch-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    margin-top: 24px;
+
+    padding: 13px 22px;
+
+    border-radius: 999px;
+
+    background: #FFCD00;
+
+    color: #111;
+
+    border: none;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+
+    text-transform: uppercase;
+
+    transition:
+        transform 0.2s ease,
+        filter 0.2s ease;
+}
+
+
+.model-card:hover .launch-button {
+
+    transform: translateX(4px);
+
+    filter: brightness(108%);
+}
+
+
+/* =====================================================
+   RIGHT SIDE
+===================================================== */
+
+.model-right {
+
+    position: relative;
+
+    width: 56%;
+
+    height: 200px;
+}
+
+
+/* =====================================================
+   MUSIC IMAGE
+===================================================== */
+
+.music-image {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    opacity: 0.58;
+
+    filter:
+        sepia(10%)
+        contrast(118%)
+        brightness(108%);
+}
+
+
+/* =====================================================
+   OVERLAY
+===================================================== */
+
+.model-right::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(10,10,10,0.94) 0%,
+            rgba(10,10,10,0.40) 36%,
+            rgba(10,10,10,0.08) 100%
+        );
+}
+
+
+/* =====================================================
+   COMPOSER IMAGE
+===================================================== */
+
+.composer-image {
+
+    position: absolute;
+
+    right: 0;
+
+    bottom: 0;
+
+    height: 100%;
+
+    width: auto;
+
+    object-fit: contain;
+
+    z-index: 2;
+
+    opacity: 0.92;
+
+    filter:
+        grayscale(10%)
+        contrast(108%)
+        drop-shadow(
+            0 8px 24px rgba(0,0,0,0.45)
+        );
+
+    -webkit-mask-image:
+        linear-gradient(
+            to left,
+            rgba(0,0,0,1) 72%,
+            rgba(0,0,0,0) 100%
+        );
+
+    mask-image:
+        linear-gradient(
+            to left,
+            rgba(0,0,0,1) 72%,
+            rgba(0,0,0,0) 100%
+        );
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .model-card {
+
+        flex-direction: column;
+
+        min-height: unset;
+    }
+
+    .model-left {
+
+        width: 100%;
+
+        padding: 34px;
+    }
+
+    .model-right {
+
+        width: 100%;
+
+        height: 300px;
+    }
+
+    .composer-image {
+
+        height: 95%;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .page-title {
+
+        padding-top: 40px;
+    }
+
+    .page-title h1 {
+
+        font-size: 56px;
+    }
+
+    .model-left {
+
+        padding: 24px;
+    }
+
+    .model-left h2 {
+
+        font-size: 46px;
+    }
+
+    .model-left p {
+
+        font-size: 16px;
+    }
+}
