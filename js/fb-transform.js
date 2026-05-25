@@ -72,30 +72,61 @@ const KEY_SIGNATURES = {
 };
 
 function getScaleAccidental(tonic, mode, letter) {
-    const key = `${tonic} ${mode}`;
-    return (KEY_SIGNATURES[key] || {})[letter] || 'n';
+    // Try both capitalizations for tonic
+    const key1 = `${tonic} ${mode}`;
+    const key2 = `${tonic.toLowerCase()} ${mode}`;
+    const sig = KEY_SIGNATURES[key1] || KEY_SIGNATURES[key2] || {};
+    return sig[letter] || 'n';
 }
 
+// ----------------------------
+
+// ----------------------------
+// FIGURE PARSING
+// ----------------------------
+
+function parseFigurePairs(figure) {
+    // Returns array of {numeral, accidental} in order
+    // Handles: "6 4", "5 #", "#", "n", "6#", "5-", "6 4\n5 #" etc.
+
+    const pairs = [];
+
+    // Match digit+optional_immediately_attached_accidental
+    const explicitMatches = [...figure.matchAll(/(\d+)(--|##|#|-|n)?/g)];
+    for (const m of explicitMatches) {
+        pairs.push({
+            numeral: Number(m[1]),
+            accidental: m[2] || null  // null = use diatonic
+        });
+    }
+
+    // Check for standalone accidental (not attached to any digit) = implied 3rd
+    const standaloneAcc = figure.match(/(?<!\d)(--|##|#|-|n)(?!\d)/)?.[0];
+    if (standaloneAcc) {
+        pairs.push({ numeral: 3, accidental: standaloneAcc });
+    }
+
+    return pairs;
+}
+
+// ----------------------------
+// DIATONIC LOGIC
 // ----------------------------
 
 export function computeDiatonicIntervalNotes(bass, figure, tonic, mode) {
     if (!bass) return '';
 
-    const numerals = getFigureNumerals(figure);
-    if (!numerals.length) return '';
+    const pairs = parseFigurePairs(figure);
+    if (!pairs.length) return '';
 
     const bassLetter = bass[0].toUpperCase();
     const index = LETTERS.indexOf(bassLetter);
 
-    const notes = [];
-
-    for (const n of numerals) {
-        const target = LETTERS[(index + n - 1) % 7];
+    return pairs.map(({ numeral }) => {
+        const target = LETTERS[(index + numeral - 1) % 7];
         const acc = getScaleAccidental(tonic, mode, target);
-        notes.push(target + acc);
-    }
-
-    return notes.join(' ');
+        return target + acc;
+    }).join(' ');
 }
 
 // ----------------------------
@@ -125,45 +156,27 @@ function accidentalOffset(acc) {
 }
 
 function offsetToAccidental(o) {
-
-    if (o === 1) return '#';
-    if (o === 2) return '##';
-
-    if (o === -1) return '-';
-    if (o === -2) return '--';
-
-    return '';
+    if (o === 0) return 'n';
+    if (o > 0) return '#'.repeat(o);
+    return '-'.repeat(Math.abs(o));
 }
 
 // ----------------------------
 
-export function computeNewUpperNotesReferenced(din, dfd) {
+export function computeUpperNotesReferenced(bass, figure, tonic, mode) {
+    const pairs = parseFigurePairs(figure);
+    if (!pairs.length) return '';
 
-    const notes =
-        din.split(' ');
+    const bassLetter = bass[0].toUpperCase();
+    const index = LETTERS.indexOf(bassLetter);
 
-    const devs =
-        dfd.split(' ').map(Number);
-
-    return notes.map((note, i) => {
-
-        const letter =
-            note[0];
-
-        const baseAcc =
-            note.slice(1);
-
-        const baseOffset =
-            accidentalOffset(baseAcc);
-
-        const finalOffset =
-            baseOffset + devs[i];
-
-        return (
-            letter +
-            offsetToAccidental(finalOffset)
-        );
-
+    return pairs.map(({ numeral, accidental }) => {
+        const target = LETTERS[(index + numeral - 1) % 7];
+        const diatonicAcc = getScaleAccidental(tonic, mode, target);
+        const finalAcc = accidental === null ? diatonicAcc
+                       : accidental === 'n'  ? 'n'
+                       : accidental;
+        return target + finalAcc;
     }).join(' ');
 }
 
@@ -211,18 +224,31 @@ export function computeNewUpperNotesReferenced(din, dfd) {
 // ----------------------------
 
 export function buildNewFigure(original, newNotes) {
-
-    // passthrough simple
     if (/^[\d\s]+$/.test(original)) return original;
     if (/[\/|\\]/.test(original)) return original;
 
     const accs = newNotes.split(' ').map(n => n.slice(1));
-    let i = 0;
+    let explicitIndex = 0;
+    let standaloneIndex = -1;
 
-    return original.replace(/(\d+)?(--|-|n|#|##)/g, (_, num) => {
-        const acc = accs[i++] || 'n';
-        return num ? num + acc : acc;
+    // Find which index in accs corresponds to the standalone accidental
+    const hasStandalone = /(?<!\d)(--|##|#|-|n)(?!\d)/.test(original);
+    const explicitCount = [...original.matchAll(/(\d+)(--|##|#|-|n)?/g)].length;
+    if (hasStandalone) standaloneIndex = explicitCount; // it's appended last by parseFigurePairs
+
+    // Replace digit+attached_accidental pairs
+    let result = original.replace(/(\d+)(--|##|#|-|n)?/g, (_, num, acc) => {
+        const newAcc = acc != null ? (accs[explicitIndex++] || 'n') : '';
+        return num + newAcc;
     });
+
+    // Replace standalone accidental
+    if (hasStandalone && standaloneIndex < accs.length) {
+        const newAcc = accs[standaloneIndex] || 'n';
+        result = result.replace(/(?<!\d)(--|##|#|-|n)(?!\d)/, newAcc);
+    }
+
+    return result;
 }
 
 // ----------------------------
@@ -279,40 +305,41 @@ export function computeKeyIntervalDescription(from, to) {
 }
 
 export function transposeBassNote(note, interval) {
-
     if (!note || !interval) return note;
 
-    const parsed = parseNote(note);
-    if (!parsed) return note;
+    // Separate repeated-letter octave prefix from accidental
+    const m = note.match(/^([A-Ga-g]+)([#\-]*)$/);
+    if (!m) return note;
 
-    const newLetterIndex =
-        (LETTER_INDEX[parsed.letter] + interval.letterShift) % 7;
+    const letters = m[1];          // e.g. "GG"
+    const accidental = m[2];       // e.g. ""
+    const coreLetter = letters[0].toUpperCase();
 
-    const newLetter =
-        Object.keys(LETTER_INDEX).find(
-            k => LETTER_INDEX[k] === newLetterIndex
-        );
+    const parsed = {
+        letter: coreLetter,
+        accidental: accidental === 'b' ? '-' : accidental
+    };
+
+    const newLetterIndex = (LETTER_INDEX[parsed.letter] + interval.letterShift) % 7;
+    const newLetter = Object.keys(LETTER_INDEX).find(k => LETTER_INDEX[k] === newLetterIndex);
 
     const naturalValue = SEMITONES[newLetter];
+    const targetValue = (noteToValue(coreLetter + accidental) + interval.semitoneShift) % 12;
 
-    const targetValue =
-        (noteToValue(note) + interval.semitoneShift) % 12;
+    let offset = targetValue - naturalValue;
+    if (offset > 6) offset -= 12;
+    if (offset < -6) offset += 12;
 
-    let accidentalOffset =
-        targetValue - naturalValue;
+    let newAcc = '';
+    if (offset > 0) newAcc = '#'.repeat(offset);
+    else if (offset < 0) newAcc = '-'.repeat(-offset);
 
-    if (accidentalOffset > 6) accidentalOffset -= 12;
-    if (accidentalOffset < -6) accidentalOffset += 12;
+    // Rebuild with same letter repetition, new pitch letter, new accidental
+    const newLetterRepeated = letters.replace(/[A-Ga-g]/g,
+        (c) => c === c.toUpperCase() ? newLetter : newLetter.toLowerCase()
+    );
 
-    let accidental = '';
-
-    if (accidentalOffset > 0) {
-        accidental = '#'.repeat(accidentalOffset);
-    } else if (accidentalOffset < 0) {
-        accidental = '-'.repeat(-accidentalOffset);
-    }
-
-    return newLetter + accidental;
+    return newLetterRepeated + newAcc;
 }
 
 // ----------------------------
@@ -446,6 +473,17 @@ export function transformKrnFiguredBass({
             DINNK,
             DFD
         );
+
+        console.log({
+            activeFigure,
+            currentBass,
+            newBass,
+            DIN,
+            UNR,
+            DFD,
+            DINNK,
+            NUNR
+        });
 
         const newFigure = buildNewFigure(
             activeFigure,
