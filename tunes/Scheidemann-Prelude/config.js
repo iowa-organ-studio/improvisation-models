@@ -1,12 +1,9 @@
-export default {
+{
+  "name": "Scheidemann Free Praeludia",
 
-  name: "Scheidemann Free Praeludia",
+  "heroMusicImage": "img/music/Praeludium.jpg",
 
-  heroMusicImage:
-    "img/music/Praeludium.jpg",
+  'heroComposerImage': "img/composers/Heinrich_Scheidemann.jpg",
 
-  heroComposerImage:
-    "img/composers/Heinrich_Scheidemann.jpg",
-
-  levels: [1, 2]
-};
+  "levels": [1, 2]
+}
