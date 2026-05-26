@@ -23,6 +23,10 @@ let tenorClef = 'treble';
 let altoClef = 'treble';
 
 let fbAnalysisRows = [];
+let allowMajor = true;
+let allowMinor = true;
+
+let phraseKeyCache = {};
 
 
 
@@ -35,7 +39,7 @@ function getModelFromURL() {
 }
 
 async function loadConfig() {
-    const module = await import(`../tunes/${currentModel}/config.js`);
+    const module = await import(`/tunes/${currentModel}/config.js`);
     config = module.default;
 
 
@@ -74,12 +78,75 @@ async function loadConfig() {
 }
 
 async function loadPhrases() {
-    const res = await fetch(`./tunes/${currentModel}/phrases.json`);
+
+    const res =
+        await fetch(
+            `./tunes/${currentModel}/phrases.json`
+        );
+
     phrases = await res.json();
+
+    phraseKeyCache = {};
+
+    for (const family of phrases) {
+
+        const path =
+            `./tunes/${currentModel}/${family}-01.krn`;
+
+        try {
+
+            const text =
+                await loadText(path);
+
+            phraseKeyCache[family] = text;
+
+        } catch (err) {
+
+            console.warn(
+                'Failed loading phrase metadata:',
+                family
+            );
+        }
+    }
 }
 
 function randomPhrase() {
-    return phrases[Math.floor(Math.random() * phrases.length)];
+
+    const filtered = phrases.filter(family => {
+
+        const krn = phraseKeyCache[family];
+
+        if (!krn) return true;
+
+        const parsed =
+            parseKeyFromKrn(krn);
+
+        if (
+            parsed.mode === 'major' &&
+            !allowMajor
+        ) {
+            return false;
+        }
+
+        if (
+            parsed.mode === 'minor' &&
+            !allowMinor
+        ) {
+            return false;
+        }
+
+        return true;
+    });
+
+    if (!filtered.length) {
+        return phrases[
+            Math.floor(Math.random() * phrases.length)
+        ];
+    }
+
+    return filtered[
+        Math.floor(Math.random() * filtered.length)
+    ];
 }
 
 async function loadFamily(family) {
@@ -124,13 +191,37 @@ function parseKeyFromKrn(krnText) {
     return { tonic, mode };
 }
 
+function parsePhraseInfo(krnText) {
+
+    const titleMatch =
+        krnText.match(/^!!!\s*Title:\s*(.*)$/mi);
+
+    const numberMatch =
+        krnText.match(/^!!!\s*Number:\s*(.*)$/mi);
+
+    const title =
+        titleMatch
+            ? titleMatch[1].trim()
+            : 'Unknown';
+
+    const number =
+        numberMatch
+            ? numberMatch[1].trim()
+            : '?';
+
+    return {
+        title,
+        number
+    };
+}
+
 async function loadText(path) {
     const r = await fetch(path);
     return await r.text();
 }
 
 const STEPPER_MAJOR = [
-    'C', 'Db', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'Bb', 'B'
+     'C',  'Db', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'Bb', 'B'
 ];
 
 const STEPPER_MINOR = [
@@ -180,13 +271,31 @@ function computeVerovioTranspose() {
 }
 
 function updateKeyPill() {
+    const prettyKey =
+        currentTargetTonic
+            .replace(/b/g, '♭')
+            .replace(/#/g, '♯');
+
     document.getElementById('keyDisplay').textContent =
-        `Current key: ${currentTargetTonic} ${originalKeyMode}`;
+        `Current key: ${prettyKey} ${originalKeyMode}`;
+}
+
+function updatePhrasePill() {
+
+    const info =
+        parsePhraseInfo(level1Text);
+
+    document.getElementById(
+        'phraseDisplay'
+    ).textContent =
+
+        `${info.title} Phrase ${info.number}`;
 }
 
 const ENHARMONIC_MAJOR = {
     'Db': 'C#', 'C#': 'Db',
-    'F#': 'Gb', 'Gb': 'F#'
+    'F#': 'Gb', 'Gb': 'F#',
+    'B': 'Cb', 'Cb': 'B',
 };
 
 const ENHARMONIC_MINOR = {
@@ -331,6 +440,7 @@ async function newPhrase() {
     await loadFamily(family);
     chooseRandomTargetKey();
     updateKeyPill();
+    updatePhrasePill();
 
     // reset UI defaults
 
@@ -582,14 +692,53 @@ function wireKeyButtons() {
         });
 }
 
+function wireModeButtons() {
+
+    const majorBtn =
+        document.getElementById('majorModeBtn');
+
+    const minorBtn =
+        document.getElementById('minorModeBtn');
+
+    majorBtn.addEventListener('click', () => {
+
+        allowMajor = !allowMajor;
+
+        majorBtn.classList.toggle(
+            'selected',
+            allowMajor
+        );
+    });
+
+    minorBtn.addEventListener('click', () => {
+
+        allowMinor = !allowMinor;
+
+        minorBtn.classList.toggle(
+            'selected',
+            allowMinor
+        );
+    });
+}
+
 function chooseRandomTargetKey() {
 
     const pool = [];
 
-    const source =
-        originalKeyMode === 'minor'
-            ? MINOR_BY_COUNT
-            : MAJOR_BY_COUNT;
+    let source = {};
+
+    if (originalKeyMode === 'minor') {
+
+        if (!allowMinor) return;
+
+        source = MINOR_BY_COUNT;
+
+    } else {
+
+        if (!allowMajor) return;
+
+        source = MAJOR_BY_COUNT;
+    }
 
     for (const count of enabledCounts) {
 
@@ -649,6 +798,7 @@ async function main() {
     wireClefOverrideRadios();
     syncClefRadios();
     wireKeyButtons();
+    wireModeButtons();
     refreshKeyButtonsUI();
     wireFbModeButtons();
     wireScaleSpacing('l0');
