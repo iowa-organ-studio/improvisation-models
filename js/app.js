@@ -39,40 +39,22 @@ function getModelFromURL() {
 }
 
 async function loadConfig() {
-    const module = await import(`./tunes/${currentModel}/config.js`);
-    config = module.default;
+    const res = await fetch(`./tunes/${currentModel}/config.json`);
+    config = await res.json();
 
-
-
-    console.log("CONFIG:", config);   // ✅ ADD THIS LINE RIGHT HERE
+    console.log("CONFIG:", config);
 
     document.getElementById('modelTitle').textContent = config.name;
 
-    const musicImage =
-        document.getElementById('heroMusicImage');
+    const musicImage = document.getElementById('heroMusicImage');
+    const composerImage = document.getElementById('heroComposerImage');
 
-    const composerImage =
-        document.getElementById('heroComposerImage');
-
-    if (musicImage && config.heroMusicImage) {
-
-        musicImage.src =
-            config.heroMusicImage;
-    }
-
-    if (composerImage && config.heroComposerImage) {
-
-        composerImage.src =
-            config.heroComposerImage;
-    }
+    if (musicImage && config.heroMusicImage) musicImage.src = config.heroMusicImage;
+    if (composerImage && config.heroComposerImage) composerImage.src = config.heroComposerImage;
 
     if (!config.levels.includes(0)) {
-        const wrap = document.getElementById('level0Wrap');
-        wrap.style.display = 'none';
-    }
-
-
-    else {
+        document.getElementById('level0Wrap').style.display = 'none';
+    } else {
         document.getElementById('level0Wrap').style.display = 'block';
     }
 }
