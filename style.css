@@ -32,7 +32,7 @@
 
   min-height:220px;
 
-  overflow:hidden;
+  overflow:visible;
 
   border-radius:28px;
 
@@ -57,7 +57,7 @@
 
 .trainer-hero-left{
 
-  width:52%;
+  width:100%;
 
   padding:20px 20px 18px 20px;
 
@@ -70,6 +70,8 @@
   flex-direction:column;
 
   justify-content:space-between;
+
+  overflow:visible;
 }
 
 
@@ -97,7 +99,7 @@
 
   font-family:'Cormorant Garamond', serif;
 
-  font-size:clamp(26px,3vw,38px);
+  font-size:clamp(52px,3vw,52px);
 
   line-height:0.95;
 
@@ -268,13 +270,14 @@
    RIGHT SIDE
 ===================================================== */
 
-.trainer-hero-right{
-
-  position:relative;
-
-  width:48%;
-
-  min-height:220px;
+.trainer-hero-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 60%; /* how far left the image bleeds */
+  min-height: unset;
+  margin-left: 0;
 }
 
 
