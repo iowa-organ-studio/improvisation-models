@@ -4,7 +4,21 @@
 
 :root{
 
-   /* =====================================================
+  --bg: #f3f2ed;
+
+  --card: #ffffff;
+
+  --border: #d6d3cf;
+
+  --ink: #1b1b1f;
+
+  --muted: #4b4d53;
+
+  --grey: #d4cfc4;
+
+}
+
+  /* =====================================================
    TRAINER HERO
 ===================================================== */
 
@@ -60,7 +74,7 @@
 
 
 /* =====================================================
-   TITLE ROW
+   TITLE ROW (the top row)
 ===================================================== */
 
 .trainer-title-row{
@@ -69,9 +83,13 @@
 
   align-items:center;
 
-  gap:24px;
+  gap:16px;
 
-  flex-wrap:wrap;
+  flex-wrap:nowrap;
+
+  white-space:nowrap;
+
+  overflow:hidden;
 }
 
 
@@ -92,16 +110,24 @@
 
 
 /* =====================================================
-   KEY PILL
+   KEY PILL ... controls Key and Title pill
 ===================================================== */
 
 .hero-key-pill{
 
-  padding:6px 10px;
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  height:34px;
+
+  padding:0 12px;
 
   border-radius:10px;
 
-  background:rgba(255,255,255,0.92);
+  background:#ffffff;
 
   border:1px solid rgba(255,255,255,0.16);
 
@@ -112,6 +138,10 @@
   font-weight:600;
 
   white-space:nowrap;
+
+  line-height:1;
+
+  transform:translateY(1px);
 }
 
 
@@ -134,29 +164,14 @@
   margin-bottom:18px;
 }
 
-
 /* =====================================================
-   WHITE TOOL CARDS
+   CTA ROW
 ===================================================== */
 
-.key-toolbar-card,
-.transpose-toolbar-card{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:8px;
-
-  padding:8px 10px;
-
-  border-radius:14px;
-
-  background:rgba(255,255,255,0.94);
-
-  border:1px solid rgba(255,255,255,0.14);
-
-  backdrop-filter:blur(4px);
+.hero-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 
@@ -221,6 +236,34 @@
 
   background:#FFCD00 !important;
 }
+
+
+/* =====================================================
+   MAJOR / MINOR FILTER CARD
+===================================================== */
+
+.mode-filter-card{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  background:#232323;
+
+  border:1px solid rgba(255,255,255,0.07);
+
+  border-radius:10px;
+
+  padding:6px 8px;
+}
+
+
+
+
+
+
 /* =====================================================
    RIGHT SIDE
 ===================================================== */
@@ -329,25 +372,6 @@
       rgba(0,0,0,0) 100%
     );
 } 
-
-  --bg: #f3f2ed;
-  --card: #ffffff;
-  --border: #d6d3cf;
-
-  --ink: #1b1b1f;
-  --muted: #4b4d53;
-
-  --silver: #d6d3cf;
-  --pewter: #b7b4b0;
-
-  --selected-bg: #c4ccd9;
-  --selected-border: #808899;
-  --selected-ink: #1b1b1f;
-
-  --grey: #e2e0da;
-}
-
-
 /* =====================================================
    GLOBAL
 ===================================================== */
@@ -384,17 +408,12 @@ h2{
    GENERIC LAYOUT
 ===================================================== */
 
-
-
-
 /* =====================================================
-   GENERIC GROUP CARD
+   GENERIC GROUP CARD — no key-toolbar-card here
 ===================================================== */
 
-.key-toolbar-card,
-.transpose-toolbar-card,
 .clef-card,
-.summary-controls{
+.summary-controls {
 
   display:flex;
   align-items:center;
@@ -408,6 +427,54 @@ h2{
 
   padding:6px 8px;
 }
+
+
+
+/* =====================================================
+   KEY TOOLBAR CARD
+===================================================== */
+
+.key-toolbar-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 10px;
+  padding: 6px 8px;
+  background: #232323;
+  border: 1px solid rgba(255,255,255,0.07);
+}
+
+
+/* =====================================================
+   KEY BUTTONS — ON STATE (incandescent)
+===================================================== */
+
+.key-toolbar-card .key-btn.selected {
+  background: #a8925c!important;
+  border-color: #a8760a !important;
+  
+}
+
+/* =====================================================
+   TRANSPOSE TOOLBAR CARD
+===================================================== */
+
+.transpose-toolbar-card {
+
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  background:#2a2a2a;
+
+  border:1px solid rgba(255,255,255,0.08);
+
+  border-radius:10px;
+
+  padding:6px 8px;
+}
+
+
 
 
 
@@ -485,21 +552,6 @@ button:active{
 }
 
 
-/* =====================================================
-   SELECTED STATE SYSTEM
-===================================================== */
-
-.selected,
-.key-btn.selected,
-.mode-toggle.selected,
-.clef-toggle.selected{
-
-  background:var(--selected-bg) !important;
-
-  border-color:var(--selected-border) !important;
-
-  color:var(--selected-ink) !important;
-}
 
 
 /* =====================================================
@@ -508,6 +560,7 @@ button:active{
 
 .key-btn{
   min-width:36px;
+  
 }
 
 
@@ -675,9 +728,9 @@ summary::-webkit-details-marker{
 
   border:1px solid var(--grey);
 
-  background:var(--grey);
+  
 
-  color:#222;
+  
 
   font-size:.82rem;
 
@@ -736,7 +789,7 @@ summary::-webkit-details-marker{
 
   border:1px solid var(--grey);
 
-  background:var(--grey);
+  
 
   cursor:pointer;
 
@@ -776,7 +829,7 @@ summary::-webkit-details-marker{
 
 .logo-card img{
 
-  height:105px;
+  height:165px;
 
   width:auto;
 
@@ -825,4 +878,32 @@ hr{
   .logo-card img{
     height:64px;
   }
+}
+
+/* =====================================================
+   INCANDESCENT BUTTON SYSTEM — all togglable buttons
+===================================================== */
+
+.key-toolbar-card .key-btn,
+.mode-filter-btn,
+.transpose-toolbar-card button,
+#enharmonicBtn,
+.mode-toggle,
+.clef-toggle {
+  background: white !important; /*this is for unselected */
+  border-color: #b8b2a6 !important;
+  color: #444 !important;
+}
+
+.key-toolbar-card .key-btn.selected,
+.mode-filter-btn.selected,
+#enharmonicBtn,
+.mode-toggle.selected,
+.clef-toggle.selected {
+  background: #e7d99a !important;
+  border-color: #c9b56a !important;
+  color: #1a1000 !important;
+  box-shadow:
+    0 0 6px rgba(200,140,10,0.35),
+    inset 0 1px 0 rgba(255,210,80,0.25);
 }
