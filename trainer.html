@@ -18,6 +18,7 @@
   <script src="https://www.verovio.org/javascript/latest/verovio-toolkit-hum.js"></script>
 </head>
 
+
 <body>
 
   <!-- ===================================================== -->
@@ -94,7 +95,7 @@
       </div>
 
 
-    <!-- CTA ROW -->
+      <!-- CTA ROW -->
 
       <div class="hero-cta-row">
 
@@ -118,7 +119,7 @@
     </div>
 
 
- 
+
 
     <!-- RIGHT SIDE -->
 
@@ -309,55 +310,34 @@
 
       <!-- ALTO -->
 
+      <!-- ALTO -->
       <div class="clef-card">
-
-        <span class="clef-label">
-          Alto
-        </span>
+        <span class="clef-label">Alto</span>
 
         <label id="altoTrebleLabel" class="clef-toggle selected">
-
           <input type="radio" id="altoTrebleRadio" name="altoClef">
-
-          𝄞
-
+          <img src="img/clefs/Treble_clef.svg" alt="Treble">
         </label>
 
         <label id="altoBassLabel" class="clef-toggle">
-
           <input type="radio" id="altoBassRadio" name="altoClef">
-
-          𝄢
-
+          <img src="img/clefs/Bass_clef.svg" alt="Bass">
         </label>
-
       </div>
 
-
       <!-- TENOR -->
-
       <div class="clef-card">
-
-        <span class="clef-label">
-          Tenor
-        </span>
+        <span class="clef-label">Tenor</span>
 
         <label id="tenorTrebleLabel" class="clef-toggle selected">
-
           <input type="radio" id="tenorTrebleRadio" name="tenorClef">
-
-          𝄞
-
+          <img src="img/clefs/Treble_clef.svg" alt="Treble">
         </label>
 
         <label id="tenorBassLabel" class="clef-toggle">
-
           <input type="radio" id="tenorBassRadio" name="tenorClef">
-
-          𝄢
-
+          <img src="img/clefs/Bass_clef.svg" alt="Bass">
         </label>
-
       </div>
 
     </div>
@@ -381,6 +361,18 @@
   </div>
 
   <script type="module" src="./js/app.js"></script>
+
+
+  <!-- HELP NOTCH -->
+  <div class="help-notch" id="helpNotch" onclick="openHelp()">?</div>
+
+  <div class="help-overlay" id="helpOverlay" onclick="closeHelp()"></div>
+  <div class="help-panel" id="helpPanel">
+    <div class="help-panel-inner">
+      <button class="help-close" id="helpClose" onclick="closeHelp()">✕</button>
+      <div id="helpContent"></div>
+    </div>
+  </div>
 
 </body>
 
