@@ -935,6 +935,7 @@ hr{
   cursor: pointer;
   z-index: 100;
   transition: background 0.15s ease;
+   transform: none;
 }
 
 .help-notch:hover {
