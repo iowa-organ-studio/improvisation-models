@@ -910,3 +910,104 @@ hr{
     0 0 6px rgba(200,140,10,0.35),
     inset 0 1px 0 rgba(255,210,80,0.25);
 }
+
+/* =====================================================
+   HELP NOTCH
+===================================================== */
+
+.help-notch {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111;
+  color: #FFCD00;
+  font-size: 1.8rem; /* change to resize notch */
+  font-weight: 700;
+  width: 72px;  /* change to resize notch */
+  height: 56px;  /* change to resize notch */
+  border-radius: 18px 18px 0 0;  /* change to resize notch */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+  transition: background 0.15s ease;
+}
+
+.help-notch:hover {
+  background: #222;
+}
+
+/* =====================================================
+   HELP OVERLAY
+===================================================== */
+
+.help-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 200;
+}
+
+.help-overlay.open {
+  display: block;
+}
+
+/* =====================================================
+   HELP PANEL
+===================================================== */
+
+.help-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-radius: 18px 18px 0 0;
+  z-index: 201;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.help-panel.open {
+  transform: translateY(0);
+}
+
+.help-panel-inner {
+  padding: 24px 24px 32px;
+  position: relative;
+}
+
+.help-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #666;
+  padding: 4px 8px;
+}
+
+#helpContent h3 {
+  margin: 0 0 10px;
+  font-size: 1.1rem;
+}
+
+#helpContent p {
+  font-size: 0.9rem;
+  color: #444;
+  line-height: 1.5;
+  margin: 0 0 8px;
+}
+
+.clef-toggle img {
+  height: 28px;
+  width: auto;
+  display: block;
+}
