@@ -1,3 +1,5 @@
+console.log('app.js module loaded');
+
 import { createToolkit, renderKrn } from './render.js';
 import { transformKrnFiguredBass, FB_MODE, setFbMode } from './fb-transform.js';
 
@@ -203,7 +205,7 @@ async function loadText(path) {
 }
 
 const STEPPER_MAJOR = [
-     'C',  'Db', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'Bb', 'B'
+    'C', 'Db', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'Bb', 'B'
 ];
 
 const STEPPER_MINOR = [
@@ -703,6 +705,27 @@ function wireModeButtons() {
     });
 }
 
+window.openHelp = openHelp;
+window.closeHelp = closeHelp;
+
+
+async function openHelp() {
+  console.log('openHelp called');
+  const res = await fetch(`./tunes/${currentModel}/help.html`);
+  console.log('fetch status:', res.status);
+  const html = await res.text();
+  console.log('html length:', html.length);
+  document.getElementById('helpContent').innerHTML = html;
+  document.getElementById('helpOverlay').classList.add('open');
+  document.getElementById('helpPanel').classList.add('open');
+}
+function closeHelp() {
+    document.getElementById('helpOverlay').classList.remove('open');
+    document.getElementById('helpPanel').classList.remove('open');
+}
+
+
+
 function chooseRandomTargetKey() {
 
     const pool = [];
@@ -786,6 +809,12 @@ async function main() {
     wireScaleSpacing('l0');
     wireScaleSpacing('l1');
     wireScaleSpacing('l2');
+
+
+
+    const notch = document.getElementById('helpNotch');
+console.log('helpNotch element:', notch);
+notch?.addEventListener('click', openHelp);
 
     document.getElementById('randomBtn')
         .addEventListener('click', newPhrase);
