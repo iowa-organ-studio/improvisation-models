@@ -58,10 +58,19 @@ function viewerAvailableWidth(targetElement) {
   const rect =
     targetElement.getBoundingClientRect();
 
+  const width = Math.max(
+    340,
+    Math.floor(rect.width || 0)
+  );
+
+  console.log('available width:', width, rect);
+
   return Math.max(
     340,
     Math.floor(rect.width || 0)
   );
+
+
 }
 
 async function renderWithPageWidth(
@@ -72,14 +81,14 @@ async function renderWithPageWidth(
   pageWidth,
   transposeValue = ''
 ) {
-
+console.log('rendering with pageWidth:', pageWidth);
   toolkit.setOptions({
 
     scale: options.scale,
 
-    transpose: transposeValue,
+    pageWidth: Math.round(pageWidth * (100 / options.scale)),
 
-    pageWidth: pageWidth,
+    transpose: transposeValue,
 
     adjustPageHeight: true,
 
@@ -92,10 +101,10 @@ async function renderWithPageWidth(
     pageMarginLeft: 12,
     pageMarginRight: 12,
 
-    noJustification: true,
+    noJustification: false,
     justifyVertically: false,
 
-    breaks: "none"
+    breaks: "auto"
   });
 
   toolkit.loadData(krnText);
@@ -126,13 +135,13 @@ export async function renderKrn(
     lastGoodPageWidth || available;
 
   await renderWithPageWidth(
-  toolkit,
-  krnText,
-  targetElement,
-  options,
-  pageWidth,
-  transposeValue
-);
+    toolkit,
+    krnText,
+    targetElement,
+    options,
+    pageWidth,
+    transposeValue
+  );
 
   let width =
     svgIntrinsicWidthPx(targetElement);
@@ -142,14 +151,14 @@ export async function renderKrn(
 
   pageWidth = available;
 
- await renderWithPageWidth(
-  toolkit,
-  krnText,
-  targetElement,
-  options,
-  pageWidth,
-  transposeValue
-);
+  await renderWithPageWidth(
+    toolkit,
+    krnText,
+    targetElement,
+    options,
+    pageWidth,
+    transposeValue
+  );
 
   lastGoodPageWidth = pageWidth;
 }
