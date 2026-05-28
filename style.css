@@ -917,10 +917,9 @@ hr{
 
 .help-notch {
   position: fixed;
- bottom: 0;   /* distance from bottom */
-  right: 24px;    /* distance from right */
+ bottom: 0;   
   
-  left: 50%;
+  left: 85%;
   transform: translateX(-50%);
   background: #111;
   color: #FFCD00;
@@ -935,7 +934,7 @@ hr{
   cursor: pointer;
   z-index: 100;
   transition: background 0.15s ease;
-   transform: none;
+   
 }
 
 .help-notch:hover {
