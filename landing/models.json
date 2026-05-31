@@ -1,0 +1,30 @@
+{
+  "models": [
+    {
+      "type": "model",
+      "title": "Scheidemann Free Praeludia",
+      "description": "Learn to embellish simple harmony with classic gestures.",
+      "musicImage": "img/music/Praeludium.jpg",
+      "composerImage": "img/composers/Heinrich_Scheidemann.jpg",
+      "model": "Scheidemann-Prelude"
+    },
+
+    {
+      "type": "model",
+      "title": "Buxtehude Chorale Preludes",
+      "description": "Turn a hymn tune into a lyrical soprano solo, with contrapuntal accompanimental voices.",
+      "musicImage": "img/music/Buxtehude-Chorale-Prelude.jpg",
+      "composerImage": "img/composers/Dieterich_Buxtehude.png",
+      "model": "Buxtehude-Chorale-Prelude"
+    },
+
+    {
+      "type": "collection",
+      "title": "Böhm Chorale Partita",
+      "description": "Turn a hymn tune into a variation set.",
+      "musicImage": "img/music/partita.png",
+      "composerImage": "img/composers/boehm.png",
+      "collection": "Boehm-Chorale-Partita"
+    }
+  ]
+}

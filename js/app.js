@@ -37,7 +37,14 @@ let phraseKeyCache = {};
 
 function getModelFromURL() {
     const params = new URLSearchParams(window.location.search);
-    return params.get('model') || 'Buxtehude-Chorale-Prelude';
+
+    const model = params.get('model');
+
+    if (!model) {
+        throw new Error("No model specified in URL.");
+    }
+
+    return model;
 }
 
 async function loadConfig() {
@@ -710,14 +717,14 @@ window.closeHelp = closeHelp;
 
 
 async function openHelp() {
-  console.log('openHelp called');
-  const res = await fetch(`./tunes/${currentModel}/help.html`);
-  console.log('fetch status:', res.status);
-  const html = await res.text();
-  console.log('html length:', html.length);
-  document.getElementById('helpContent').innerHTML = html;
-  document.getElementById('helpOverlay').classList.add('open');
-  document.getElementById('helpPanel').classList.add('open');
+    console.log('openHelp called');
+    const res = await fetch(`./tunes/${currentModel}/help.html`);
+    console.log('fetch status:', res.status);
+    const html = await res.text();
+    console.log('html length:', html.length);
+    document.getElementById('helpContent').innerHTML = html;
+    document.getElementById('helpOverlay').classList.add('open');
+    document.getElementById('helpPanel').classList.add('open');
 }
 function closeHelp() {
     document.getElementById('helpOverlay').classList.remove('open');
@@ -813,8 +820,8 @@ async function main() {
 
 
     const notch = document.getElementById('helpNotch');
-console.log('helpNotch element:', notch);
-notch?.addEventListener('click', openHelp);
+    console.log('helpNotch element:', notch);
+    notch?.addEventListener('click', openHelp);
 
     document.getElementById('randomBtn')
         .addEventListener('click', newPhrase);

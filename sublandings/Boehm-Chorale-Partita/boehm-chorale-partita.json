@@ -1,0 +1,36 @@
+{
+  "title": "Böhm Chorale Partita",
+  "description": "Choose a variation style.",
+  "heroMusicImage": "img/music/partita.png",
+  "heroComposerImage": "img/composers/boehm.png",
+
+  "items": [
+    {
+      "title": "Partita 1",
+      "description": "Adding rests and 16th notes",
+      "model": "Boehm-Partita-1",
+      "musicImage": "img/music/Boehm-Partita1.jpg"
+
+    },
+    {
+      "title": "Partita 2",
+      "model": "Boehm-Partita-2"
+    },
+    {
+      "title": "Partita 3",
+      "model": "Boehm-Partita-3"
+    },
+    {
+      "title": "Partita 4",
+      "model": "Boehm-Partita-4"
+    },
+    {
+      "title": "Partita 5",
+      "model": "Boehm-Partita-5"
+    },
+    {
+      "title": "Partita 6",
+      "model": "Boehm-Partita-6"
+    }
+  ]
+}
