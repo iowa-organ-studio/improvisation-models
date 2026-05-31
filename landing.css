@@ -80,7 +80,7 @@ body.landing-page {
 
     align-items: center;
 
-    min-height: 200px;
+    min-height: 120px;
 
     overflow: hidden;
 
@@ -381,4 +381,45 @@ body.landing-page {
 
         font-size: 16px;
     }
+}
+
+.sub-item .model-left {
+    width: 100%;
+}
+
+.sub-item {
+    width: 92%;
+    margin-left: 8%;
+    min-height: 110px;
+}
+
+.sub-item .composer-image {
+    display: none;
+}
+
+/* next two items make music start sooner for sublanding sub-genres */
+.sub-item .model-left {
+    width: 35%;
+}
+
+.sub-item .model-right {
+    width: 65%;
+}
+
+/* override subgradient for sublanding sub-genres */
+.sub-item .model-right::before {
+    background:
+        linear-gradient(
+            90deg,
+            rgba(10,10,10,0.98) 0%,
+            rgba(10,10,10,0.70) 15%,
+            rgba(10,10,10,0.20) 40%,
+            rgba(10,10,10,0.00) 100%
+        );
+}
+
+/* make title bigger in heading for sublanding page */
+.collection-header .model-left h2 {
+    font-size: clamp(32px, 5vw, 44px);
+    line-height: 0.95;
 }
