@@ -26,5 +26,14 @@
       "composerImage": "img/composers/boehm.png",
       "collection": "Boehm-Chorale-Partita"
     }
+
+     {
+      "type": "collection",
+      "title": "JS Bach Well-Tempered Clavier Preludes",
+      "description": "The ultimate collection of prelude styles.",
+      "musicImage": "img/music/WTC-title.png",
+      "composerImage": "img/composers/JS-Bach.png",
+      "collection": "Bach-WTC"
+    }
   ]
 }
