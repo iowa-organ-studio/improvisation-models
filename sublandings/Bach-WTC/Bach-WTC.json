@@ -2,7 +2,7 @@
   "title": "Bach Well-Tempered Clavier",
   "description": "Choose a prelude style.",
   "heroMusicImage": "img/music/WTC-title.png",
-  "heroComposerImage": "img/composers/bach.png",
+  "heroComposerImage": "img/composers/JS_Bach.png",
 
   "items": [
     {
@@ -14,7 +14,7 @@
     
     {
       "title": "WTC1 Prelude 15 (G major)",
-      "model": "Boehm-Partita-2"
+      "model": "WTC1-Prelude-15"
     },
  
   ]
