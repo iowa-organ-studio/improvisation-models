@@ -1,0 +1,21 @@
+{
+  "title": "Bach Well-Tempered Clavier",
+  "description": "Choose a prelude style.",
+  "heroMusicImage": "img/music/WTC-title.png",
+  "heroComposerImage": "img/composers/bach.png",
+
+  "items": [
+    {
+      "title": "WTC1 Prelude 2 (C minor)",
+      "description": "Adding parallel stepwise non-chord tones in two voices",
+      "model": "Boehm-Partita-1",
+      "musicImage": "img/music/WTC1-prelude2.png"
+    },
+    
+    {
+      "title": "WTC1 Prelude 15 (G major)",
+      "model": "Boehm-Partita-2"
+    },
+ 
+  ]
+}
