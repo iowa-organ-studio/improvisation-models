@@ -223,26 +223,29 @@ export function computeNewUpperNotesReferenced(din, dfd) {
 
 // ----------------------------
 
-export function buildNewFigure(original, newNotes) {
+export function buildNewFigure(original, newNotes, fbMode = FB_MODE) {
     if (/^[\d\s]+$/.test(original)) return original;
     if (/[\/|\\]/.test(original)) return original;
 
     const accs = newNotes.split(' ').map(n => n.slice(1));
     let explicitIndex = 0;
-    let standaloneIndex = -1;
 
-    // Find which index in accs corresponds to the standalone accidental
     const hasStandalone = /(?<!\d)(--|##|#|-|n)(?!\d)/.test(original);
     const explicitCount = [...original.matchAll(/(\d+)(--|##|#|-|n)?/g)].length;
-    if (hasStandalone) standaloneIndex = explicitCount; // it's appended last by parseFigurePairs
+    const standaloneIndex = hasStandalone ? explicitCount : -1;
 
-    // Replace digit+attached_accidental pairs
-    let result = original.replace(/(\d+)(--|##|#|-|n)?/g, (_, num, acc) => {
-        const newAcc = acc != null ? (accs[explicitIndex++] || 'n') : '';
-        return num + newAcc;
+    let result = original.replace(/(\d+)(--|##|#|-|n)?/g, (_, num, attachedAcc) => {
+        const consumedAcc = attachedAcc ? (accs[explicitIndex++] || 'n') : '';
+
+        // Historic mode: a literal "5-" token always passes through unchanged,
+        // even when it's part of a multi-token figure like "7n 5-"
+        if (fbMode === 'historic' && num === '5' && attachedAcc === '-') {
+            return '5-';
+        }
+
+        return num + consumedAcc;
     });
 
-    // Replace standalone accidental
     if (hasStandalone && standaloneIndex < accs.length) {
         const newAcc = accs[standaloneIndex] || 'n';
         result = result.replace(/(?<!\d)(--|##|#|-|n)(?!\d)/, newAcc);
@@ -485,10 +488,11 @@ export function transformKrnFiguredBass({
             NUNR
         });
 
-        const newFigure = buildNewFigure(
-            activeFigure,
-            NUNR
-        );
+       const newFigure = buildNewFigure(
+    activeFigure,
+    NUNR,
+    fbMode
+);
 
         console.log(activeFigure, newFigure);
         // replace figure
