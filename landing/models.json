@@ -9,6 +9,15 @@
       "model": "Scheidemann-Prelude"
     },
 
+     {
+      "type": "model",
+      "title": "Merulo Venetian Toccata",
+      "description": "The first expressive keyboard genre.",
+      "musicImage": "img/music/VenetianToccata.jpg",
+      "composerImage": "img/composers/Merulo.jpg",
+      "model": "Venetian-Toccata"
+    },
+
     {
       "type": "model",
       "title": "Buxtehude Chorale Preludes",
