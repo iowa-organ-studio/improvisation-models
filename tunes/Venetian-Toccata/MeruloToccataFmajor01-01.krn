@@ -3,10 +3,10 @@
 !!! Number: 1
 !!! Level: 1
 **kern	**fb	**text	**text
-*clefF4	*clefF4	*	*
-*k[]	*k[]	*	*
-*met(c)	*met(c)	*	*
-*C:	*C:	*C:	*C:
+**kern	**kern	**kern	**kern
+*clefF4	*clefF4	*clefG2	*clefG2
+*k[b-]	*k[b-]	*k[b-]	*k[b-]
+*met(c)	*met(c)	*met(c)	*met(c)
 =1	=1	=1	=1
 1F[	.	.	.
 2F]	.	.	.
