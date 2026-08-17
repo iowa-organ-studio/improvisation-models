@@ -5,5 +5,7 @@
 
   "heroComposerImage": "img/composers/merulo.jpg",
 
-  "levels": [1, 2]
+  "levels": [1, 2],
+
+  "level2Renderer": "lilypond"
 }
