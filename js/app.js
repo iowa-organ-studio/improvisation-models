@@ -2,6 +2,7 @@ console.log('app.js module loaded');
 
 import { createToolkit, renderKrn } from './render.js';
 import { transformKrnFiguredBass, FB_MODE, setFbMode } from './fb-transform.js';
+import { renderLilypondLevel2 } from './lilypond-renderer.js';
 
 // ------------------- STATE -------------------
 
@@ -10,6 +11,7 @@ import { transformKrnFiguredBass, FB_MODE, setFbMode } from './fb-transform.js';
 let currentModel = getModelFromURL();
 let config = {};
 let phrases = [];
+let currentPhraseId = '';
 
 let toolkit0, toolkit1, toolkit2;
 
@@ -58,15 +60,40 @@ async function loadConfig() {
     const musicImage = document.getElementById('heroMusicImage');
     const composerImage = document.getElementById('heroComposerImage');
 
-    if (musicImage && config.heroMusicImage) musicImage.src = config.heroMusicImage;
-    if (composerImage && config.heroComposerImage) composerImage.src = config.heroComposerImage;
+    if (musicImage && config.heroMusicImage) {
+        musicImage.src = config.heroMusicImage;
+    }
+
+    if (composerImage && config.heroComposerImage) {
+        composerImage.src = config.heroComposerImage;
+    }
 
     if (!config.levels.includes(0)) {
         document.getElementById('level0Wrap').style.display = 'none';
     } else {
         document.getElementById('level0Wrap').style.display = 'block';
     }
+
+    const isLilypondLevel2 =
+        config.level2Renderer === 'lilypond';
+
+    const level2VerovioControls =
+        document.getElementById('level2VerovioControls');
+
+    const level2VerovioClefControls =
+        document.getElementById('level2VerovioClefControls');
+
+    if (level2VerovioControls) {
+        level2VerovioControls.style.display =
+            isLilypondLevel2 ? 'none' : '';
+    }
+
+    if (level2VerovioClefControls) {
+        level2VerovioClefControls.style.display =
+            isLilypondLevel2 ? 'none' : '';
+    }
 }
+
 
 async function loadPhrases() {
 
@@ -141,6 +168,8 @@ function randomPhrase() {
 }
 
 async function loadFamily(family) {
+    currentPhraseId = family;
+
     const base = `./tunes/${currentModel}/${family}`;
 
     if (config.levels.includes(0)) {
@@ -157,6 +186,7 @@ async function loadFamily(family) {
 
     currentTargetTonic = originalKeyTonic;
 }
+
 
 function parseKeyFromKrn(krnText) {
 
@@ -358,7 +388,6 @@ function wireScaleSpacing(prefix) {
 
 
 // ------------------- RENDER -------------------
-
 function renderAll() {
 
     // LEVEL 0
@@ -381,9 +410,8 @@ function renderAll() {
         document.getElementById('level0Wrap').style.display = 'none';
     }
 
-    // LEVEL 1 (TRANSFORM)
-    // LEVEL 1 (NO TRANSFORM — raw krn)
 
+    // LEVEL 1
     const { transformedKrn } =
         transformKrnFiguredBass({
             krnText: level1Text,
@@ -406,23 +434,35 @@ function renderAll() {
 
 
     // LEVEL 2
+    const level2Container =
+        document.getElementById('level2');
 
-    const level2Display = buildLevel2ClefOverrideKrn();
+    if (config.level2Renderer === 'lilypond') {
 
-    renderKrn(
-        toolkit2,
-        level2Display,
-        document.getElementById('level2'),
-        {
-            scale: getNumber('l2ScaleValue'),
-            spacing: getNumber('l2SpacingValue')
-        },
-        computeVerovioTranspose()
-    );
+        renderLilypondLevel2({
+            container: level2Container,
+            currentModel,
+            phraseId: currentPhraseId,
+            tonic: currentTargetTonic
+        });
 
+    } else {
+
+        const level2Display =
+            buildLevel2ClefOverrideKrn();
+
+        renderKrn(
+            toolkit2,
+            level2Display,
+            level2Container,
+            {
+                scale: getNumber('l2ScaleValue'),
+                spacing: getNumber('l2SpacingValue')
+            },
+            computeVerovioTranspose()
+        );
+    }
 }
-
-// ------------------- EVENTS -------------------
 
 async function newPhrase() {
 
