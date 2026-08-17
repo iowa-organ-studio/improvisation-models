@@ -1013,3 +1013,90 @@ hr{
   width: auto;
   display: block;
 }
+
+/* =====================================================
+   LILYPOND LEVEL 2
+===================================================== */
+
+.lilypond-toolbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  margin-bottom: 10px;
+}
+
+
+/* VIEW SIZE CONTROL */
+
+.lilypond-size-control {
+  position: absolute;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  font-size: .82rem;
+  font-weight: 700;
+}
+
+.lilypond-size-value {
+  min-width: 44px;
+  text-align: center;
+}
+
+
+/* MODERN / HISTORICAL SLIDER */
+
+.lilypond-slider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  width: 50%;
+}
+
+.lilypond-range {
+  flex: 1;
+}
+
+
+/* SCORE VIEWPORT */
+
+.lilypond-viewport {
+  width: 100%;
+  overflow-x: auto;
+  background: #fff;
+}
+
+
+/* SCORE
+
+   margin-left:auto makes the score RIGHT JUSTIFIED.
+*/
+
+.lilypond-score {
+  position: relative;
+
+  width: 55%;
+  margin-right: auto;
+
+  background: #fff;
+}
+
+
+/* SVG LAYERS */
+
+.lilypond-stage {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.lilypond-stage5 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
