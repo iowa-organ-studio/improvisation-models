@@ -14,8 +14,8 @@
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap"
     rel="stylesheet">
 
-<link rel="icon" type="image/png" href="img/favicon.png">
-  
+  <link rel="icon" type="image/png" href="img/favicon.png">
+
   <script src="https://www.verovio.org/javascript/latest/verovio-toolkit-wasm.js"></script>
   <script src="https://www.verovio.org/javascript/latest/verovio-toolkit-hum.js"></script>
 </head>
@@ -105,7 +105,7 @@
           Random Phrase →
         </button>
 
-        <div class="mode-filter-card">
+        <div class="mode-filter-card" id="modeFilterCard">
 
           <button id="majorModeBtn" class="mode-filter-btn selected">
             Major
@@ -260,7 +260,7 @@
 
   </details>
 
-    <!-- ===================================================== -->
+  <!-- ===================================================== -->
   <!-- LEVEL 2 -->
   <!-- ===================================================== -->
 
@@ -274,10 +274,7 @@
           Foreground
         </div>
 
-        <div
-          class="summary-controls"
-          id="level2VerovioControls"
-        >
+        <div class="summary-controls" id="level2VerovioControls">
 
           <div class="mini-control-group">
 
@@ -285,11 +282,7 @@
 
             <button id="l2ScaleMinus">−</button>
 
-            <input
-              id="l2ScaleValue"
-              type="text"
-              value="42"
-            >
+            <input id="l2ScaleValue" type="text" value="42">
 
             <button id="l2ScalePlus">+</button>
 
@@ -301,11 +294,7 @@
 
             <button id="l2SpacingMinus">−</button>
 
-            <input
-              id="l2SpacingValue"
-              type="text"
-              value="0.50"
-            >
+            <input id="l2SpacingValue" type="text" value="0.50">
 
             <button id="l2SpacingPlus">+</button>
 
@@ -319,10 +308,7 @@
 
     <div id="level2"></div>
 
-    <div
-      class="clef-toolbar"
-      id="level2VerovioClefControls"
-    >
+    <div class="clef-toolbar" id="level2VerovioClefControls">
 
       <!-- ALTO -->
 
@@ -330,34 +316,14 @@
 
         <span class="clef-label">Alto</span>
 
-        <label
-          id="altoTrebleLabel"
-          class="clef-toggle selected"
-        >
-          <input
-            type="radio"
-            id="altoTrebleRadio"
-            name="altoClef"
-          >
-          <img
-            src="img/clefs/Treble_clef.svg"
-            alt="Treble"
-          >
+        <label id="altoTrebleLabel" class="clef-toggle selected">
+          <input type="radio" id="altoTrebleRadio" name="altoClef">
+          <img src="img/clefs/Treble_clef.svg" alt="Treble">
         </label>
 
-        <label
-          id="altoBassLabel"
-          class="clef-toggle"
-        >
-          <input
-            type="radio"
-            id="altoBassRadio"
-            name="altoClef"
-          >
-          <img
-            src="img/clefs/Bass_clef.svg"
-            alt="Bass"
-          >
+        <label id="altoBassLabel" class="clef-toggle">
+          <input type="radio" id="altoBassRadio" name="altoClef">
+          <img src="img/clefs/Bass_clef.svg" alt="Bass">
         </label>
 
       </div>
@@ -368,34 +334,14 @@
 
         <span class="clef-label">Tenor</span>
 
-        <label
-          id="tenorTrebleLabel"
-          class="clef-toggle selected"
-        >
-          <input
-            type="radio"
-            id="tenorTrebleRadio"
-            name="tenorClef"
-          >
-          <img
-            src="img/clefs/Treble_clef.svg"
-            alt="Treble"
-          >
+        <label id="tenorTrebleLabel" class="clef-toggle selected">
+          <input type="radio" id="tenorTrebleRadio" name="tenorClef">
+          <img src="img/clefs/Treble_clef.svg" alt="Treble">
         </label>
 
-        <label
-          id="tenorBassLabel"
-          class="clef-toggle"
-        >
-          <input
-            type="radio"
-            id="tenorBassRadio"
-            name="tenorClef"
-          >
-          <img
-            src="img/clefs/Bass_clef.svg"
-            alt="Bass"
-          >
+        <label id="tenorBassLabel" class="clef-toggle">
+          <input type="radio" id="tenorBassRadio" name="tenorClef">
+          <img src="img/clefs/Bass_clef.svg" alt="Bass">
         </label>
 
       </div>
@@ -430,12 +376,12 @@
     </div>
   </div>
 
-<p style="text-align:center; font-size:0.8rem; color:#888; margin-top:16px; padding-bottom:8px;">
-  This page is still in development and may not function perfectly. 
-  Contact <a href="mailto:gregory-hand@uiowa.edu">gregory-hand@uiowa.edu</a> 
-  if you have any questions or comments.
-</p>
-  
+  <p style="text-align:center; font-size:0.8rem; color:#888; margin-top:16px; padding-bottom:8px;">
+    This page is still in development and may not function perfectly.
+    Contact <a href="mailto:gregory-hand@uiowa.edu">gregory-hand@uiowa.edu</a>
+    if you have any questions or comments.
+  </p>
+
 </body>
 
 </html>
