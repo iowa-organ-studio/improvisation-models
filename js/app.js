@@ -23,6 +23,9 @@ let currentTargetTonic = '';
 let originalKeyTonic = '';
 let originalKeyMode = '';
 
+let venetianSourceFinal = '';
+let venetianSourceLilypondKey = '';
+
 let tenorClef = 'treble';
 let altoClef = 'treble';
 
@@ -30,8 +33,13 @@ let fbAnalysisRows = [];
 let allowMajor = true;
 let allowMinor = true;
 
-let phraseKeyCache = {};
+let enabledVenetianTones =
+    new Set([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
+let phraseKeyCache = {};
+let phraseToneCache = {};
+let phraseAccidentalCountCache = {};
+let phraseFinalCache = {};
 
 
 
@@ -105,6 +113,8 @@ async function loadPhrases() {
     phrases = await res.json();
 
     phraseKeyCache = {};
+    phraseToneCache = {};
+    phraseAccidentalCountCache = {};
 
     for (const family of phrases) {
 
@@ -118,6 +128,18 @@ async function loadPhrases() {
 
             phraseKeyCache[family] = text;
 
+            if (currentModel === 'Venetian-Toccata') {
+
+                phraseToneCache[family] =
+                    parseVenetianToneFromKrn(text);
+
+                phraseAccidentalCountCache[family] =
+                    parseKeySignatureAccidentalCount(text);
+
+                phraseFinalCache[family] =
+                    parseVenetianFinalFromKrn(text);
+            }
+
         } catch (err) {
 
             console.warn(
@@ -130,61 +152,131 @@ async function loadPhrases() {
 
 function randomPhrase() {
 
-    const filtered = phrases.filter(family => {
+    if (currentModel === 'Venetian-Toccata') {
 
-        const krn = phraseKeyCache[family];
+        const filtered =
+            phrases.filter(family => {
 
-        if (!krn) return true;
+                const tone =
+                    phraseToneCache[family];
 
-        const parsed =
-            parseKeyFromKrn(krn);
+                return (
+                    tone !== null &&
+                    tone !== undefined &&
+                    enabledVenetianTones.has(tone)
+                );
+            });
 
-        if (
-            parsed.mode === 'major' &&
-            !allowMajor
-        ) {
-            return false;
+        if (!filtered.length) {
+            return null;
         }
 
-        if (
-            parsed.mode === 'minor' &&
-            !allowMinor
-        ) {
-            return false;
-        }
+        return filtered[
+            Math.floor(
+                Math.random() * filtered.length
+            )
+        ];
+    }
 
-        return true;
-    });
+    const filtered =
+        phrases.filter(family => {
+
+            const krn =
+                phraseKeyCache[family];
+
+            if (!krn) {
+                return true;
+            }
+
+            const parsed =
+                parseKeyFromKrn(krn);
+
+            if (
+                parsed.mode === 'major' &&
+                !allowMajor
+            ) {
+                return false;
+            }
+
+            if (
+                parsed.mode === 'minor' &&
+                !allowMinor
+            ) {
+                return false;
+            }
+
+            return true;
+        });
 
     if (!filtered.length) {
+
         return phrases[
-            Math.floor(Math.random() * phrases.length)
+            Math.floor(
+                Math.random() * phrases.length
+            )
         ];
     }
 
     return filtered[
-        Math.floor(Math.random() * filtered.length)
+        Math.floor(
+            Math.random() * filtered.length
+        )
     ];
 }
 
 async function loadFamily(family) {
+
     currentPhraseId = family;
 
-    const base = `./tunes/${currentModel}/${family}`;
+    const base =
+        `./tunes/${currentModel}/${family}`;
 
     if (config.levels.includes(0)) {
-        level0Text = await loadText(`${base}-00.krn`);
+
+        level0Text =
+            await loadText(
+                `${base}-00.krn`
+            );
     }
 
-    level1Text = await loadText(`${base}-01.krn`);
-    level2Text = await loadText(`${base}-02.krn`);
+    level1Text =
+        await loadText(
+            `${base}-01.krn`
+        );
 
-    const parsed = parseKeyFromKrn(level1Text);
+    level2Text =
+        await loadText(
+            `${base}-02.krn`
+        );
 
-    originalKeyTonic = parsed.tonic;
-    originalKeyMode = parsed.mode;
 
-    currentTargetTonic = originalKeyTonic;
+    if (
+        currentModel === 'Venetian-Toccata'
+    ) {
+
+        venetianSourceFinal =
+            parseVenetianFinalFromKrn(
+                level1Text
+            );
+
+        venetianSourceLilypondKey =
+            parseVenetianSourceLilypondKey(
+                level1Text
+            );
+    }
+
+
+    const parsed =
+        parseKeyFromKrn(level1Text);
+
+    originalKeyTonic =
+        parsed.tonic;
+
+    originalKeyMode =
+        parsed.mode;
+
+    currentTargetTonic =
+        originalKeyTonic;
 }
 
 
@@ -212,6 +304,568 @@ function parseKeyFromKrn(krnText) {
     return { tonic, mode };
 }
 
+function parseVenetianFinalFromKrn(krnText) {
+
+    const match =
+        krnText.match(
+            /^\*([A-Ga-g])([#-]?):/m
+        );
+
+    if (!match) {
+        return null;
+    }
+
+    return (
+        match[1].toUpperCase() +
+        (match[2] || '').replace('-', 'b')
+    );
+}
+
+
+function parseKernKeySignature(krnText) {
+
+    const match =
+        krnText.match(
+            /^\*k\[([^\]]*)\]/m
+        );
+
+    if (!match) {
+        return [];
+    }
+
+    const contents =
+        match[1].trim();
+
+    if (!contents) {
+        return [];
+    }
+
+    return (
+        contents.match(
+            /[A-Ga-g][#-]?/g
+        ) || []
+    ).map(item =>
+        item
+            .replace('-', 'b')
+            .replace(
+                /^([a-g])$/,
+                m => m.toUpperCase()
+            )
+    );
+}
+
+function pitchClass(tonic) {
+
+    const normalized =
+        tonic
+            .replace('♭', 'b')
+            .replace('♯', '#');
+
+    const values = {
+        'C': 0,
+        'B#': 0,
+
+        'C#': 1,
+        'Db': 1,
+
+        'D': 2,
+
+        'D#': 3,
+        'Eb': 3,
+
+        'E': 4,
+        'Fb': 4,
+
+        'E#': 5,
+        'F': 5,
+
+        'F#': 6,
+        'Gb': 6,
+
+        'G': 7,
+
+        'G#': 8,
+        'Ab': 8,
+
+        'A': 9,
+
+        'A#': 10,
+        'Bb': 10,
+
+        'B': 11,
+        'Cb': 11
+    };
+
+    return values[normalized];
+}
+
+function getVenetianTargetKeySignatureInfo(
+    targetFinal
+) {
+
+    if (
+        currentModel !== 'Venetian-Toccata' ||
+        !venetianSourceFinal ||
+        !venetianSourceLilypondKey
+    ) {
+        return null;
+    }
+
+    const sourceFinalPC =
+        pitchClass(venetianSourceFinal);
+
+    const targetFinalPC =
+        pitchClass(targetFinal);
+
+    const sourceLilypondPC =
+        pitchClass(
+            venetianSourceLilypondKey
+        );
+
+    if (
+        sourceFinalPC === undefined ||
+        targetFinalPC === undefined ||
+        sourceLilypondPC === undefined
+    ) {
+        return null;
+    }
+
+    const interval =
+        (
+            targetFinalPC -
+            sourceFinalPC +
+            12
+        ) % 12;
+
+    const targetLilypondPC =
+        (
+            sourceLilypondPC +
+            interval
+        ) % 12;
+
+    const keyInfo =
+        getMajorKeySignatureInfo(
+            targetLilypondPC
+        );
+
+    return {
+        interval,
+        targetLilypondPC,
+        keyInfo
+    };
+}
+
+function normalizeVenetianTargetTonic(
+    targetFinal
+) {
+
+    if (
+        currentModel !== 'Venetian-Toccata'
+    ) {
+        return targetFinal;
+    }
+
+    const candidates = [
+        targetFinal
+    ];
+
+    const enharmonicMap = {
+        'C#': 'Db',
+        'Db': 'C#',
+
+        'D#': 'Eb',
+        'Eb': 'D#',
+
+        'F#': 'Gb',
+        'Gb': 'F#',
+
+        'G#': 'Ab',
+        'Ab': 'G#',
+
+        'A#': 'Bb',
+        'Bb': 'A#'
+    };
+
+    const alternative =
+        enharmonicMap[targetFinal];
+
+    if (alternative) {
+        candidates.push(alternative);
+    }
+
+    for (const candidate of candidates) {
+
+        const info =
+            getVenetianTargetKeySignatureInfo(
+                candidate
+            );
+
+        if (!info || !info.keyInfo) {
+            continue;
+        }
+
+        if (
+            info.keyInfo.sharps <= 7 &&
+            info.keyInfo.flats <= 7
+        ) {
+            return candidate;
+        }
+    }
+
+    return targetFinal;
+}
+
+function getMajorKeySignatureInfo(
+    pitchClassValue
+) {
+
+    const keys = {
+
+        0:  { name: 'C',  sharps: 0, flats: 0 },
+        1:  { name: 'Db', sharps: 0, flats: 5 },
+        2:  { name: 'D',  sharps: 2, flats: 0 },
+        3:  { name: 'Eb', sharps: 0, flats: 3 },
+        4:  { name: 'E',  sharps: 4, flats: 0 },
+        5:  { name: 'F',  sharps: 0, flats: 1 },
+        6:  { name: 'F#', sharps: 6, flats: 0 },
+        7:  { name: 'G',  sharps: 1, flats: 0 },
+        8:  { name: 'Ab', sharps: 0, flats: 4 },
+        9:  { name: 'A',  sharps: 3, flats: 0 },
+        10: { name: 'Bb', sharps: 0, flats: 2 },
+        11: { name: 'B',  sharps: 5, flats: 0 }
+    };
+
+    return keys[pitchClassValue] || null;
+}
+
+function getVenetianLevel2Tonic() {
+
+    if (
+        currentModel !== 'Venetian-Toccata'
+    ) {
+        return currentTargetTonic;
+    }
+
+    if (
+        !venetianSourceFinal ||
+        !venetianSourceLilypondKey
+    ) {
+        return currentTargetTonic;
+    }
+
+    const sourceFinalPC =
+        pitchClass(
+            venetianSourceFinal
+        );
+
+    const targetFinalPC =
+        pitchClass(
+            currentTargetTonic
+        );
+
+    const sourceLilypondPC =
+        pitchClass(
+            venetianSourceLilypondKey
+        );
+
+    if (
+        sourceFinalPC === undefined ||
+        targetFinalPC === undefined ||
+        sourceLilypondPC === undefined
+    ) {
+        return null;
+    }
+
+    const interval =
+        (
+            targetFinalPC -
+            sourceFinalPC +
+            12
+        ) % 12;
+
+    const targetLilypondPC =
+        (
+            sourceLilypondPC +
+            interval
+        ) % 12;
+
+    const canonicalMajorKeys = {
+        0: 'C',
+        1: 'Db',
+        2: 'D',
+        3: 'Eb',
+        4: 'E',
+        5: 'F',
+        6: 'F#',
+        7: 'G',
+        8: 'Ab',
+        9: 'A',
+        10: 'Bb',
+        11: 'B'
+    };
+
+    return canonicalMajorKeys[
+        targetLilypondPC
+    ] || null;
+}
+
+function chooseMajorTonicSpelling(
+    pitchClassValue,
+    targetFinal
+) {
+
+    const preferredByFinal = {
+
+        'C': 0,
+        'B#': 0,
+
+        'C#': 1,
+        'Db': 1,
+
+        'D': 2,
+
+        'D#': 3,
+        'Eb': 3,
+
+        'E': 4,
+        'Fb': 4,
+
+        'E#': 5,
+        'F': 5,
+
+        'F#': 6,
+        'Gb': 6,
+
+        'G': 7,
+
+        'G#': 8,
+        'Ab': 8,
+
+        'A': 9,
+
+        'A#': 10,
+        'Bb': 10,
+
+        'B': 11,
+        'Cb': 11
+    };
+
+    if (
+        preferredByFinal[targetFinal] ===
+        pitchClassValue
+    ) {
+        return targetFinal;
+    }
+
+    const canonicalMajorKeys = {
+        0: 'C',
+        1: 'Db',
+        2: 'D',
+        3: 'Eb',
+        4: 'E',
+        5: 'F',
+        6: 'F#',
+        7: 'G',
+        8: 'Ab',
+        9: 'A',
+        10: 'Bb',
+        11: 'B'
+    };
+
+    return canonicalMajorKeys[
+        pitchClassValue
+    ];
+}
+
+function parseVenetianSourceLilypondKey(krnText) {
+
+    const signature =
+        parseKernKeySignature(krnText);
+
+    const normalized =
+        signature
+            .map(item => item.toLowerCase())
+            .join(',');
+
+    const signatureToMajorKey = {
+        '': 'C',
+
+        'f#': 'G',
+        'f#,c#': 'D',
+        'f#,c#,g#': 'A',
+        'f#,c#,g#,d#': 'E',
+        'f#,c#,g#,d#,a#': 'B',
+        'f#,c#,g#,d#,a#,e#': 'F#',
+        'f#,c#,g#,d#,a#,e#,b#': 'C#',
+
+        'bb': 'F',
+        'bb,eb': 'Bb',
+        'bb,eb,ab': 'Eb',
+        'bb,eb,ab,db': 'Ab',
+        'bb,eb,ab,db,gb': 'Db',
+        'bb,eb,ab,db,gb,cb': 'Gb',
+        'bb,eb,ab,db,gb,cb,fb': 'Cb'
+    };
+
+    return (
+        signatureToMajorKey[normalized] ||
+        null
+    );
+}
+
+function parseVenetianSourceMetadata(krnText) {
+
+    const titleMatch =
+        krnText.match(/^!!!\s*Title:\s*(.*)$/mi);
+
+    const explicitModeMatch =
+        krnText.match(/^!!!\s*Mode:\s*(.*)$/mi);
+
+    const finalMatch =
+        krnText.match(/^\*([A-Ga-g])([#-]?):/m);
+
+    const keySignatureMatch =
+        krnText.match(/^\*k\[([^\]]*)\]/m);
+
+    let mode = null;
+
+    if (explicitModeMatch) {
+
+        mode =
+            parseRomanMode(
+                explicitModeMatch[1].trim()
+            );
+
+    } else if (titleMatch) {
+
+        const titleModeMatch =
+            titleMatch[1].match(/^([IVX]+)\./i);
+
+        if (titleModeMatch) {
+
+            mode =
+                parseRomanMode(
+                    titleModeMatch[1]
+                );
+        }
+    }
+
+    let final = null;
+
+    if (finalMatch) {
+
+        const letter =
+            finalMatch[1].toUpperCase();
+
+        const accidental =
+            finalMatch[2] || '';
+
+        final =
+            letter +
+            accidental.replace('-', 'b');
+    }
+
+    let accidentalCount = 0;
+
+    if (keySignatureMatch) {
+
+        const keySignature =
+            keySignatureMatch[1];
+
+        accidentalCount =
+            (keySignature.match(/[A-Ga-g]/g) || []).length;
+    }
+
+    return {
+        mode,
+        final,
+        accidentalCount
+    };
+}
+
+function parseVenetianToneFromKrn(krnText) {
+
+    const titleMatch =
+        krnText.match(/^!!!\s*Title:\s*(.*)$/mi);
+
+    if (!titleMatch) {
+        return null;
+    }
+
+    const toneMatch =
+        titleMatch[1].match(/\bTone\s+([IVX]+)\b/i);
+
+    if (!toneMatch) {
+        return null;
+    }
+
+    const roman =
+        toneMatch[1].toUpperCase();
+
+    const values = {
+        I: 1,
+        II: 2,
+        III: 3,
+        IV: 4,
+        V: 5,
+        VI: 6,
+        VII: 7,
+        VIII: 8,
+        IX: 9,
+        X: 10
+    };
+
+    return values[roman] || null;
+}
+
+
+
+function parseKeySignatureAccidentalCount(krnText) {
+
+    const match =
+        krnText.match(/^\*k\[([^\]]*)\]/m);
+
+    if (!match) {
+        return 0;
+    }
+
+    const keySignature =
+        match[1].trim();
+
+    if (!keySignature) {
+        return 0;
+    }
+
+    return (
+        keySignature.match(
+            /[A-Ga-g](?:[#-])?/g
+        ) || []
+    ).length;
+}
+
+function parseRomanMode(value) {
+
+    const roman =
+        value
+            .trim()
+            .toUpperCase();
+
+    const values = {
+        I: 1,
+        II: 2,
+        III: 3,
+        IV: 4,
+        V: 5,
+        VI: 6,
+        VII: 7,
+        VIII: 8,
+        IX: 9,
+        X: 10
+    };
+
+    return values[roman] || null;
+}
+
 function parsePhraseInfo(krnText) {
 
     const titleMatch =
@@ -230,9 +884,31 @@ function parsePhraseInfo(krnText) {
             ? numberMatch[1].trim()
             : '?';
 
+    let toccataNumber = null;
+    let tone = null;
+
+    if (currentModel === 'Venetian-Toccata') {
+
+        const titleParts =
+            title.match(
+                /^([IVX]+)\.\s*Tone\s+([IVX]+)$/i
+            );
+
+        if (titleParts) {
+
+            toccataNumber =
+                titleParts[1].toUpperCase();
+
+            tone =
+                titleParts[2].toUpperCase();
+        }
+    }
+
     return {
         title,
-        number
+        number,
+        toccataNumber,
+        tone
     };
 }
 
@@ -249,23 +925,56 @@ const STEPPER_MINOR = [
     'a', 'bb', 'b', 'c', 'c#', 'd', 'eb', 'e', 'f', 'f#', 'g', 'g#'
 ];
 
+const STEPPER_VENETIAN = [
+    'C',
+    'Db',
+    'D',
+    'Eb',
+    'E',
+    'F',
+    'F#',
+    'G',
+    'Ab',
+    'A',
+    'Bb',
+    'B'
+];
+
 function stepCurrentTonic(direction) {
 
     const list =
-        originalKeyMode === 'minor'
-            ? STEPPER_MINOR
-            : STEPPER_MAJOR;
+        currentModel === 'Venetian-Toccata'
+            ? STEPPER_VENETIAN
+            : (
+                originalKeyMode === 'minor'
+                    ? STEPPER_MINOR
+                    : STEPPER_MAJOR
+            );
 
-    let index = list.indexOf(currentTargetTonic);
+    let index =
+        list.indexOf(currentTargetTonic);
 
-    if (index < 0) index = 0;
+    if (index < 0) {
+        index = 0;
+    }
 
     index += direction;
 
-    if (index < 0) index = list.length - 1;
-    if (index >= list.length) index = 0;
+    if (index < 0) {
+        index = list.length - 1;
+    }
 
-    currentTargetTonic = list[index];
+    if (index >= list.length) {
+        index = 0;
+    }
+
+    const candidate =
+        list[index];
+
+    currentTargetTonic =
+        normalizeVenetianTargetTonic(
+            candidate
+        );
 }
 
 function computeVerovioTranspose() {
@@ -292,12 +1001,36 @@ function computeVerovioTranspose() {
 }
 
 function updateKeyPill() {
+
+    if (currentModel === 'Venetian-Toccata') {
+
+        const info =
+            parsePhraseInfo(level1Text);
+
+        const final =
+            currentTargetTonic
+                .replace(/b/g, '♭')
+                .replace(/#/g, '♯');
+
+        if (info.tone) {
+
+            document.getElementById(
+                'keyDisplay'
+            ).textContent =
+                `Tone ${info.tone} (${final} Final)`;
+
+            return;
+        }
+    }
+
     const prettyKey =
         currentTargetTonic
             .replace(/b/g, '♭')
             .replace(/#/g, '♯');
 
-    document.getElementById('keyDisplay').textContent =
+    document.getElementById(
+        'keyDisplay'
+    ).textContent =
         `Current key: ${prettyKey} ${originalKeyMode}`;
 }
 
@@ -306,13 +1039,25 @@ function updatePhrasePill() {
     const info =
         parsePhraseInfo(level1Text);
 
+    if (
+        currentModel === 'Venetian-Toccata' &&
+        info.toccataNumber &&
+        info.tone
+    ) {
+
+        document.getElementById(
+            'phraseDisplay'
+        ).textContent =
+            `Toccata ${info.toccataNumber} Tone ${info.tone} (Phrase ${info.number})`;
+
+        return;
+    }
+
     document.getElementById(
         'phraseDisplay'
     ).textContent =
-
         `${info.title} Phrase ${info.number}`;
 }
-
 const ENHARMONIC_MAJOR = {
     'Db': 'C#', 'C#': 'Db',
     'F#': 'Gb', 'Gb': 'F#',
@@ -327,16 +1072,35 @@ const ENHARMONIC_MINOR = {
 
 function toggleEnharmonic() {
 
-    const map =
-        originalKeyMode === 'minor'
-            ? ENHARMONIC_MINOR
-            : ENHARMONIC_MAJOR;
+    let map;
 
-    const replacement = map[currentTargetTonic];
+    if (currentModel === 'Venetian-Toccata') {
 
-    if (!replacement) return;
+        map = {
+            'Db': 'C#',
+            'C#': 'Db',
 
-    currentTargetTonic = replacement;
+            'Ab': 'G#',
+            'G#': 'Ab'
+        };
+
+    } else {
+
+        map =
+            originalKeyMode === 'minor'
+                ? ENHARMONIC_MINOR
+                : ENHARMONIC_MAJOR;
+    }
+
+    const replacement =
+        map[currentTargetTonic];
+
+    if (!replacement) {
+        return;
+    }
+
+    currentTargetTonic =
+        replacement;
 
     updateKeyPill();
     renderAll();
@@ -439,11 +1203,14 @@ function renderAll() {
 
     if (config.level2Renderer === 'lilypond') {
 
+        const lilypondLevel2Tonic =
+            getVenetianLevel2Tonic();
+
         renderLilypondLevel2({
             container: level2Container,
             currentModel,
             phraseId: currentPhraseId,
-            tonic: currentTargetTonic
+            tonic: lilypondLevel2Tonic
         });
 
     } else {
@@ -725,31 +1492,108 @@ function wireKeyButtons() {
 
 function wireModeButtons() {
 
+    const card =
+        document.getElementById('modeFilterCard');
+
+    if (!card) {
+        return;
+    }
+
+    if (currentModel === 'Venetian-Toccata') {
+
+        card.innerHTML = '';
+
+        const romanNumerals = [
+            'I',
+            'II',
+            'III',
+            'IV',
+            'V',
+            'VI',
+            'VII',
+            'VIII',
+            'IX',
+            'X'
+        ];
+
+        for (let tone = 1; tone <= 10; tone++) {
+
+            const button =
+                document.createElement('button');
+
+            button.className =
+                'mode-filter-btn';
+
+            button.dataset.tone =
+                String(tone);
+
+            button.textContent =
+                `Tone ${romanNumerals[tone - 1]}`;
+
+            button.classList.toggle(
+                'selected',
+                enabledVenetianTones.has(tone)
+            );
+
+            button.addEventListener(
+                'click',
+                () => {
+
+                    if (
+                        enabledVenetianTones.has(tone)
+                    ) {
+
+                        enabledVenetianTones.delete(tone);
+
+                    } else {
+
+                        enabledVenetianTones.add(tone);
+                    }
+
+                    button.classList.toggle(
+                        'selected',
+                        enabledVenetianTones.has(tone)
+                    );
+                }
+            );
+
+            card.appendChild(button);
+        }
+
+        return;
+    }
+
     const majorBtn =
         document.getElementById('majorModeBtn');
 
     const minorBtn =
         document.getElementById('minorModeBtn');
 
-    majorBtn.addEventListener('click', () => {
+    majorBtn.addEventListener(
+        'click',
+        () => {
 
-        allowMajor = !allowMajor;
+            allowMajor = !allowMajor;
 
-        majorBtn.classList.toggle(
-            'selected',
-            allowMajor
-        );
-    });
+            majorBtn.classList.toggle(
+                'selected',
+                allowMajor
+            );
+        }
+    );
 
-    minorBtn.addEventListener('click', () => {
+    minorBtn.addEventListener(
+        'click',
+        () => {
 
-        allowMinor = !allowMinor;
+            allowMinor = !allowMinor;
 
-        minorBtn.classList.toggle(
-            'selected',
-            allowMinor
-        );
-    });
+            minorBtn.classList.toggle(
+                'selected',
+                allowMinor
+            );
+        }
+    );
 }
 
 window.openHelp = openHelp;
@@ -775,37 +1619,111 @@ function closeHelp() {
 
 function chooseRandomTargetKey() {
 
+    if (
+        currentModel === 'Venetian-Toccata'
+    ) {
+
+        const candidates = [];
+
+        for (
+            const candidate of STEPPER_VENETIAN
+        ) {
+
+            const info =
+                getVenetianTargetKeySignatureInfo(
+                    candidate
+                );
+
+            if (
+                !info ||
+                !info.keyInfo
+            ) {
+                continue;
+            }
+
+            const accidentalCount =
+                Math.max(
+                    info.keyInfo.sharps,
+                    info.keyInfo.flats
+                );
+
+            if (
+                enabledCounts.has(
+                    accidentalCount
+                )
+            ) {
+                candidates.push(candidate);
+            }
+        }
+
+        if (!candidates.length) {
+
+            currentTargetTonic = '';
+
+            return;
+        }
+
+        const candidate =
+            candidates[
+                Math.floor(
+                    Math.random() *
+                    candidates.length
+                )
+            ];
+
+        currentTargetTonic =
+            normalizeVenetianTargetTonic(
+                candidate
+            );
+
+        return;
+    }
+
     const pool = [];
 
     let source = {};
 
     if (originalKeyMode === 'minor') {
 
-        if (!allowMinor) return;
+        if (!allowMinor) {
+            return;
+        }
 
         source = MINOR_BY_COUNT;
 
     } else {
 
-        if (!allowMajor) return;
+        if (!allowMajor) {
+            return;
+        }
 
         source = MAJOR_BY_COUNT;
     }
 
     for (const count of enabledCounts) {
 
-        const arr = source[count] || [];
+        const arr =
+            source[count] || [];
 
         pool.push(...arr);
     }
 
-    if (!pool.length) return;
+    if (!pool.length) {
+        return;
+    }
 
     currentTargetTonic =
-        pool[Math.floor(Math.random() * pool.length)];
+        pool[
+            Math.floor(
+                Math.random() * pool.length
+            )
+        ];
 
     currentTargetTonic =
-        currentTargetTonic.replace(/^([a-g])/, m => m.toUpperCase());
+        currentTargetTonic.replace(
+            /^([a-g])/,
+            m => m.toUpperCase()
+        );
 }
 
 
