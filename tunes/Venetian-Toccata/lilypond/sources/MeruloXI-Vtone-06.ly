@@ -601,6 +601,7 @@ changeLHStaff =
       g'4~
       g'4
       g'4
+      a'2~
       a'2
     }
   >>
@@ -746,7 +747,7 @@ changeLHStaff =
       \clef bass
     } {
       
-\transpose f TARGET_KEY  {
+\transpose f TARGET_KEY {
   
       \key f \major
       \time 4/2
@@ -824,7 +825,7 @@ changeLHStaff =
     \\
     {
       \voiceTwo
-      c2
+      c'2
       f2
     }
   >>

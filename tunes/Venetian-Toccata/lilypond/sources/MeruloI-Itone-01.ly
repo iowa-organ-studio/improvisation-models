@@ -544,7 +544,7 @@ changeLHStaff =
       \clef treble
     } {
       
-\transpose c c {
+\transpose c TARGET_KEY {
   
       \key c \major
       \time 4/2
@@ -636,7 +636,7 @@ changeLHStaff =
       \clef bass
     } {
       
-\transpose c c {
+\transpose c TARGET_KEY {
   
       \key c \major
       \time 4/2
