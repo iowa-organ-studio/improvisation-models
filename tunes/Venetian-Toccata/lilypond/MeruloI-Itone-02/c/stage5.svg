@@ -32,16 +32,16 @@ tspan { white-space: pre; }
 <g transform="translate(107.5577, 25.6906)">
 <rect x="0.0000" y="-2.0500" width="0.1900" height="4.0500" ry="0.0000" fill="currentColor"/>
 </g>
-<g transform="translate(107.5577, 7.3572)">
-<rect x="0.0000" y="6.3833" width="0.1900" height="9.9500" ry="0.0000" fill="currentColor"/>
+<g transform="translate(107.5577, 7.6906)">
+<rect x="0.0000" y="6.0500" width="0.1900" height="9.9500" ry="0.0000" fill="currentColor"/>
 </g>
-<g transform="translate(59.2212, 7.3572)">
-<rect x="0.0000" y="6.3833" width="0.1900" height="9.9500" ry="0.0000" fill="currentColor"/>
+<g transform="translate(59.2391, 7.6906)">
+<rect x="0.0000" y="6.0500" width="0.1900" height="9.9500" ry="0.0000" fill="currentColor"/>
 </g>
-<g transform="translate(59.2212, 11.6906)">
+<g transform="translate(59.2391, 11.6906)">
 <rect x="0.0000" y="-1.0000" width="0.1900" height="3.0500" ry="0.0000" fill="currentColor"/>
 </g>
-<g transform="translate(59.2212, 25.6906)">
+<g transform="translate(59.2391, 25.6906)">
 <rect x="0.0000" y="-2.0500" width="0.1900" height="4.0500" ry="0.0000" fill="currentColor"/>
 </g>
 <g transform="translate(8.5358, 23.6906)">
@@ -75,150 +75,150 @@ tspan { white-space: pre; }
 </g>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:593:6:7">
-<g transform="translate(79.0472, 13.6906)">
+<g transform="translate(79.0583, 13.6906)">
 <path transform="scale(0.0040, -0.0040)" d="M303 37c7 9 11 18 11 27c0 22 -20 42 -43 42c-4 0 -7 0 -11 -1c-31 -9 -78 -40 -115 -64s-84 -53 -104 -78c-7 -9 -10 -18 -10 -27c0 -22 20 -42 43 -42c4 0 7 0 11 1c31 9 77 40 114 64s84 53 104 78zM262 136c46 0 82 -21 82 -71c0 -19 -4 -39 -10 -57
 c-12 -37 -32 -72 -64 -94c-53 -36 -113 -50 -187 -50c-46 0 -83 21 -83 71c0 19 5 39 11 57c12 37 31 72 63 94c53 36 114 50 188 50z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(79.1122, 11.6906)">
+<g transform="translate(79.1233, 11.6906)">
 <rect x="-0.0650" y="2.2590" width="0.1300" height="2.4077" ry="0.0400" fill="currentColor"/>
 </g>
-<g transform="translate(80.3596, 11.6906)">
+<g transform="translate(80.3707, 11.6906)">
 <rect x="-0.0650" y="-3.3333" width="0.1300" height="3.0743" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:683:6:7">
-<g transform="translate(79.0472, 26.6906)">
+<g transform="translate(79.0583, 26.6906)">
 <path transform="scale(0.0040, -0.0040)" d="M303 37c7 9 11 18 11 27c0 22 -20 42 -43 42c-4 0 -7 0 -11 -1c-31 -9 -78 -40 -115 -64s-84 -53 -104 -78c-7 -9 -10 -18 -10 -27c0 -22 20 -42 43 -42c4 0 7 0 11 1c31 9 77 40 114 64s84 53 104 78zM262 136c46 0 82 -21 82 -71c0 -19 -4 -39 -10 -57
 c-12 -37 -32 -72 -64 -94c-53 -36 -113 -50 -187 -50c-46 0 -83 21 -83 71c0 19 5 39 11 57c12 37 31 72 63 94c53 36 114 50 188 50z" fill="currentColor"/>
 </g>
 </a>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:676:6:7">
-<g transform="translate(79.0472, 24.1906)">
+<g transform="translate(79.0583, 24.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M303 37c7 9 11 18 11 27c0 22 -20 42 -43 42c-4 0 -7 0 -11 -1c-31 -9 -78 -40 -115 -64s-84 -53 -104 -78c-7 -9 -10 -18 -10 -27c0 -22 20 -42 43 -42c4 0 7 0 11 1c31 9 77 40 114 64s84 53 104 78zM262 136c46 0 82 -21 82 -71c0 -19 -4 -39 -10 -57
 c-12 -37 -32 -72 -64 -94c-53 -36 -113 -50 -187 -50c-46 0 -83 21 -83 71c0 19 5 39 11 57c12 37 31 72 63 94c53 36 114 50 188 50z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(80.3596, 25.6906)">
+<g transform="translate(80.3707, 25.6906)">
 <rect x="-0.0650" y="-4.3333" width="0.1300" height="2.5743" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:580:6:7">
-<g transform="translate(79.0472, 11.6906)">
+<g transform="translate(79.0583, 11.6906)">
 <path transform="scale(0.0040, -0.0040)" d="M303 37c7 9 11 18 11 27c0 22 -20 42 -43 42c-4 0 -7 0 -11 -1c-31 -9 -78 -40 -115 -64s-84 -53 -104 -78c-7 -9 -10 -18 -10 -27c0 -22 20 -42 43 -42c4 0 7 0 11 1c31 9 77 40 114 64s84 53 104 78zM262 136c46 0 82 -21 82 -71c0 -19 -4 -39 -10 -57
 c-12 -37 -32 -72 -64 -94c-53 -36 -113 -50 -187 -50c-46 0 -83 21 -83 71c0 19 5 39 11 57c12 37 31 72 63 94c53 36 114 50 188 50z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(77.9175, 25.6906)">
+<g transform="translate(77.9294, 25.6906)">
 <rect x="-0.0650" y="-3.8088" width="0.1300" height="2.6226" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:675:23:24">
-<g transform="translate(76.6783, 24.6906)">
+<g transform="translate(76.6902, 24.6906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(75.5485, 25.6906)">
+<g transform="translate(75.5612, 25.6906)">
 <rect x="-0.0650" y="-3.7649" width="0.1300" height="3.0787" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:675:21:22">
-<g transform="translate(74.3093, 25.1906)">
+<g transform="translate(74.3220, 25.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(84.2633, 11.6906)">
+<g transform="translate(84.2723, 11.6906)">
 <rect x="-0.0650" y="-3.3333" width="0.1300" height="3.1471" ry="0.0400" fill="currentColor"/>
 </g>
-<g transform="translate(84.3365, 25.6906)">
+<g transform="translate(84.3455, 25.6906)">
 <rect x="-0.0650" y="-3.6667" width="0.1300" height="2.9077" ry="0.0400" fill="currentColor"/>
 </g>
-<g transform="translate(83.0891, 25.6906)">
+<g transform="translate(83.0981, 25.6906)">
 <rect x="-0.0650" y="0.7590" width="0.1300" height="2.9077" ry="0.0400" fill="currentColor"/>
 </g>
-<g transform="translate(83.0891, 11.6906)">
+<g transform="translate(83.0981, 11.6906)">
 <rect x="-0.0650" y="2.2590" width="0.1300" height="2.4077" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:684:6:7">
-<g transform="translate(83.0241, 26.1906)">
+<g transform="translate(83.0331, 26.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M303 37c7 9 11 18 11 27c0 22 -20 42 -43 42c-4 0 -7 0 -11 -1c-31 -9 -78 -40 -115 -64s-84 -53 -104 -78c-7 -9 -10 -18 -10 -27c0 -22 20 -42 43 -42c4 0 7 0 11 1c31 9 77 40 114 64s84 53 104 78zM262 136c46 0 82 -21 82 -71c0 -19 -4 -39 -10 -57
 c-12 -37 -32 -72 -64 -94c-53 -36 -113 -50 -187 -50c-46 0 -83 21 -83 71c0 19 5 39 11 57c12 37 31 72 63 94c53 36 114 50 188 50z" fill="currentColor"/>
 </g>
 </a>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:676:9:10">
-<g transform="translate(83.0241, 25.1906)">
+<g transform="translate(83.0331, 25.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M303 37c7 9 11 18 11 27c0 22 -20 42 -43 42c-4 0 -7 0 -11 -1c-31 -9 -78 -40 -115 -64s-84 -53 -104 -78c-7 -9 -10 -18 -10 -27c0 -22 20 -42 43 -42c4 0 7 0 11 1c31 9 77 40 114 64s84 53 104 78zM262 136c46 0 82 -21 82 -71c0 -19 -4 -39 -10 -57
 c-12 -37 -32 -72 -64 -94c-53 -36 -113 -50 -187 -50c-46 0 -83 21 -83 71c0 19 5 39 11 57c12 37 31 72 63 94c53 36 114 50 188 50z" fill="currentColor"/>
 </g>
 </a>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:595:6:7">
-<g transform="translate(83.0241, 13.6906)">
+<g transform="translate(83.0331, 13.6906)">
 <path transform="scale(0.0040, -0.0040)" d="M303 37c7 9 11 18 11 27c0 22 -20 42 -43 42c-4 0 -7 0 -11 -1c-31 -9 -78 -40 -115 -64s-84 -53 -104 -78c-7 -9 -10 -18 -10 -27c0 -22 20 -42 43 -42c4 0 7 0 11 1c31 9 77 40 114 64s84 53 104 78zM262 136c46 0 82 -21 82 -71c0 -19 -4 -39 -10 -57
 c-12 -37 -32 -72 -64 -94c-53 -36 -113 -50 -187 -50c-46 0 -83 21 -83 71c0 19 5 39 11 57c12 37 31 72 63 94c53 36 114 50 188 50z" fill="currentColor"/>
 </g>
 </a>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:581:6:7">
-<g transform="translate(83.0241, 11.6906)">
+<g transform="translate(83.0331, 11.6906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(79.1122, 25.6906)">
+<g transform="translate(79.1233, 25.6906)">
 <rect x="-0.0650" y="1.2590" width="0.1300" height="2.7410" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:675:11:12">
-<g transform="translate(62.4644, 25.6906)">
+<g transform="translate(62.4813, 25.6906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(63.7036, 25.6906)">
+<g transform="translate(63.7205, 25.6906)">
 <rect x="-0.0650" y="-3.5451" width="0.1300" height="3.3589" ry="0.0400" fill="currentColor"/>
 </g>
-<g transform="translate(60.1604, 25.6906)">
+<g transform="translate(60.1782, 25.6906)">
 <rect x="-0.0650" y="1.7590" width="0.1300" height="2.5743" ry="0.0400" fill="currentColor"/>
 </g>
-<g transform="translate(61.3346, 25.6906)">
+<g transform="translate(61.3524, 25.6906)">
 <rect x="-0.0650" y="-3.5012" width="0.1300" height="2.8150" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:677:9:10">
-<g transform="translate(91.0658, 20.1906)">
-<polygon stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="15.9195 -0.5100 15.9195 -0.1100 0.0400 0.2000 0.0400 -0.2000"/>
+<g transform="translate(91.0715, 20.1906)">
+<polygon stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="15.9143 -0.5100 15.9143 -0.1100 0.0400 0.2000 0.0400 -0.2000"/>
 </g>
-<g transform="translate(94.2786, 20.9381)">
-<polygon stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="12.7067 -0.4476 12.7067 -0.0476 0.0400 0.2000 0.0400 -0.2000"/>
+<g transform="translate(94.2828, 20.9382)">
+<polygon stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="12.7030 -0.4476 12.7030 -0.0476 0.0400 0.2000 0.0400 -0.2000"/>
 </g>
-<g transform="translate(101.3856, 21.6101)">
-<polygon stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="5.5998 -0.3095 5.5998 0.0905 0.0400 0.2000 0.0400 -0.2000"/>
+<g transform="translate(101.3873, 21.6101)">
+<polygon stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="5.5985 -0.3096 5.5985 0.0904 0.0400 0.2000 0.0400 -0.2000"/>
 </g>
 </a>
-<g transform="translate(73.1795, 25.6906)">
+<g transform="translate(73.1931, 25.6906)">
 <rect x="-0.0650" y="-3.7209" width="0.1300" height="3.5347" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:675:19:20">
-<g transform="translate(71.9403, 25.6906)">
+<g transform="translate(71.9539, 25.6906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(70.8105, 25.6906)">
+<g transform="translate(70.8249, 25.6906)">
 <rect x="-0.0650" y="-3.6770" width="0.1300" height="2.9908" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:675:17:18">
-<g transform="translate(69.5713, 25.1906)">
+<g transform="translate(69.5857, 25.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(68.4415, 25.6906)">
+<g transform="translate(68.4568, 25.6906)">
 <rect x="-0.0650" y="-3.6330" width="0.1300" height="3.4468" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:675:15:16">
-<g transform="translate(67.2023, 25.6906)">
+<g transform="translate(67.2176, 25.6906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(66.0725, 25.6906)">
+<g transform="translate(66.0887, 25.6906)">
 <rect x="-0.0650" y="-3.5891" width="0.1300" height="2.9029" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:675:13:14">
-<g transform="translate(64.8333, 25.1906)">
+<g transform="translate(64.8495, 25.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(106.9604, 25.6906)">
+<g transform="translate(106.9608, 25.6906)">
 <rect x="-0.0650" y="-5.8087" width="0.1300" height="3.1225" ry="0.0400" fill="currentColor"/>
 </g>
 <g transform="translate(108.9037, 22.6906)">
@@ -247,257 +247,257 @@ c-5 -6 -27 -36 -37 -36c-1 0 -2 1 -3 2l-58 79l-33 -45c-6 -8 -27 -36 -37 -36z" fil
 c-5 -6 -27 -36 -37 -36c-1 0 -2 1 -3 2l-58 79l-33 -45c-6 -8 -27 -36 -37 -36z" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:677:27:28">
-<g transform="translate(105.7212, 23.1906)">
+<g transform="translate(105.7216, 23.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(105.1238, 25.6906)">
+<g transform="translate(105.1246, 25.6906)">
 <rect x="-0.0650" y="-5.7731" width="0.1300" height="3.5869" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:677:25:26">
-<g transform="translate(103.8846, 23.6906)">
+<g transform="translate(103.8854, 23.6906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(103.2872, 25.6906)">
+<g transform="translate(103.2884, 25.6906)">
 <rect x="-0.0650" y="-5.7374" width="0.1300" height="4.0512" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:677:23:24">
-<g transform="translate(102.0480, 24.1906)">
+<g transform="translate(102.0492, 24.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:571:10:11">
-<g transform="translate(40.4667, 15.6906)">
-<polygon stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="7.1969 -0.2000 7.1969 0.2000 0.0400 0.2000 0.0400 -0.2000"/>
+<g transform="translate(40.4564, 15.6906)">
+<polygon stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="7.1944 -0.2000 7.1944 0.2000 0.0400 0.2000 0.0400 -0.2000"/>
 </g>
-<g transform="translate(40.4667, 16.5006)">
-<polygon stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="7.1969 -0.2000 7.1969 0.2000 0.0400 0.2000 0.0400 -0.2000"/>
+<g transform="translate(40.4564, 16.5006)">
+<polygon stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="7.1944 -0.2000 7.1944 0.2000 0.0400 0.2000 0.0400 -0.2000"/>
 </g>
 </a>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:580:9:10">
-<g transform="translate(79.0472, 11.6906)">
-<path stroke-width="0.0800" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" fill="currentColor" d="M1.7124 -0.2514C2.2120 -0.8358 3.2773 -0.8358 3.7769 -0.2514L3.7769 -0.2514C3.2773 -0.7158 2.2120 -0.7158 1.7124 -0.2514z"/>
+<g transform="translate(79.0583, 11.6906)">
+<path stroke-width="0.0800" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" fill="currentColor" d="M1.7124 -0.2515C2.2116 -0.8356 3.2755 -0.8356 3.7748 -0.2515L3.7748 -0.2515C3.2755 -0.7156 2.2116 -0.7156 1.7124 -0.2515z"/>
 </g>
 </a>
-<g transform="translate(54.5506, 21.8806)">
-<polygon stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="2.9914 0.1100 2.9914 0.5100 0.0400 0.2000 0.0400 -0.2000"/>
+<g transform="translate(54.5353, 21.8806)">
+<polygon stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="2.9901 0.1100 2.9901 0.5100 0.0400 0.2000 0.0400 -0.2000"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:592:9:10">
-<g transform="translate(60.0954, 11.6906)">
-<path stroke-width="0.0800" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" fill="currentColor" d="M0.8887 2.7500C2.3705 3.7416 17.1351 3.7416 18.6169 2.7500L18.6169 2.7500C17.1351 3.6216 2.3705 3.6216 0.8887 2.7500z"/>
+<g transform="translate(60.1132, 11.6906)">
+<path stroke-width="0.0800" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" fill="currentColor" d="M0.8887 2.7500C2.3703 3.7416 17.1285 3.7416 18.6102 2.7500L18.6102 2.7500C17.1285 3.6216 2.3703 3.6216 0.8887 2.7500z"/>
 </g>
 </a>
-<g transform="translate(54.5506, 8.1906)">
-<polygon stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="2.9914 0.1100 2.9914 0.5100 0.0400 0.2000 0.0400 -0.2000"/>
+<g transform="translate(54.5353, 8.8806)">
+<polygon stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="2.9901 0.1100 2.9901 0.5100 0.0400 0.2000 0.0400 -0.2000"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:675:9:10">
-<g transform="translate(61.2696, 22.1906)">
-<polygon stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="16.6729 -0.5100 16.6729 -0.1100 0.0400 0.2000 0.0400 -0.2000"/>
+<g transform="translate(61.2874, 22.1906)">
+<polygon stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="16.6670 -0.5100 16.6670 -0.1100 0.0400 0.2000 0.0400 -0.2000"/>
 </g>
-<g transform="translate(61.2696, 23.0006)">
-<polygon stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="16.6729 -0.5100 16.6729 -0.1100 0.0400 0.2000 0.0400 -0.2000"/>
+<g transform="translate(61.2874, 23.0006)">
+<polygon stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="16.6670 -0.5100 16.6670 -0.1100 0.0400 0.2000 0.0400 -0.2000"/>
 </g>
 </a>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:667:9:10">
-<g transform="translate(49.9426, 25.6906)">
-<path stroke-width="0.0800" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" fill="currentColor" d="M1.5774 2.0000C2.7187 2.9149 8.6765 2.9149 9.8178 2.0000L9.8178 2.0000C8.6765 2.7949 2.7187 2.7949 1.5774 2.0000z"/>
+<g transform="translate(49.9290, 25.6906)">
+<path stroke-width="0.0800" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" fill="currentColor" d="M1.5774 2.0000C2.7206 2.9154 8.7060 2.9154 9.8492 2.0000L9.8492 2.0000C8.7060 2.7954 2.7206 2.7954 1.5774 2.0000z"/>
 </g>
 </a>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:572:9:10">
-<g transform="translate(49.9426, 11.6906)">
-<path stroke-width="0.0800" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" fill="currentColor" d="M0.8887 2.7500C2.0691 3.6757 8.6374 3.6757 9.8178 2.7500L9.8178 2.7500C8.6374 3.5557 2.0691 3.5557 0.8887 2.7500z"/>
+<g transform="translate(49.9290, 11.6906)">
+<path stroke-width="0.0800" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" fill="currentColor" d="M0.8887 2.7500C2.0708 3.6762 8.6671 3.6762 9.8492 2.7500L9.8492 2.7500C8.6671 3.5562 2.0708 3.5562 0.8887 2.7500z"/>
 </g>
 </a>
-<g transform="translate(31.2301, 28.5006)">
-<polygon stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="2.9914 -0.0100 2.9914 0.3900 0.0400 0.2000 0.0400 -0.2000"/>
+<g transform="translate(31.2240, 28.5006)">
+<polygon stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="2.9901 -0.0100 2.9901 0.3900 0.0400 0.2000 0.0400 -0.2000"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:653:8:9">
-<g transform="translate(37.0329, 25.6906)">
-<path stroke-width="0.0800" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" fill="currentColor" d="M1.7124 -2.7500C3.0177 -3.7064 12.0565 -3.7064 13.3618 -2.7500L13.3618 -2.7500C12.0565 -3.5864 3.0177 -3.5864 1.7124 -2.7500z"/>
+<g transform="translate(37.0243, 25.6906)">
+<path stroke-width="0.0800" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" fill="currentColor" d="M1.7124 -2.7500C3.0175 -3.7064 12.0517 -3.7064 13.3568 -2.7500L13.3568 -2.7500C12.0517 -3.5864 3.0175 -3.5864 1.7124 -2.7500z"/>
 </g>
 </a>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:561:10:11">
-<g transform="translate(37.0329, 11.6906)">
-<path stroke-width="0.0800" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" fill="currentColor" d="M1.7124 -2.0000C2.9914 -2.9504 11.4307 -2.9504 12.7097 -2.0000L12.7097 -2.0000C11.4307 -2.8304 2.9914 -2.8304 1.7124 -2.0000z"/>
+<g transform="translate(37.0243, 11.6906)">
+<path stroke-width="0.0800" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" fill="currentColor" d="M1.7124 -1.0000C2.9911 -1.9504 11.4259 -1.9504 12.7047 -1.0000L12.7047 -1.0000C11.4259 -1.8304 2.9911 -1.8304 1.7124 -1.0000z"/>
 </g>
 </a>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:663:9:10">
-<g transform="translate(23.8838, 26.8806)">
-<polygon stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="5.5998 -0.2000 5.5998 0.2000 0.0400 0.2000 0.0400 -0.2000"/>
+<g transform="translate(23.8794, 26.8806)">
+<polygon stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="5.5985 -0.2000 5.5985 0.2000 0.0400 0.2000 0.0400 -0.2000"/>
 </g>
-<g transform="translate(23.8838, 27.6906)">
-<polygon stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="5.5998 -0.2000 5.5998 0.2000 0.0400 0.2000 0.0400 -0.2000"/>
+<g transform="translate(23.8794, 27.6906)">
+<polygon stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="5.5985 -0.2000 5.5985 0.2000 0.0400 0.2000 0.0400 -0.2000"/>
 </g>
-<g transform="translate(23.8838, 28.5006)">
-<polygon stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="5.5998 -0.2000 5.5998 0.2000 0.0400 0.2000 0.0400 -0.2000"/>
+<g transform="translate(23.8794, 28.5006)">
+<polygon stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="5.5985 -0.2000 5.5985 0.2000 0.0400 0.2000 0.0400 -0.2000"/>
 </g>
 </a>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:569:9:10">
-<g transform="translate(20.9824, 11.6906)">
-<path stroke-width="0.0800" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" fill="currentColor" d="M1.5774 2.0000C2.9677 2.9744 14.3252 2.9744 15.7155 2.0000L15.7155 2.0000C14.3252 2.8544 2.9677 2.8544 1.5774 2.0000z"/>
+<g transform="translate(20.9792, 11.6906)">
+<path stroke-width="0.0800" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" fill="currentColor" d="M1.5774 2.0000C2.9675 2.9744 14.3199 2.9744 15.7101 2.0000L15.7101 2.0000C14.3199 2.8544 2.9675 2.8544 1.5774 2.0000z"/>
 </g>
 </a>
-<g transform="translate(89.9566, 25.6906)">
+<g transform="translate(89.9623, 25.6906)">
 <rect x="-0.0650" y="0.2590" width="0.1300" height="3.0743" ry="0.0400" fill="currentColor"/>
 </g>
-<g transform="translate(91.1308, 25.6906)">
+<g transform="translate(91.1365, 25.6906)">
 <rect x="-0.0650" y="-5.5013" width="0.1300" height="3.3151" ry="0.0400" fill="currentColor"/>
 </g>
-<g transform="translate(91.6458, 23.1906)">
+<g transform="translate(91.6515, 23.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M0 0c0 31 25 56 56 56s56 -25 56 -56s-25 -56 -56 -56s-56 25 -56 56z" fill="currentColor"/>
 </g>
-<g transform="translate(89.9566, 11.6906)">
+<g transform="translate(89.9623, 11.6906)">
 <rect x="-0.0650" y="1.7590" width="0.1300" height="2.5743" ry="0.0400" fill="currentColor"/>
 </g>
-<g transform="translate(91.2040, 11.6906)">
+<g transform="translate(91.2097, 11.6906)">
 <rect x="-0.0650" y="-3.0000" width="0.1300" height="3.2410" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:685:6:7">
-<g transform="translate(89.8916, 25.6906)">
+<g transform="translate(89.8973, 25.6906)">
 <path transform="scale(0.0040, -0.0040)" d="M303 37c7 9 11 18 11 27c0 22 -20 42 -43 42c-4 0 -7 0 -11 -1c-31 -9 -78 -40 -115 -64s-84 -53 -104 -78c-7 -9 -10 -18 -10 -27c0 -22 20 -42 43 -42c4 0 7 0 11 1c31 9 77 40 114 64s84 53 104 78zM262 136c46 0 82 -21 82 -71c0 -19 -4 -39 -10 -57
 c-12 -37 -32 -72 -64 -94c-53 -36 -113 -50 -187 -50c-46 0 -83 21 -83 71c0 19 5 39 11 57c12 37 31 72 63 94c53 36 114 50 188 50z" fill="currentColor"/>
 </g>
 </a>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:677:6:7">
-<g transform="translate(89.8916, 23.6906)">
+<g transform="translate(89.8973, 23.6906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:596:6:7">
-<g transform="translate(89.8916, 13.1906)">
+<g transform="translate(89.8973, 13.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M303 37c7 9 11 18 11 27c0 22 -20 42 -43 42c-4 0 -7 0 -11 -1c-31 -9 -78 -40 -115 -64s-84 -53 -104 -78c-7 -9 -10 -18 -10 -27c0 -22 20 -42 43 -42c4 0 7 0 11 1c31 9 77 40 114 64s84 53 104 78zM262 136c46 0 82 -21 82 -71c0 -19 -4 -39 -10 -57
 c-12 -37 -32 -72 -64 -94c-53 -36 -113 -50 -187 -50c-46 0 -83 21 -83 71c0 19 5 39 11 57c12 37 31 72 63 94c53 36 114 50 188 50z" fill="currentColor"/>
 </g>
 </a>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:583:6:7">
-<g transform="translate(89.8916, 12.1906)">
+<g transform="translate(89.8973, 12.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M303 37c7 9 11 18 11 27c0 22 -20 42 -43 42c-4 0 -7 0 -11 -1c-31 -9 -78 -40 -115 -64s-84 -53 -104 -78c-7 -9 -10 -18 -10 -27c0 -22 20 -42 43 -42c4 0 7 0 11 1c31 9 77 40 114 64s84 53 104 78zM262 136c46 0 82 -21 82 -71c0 -19 -4 -39 -10 -57
 c-12 -37 -32 -72 -64 -94c-53 -36 -113 -50 -187 -50c-46 0 -83 21 -83 71c0 19 5 39 11 57c12 37 31 72 63 94c53 36 114 50 188 50z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(87.6971, 11.6906)">
+<g transform="translate(87.7044, 11.6906)">
 <rect x="-0.0650" y="-3.0000" width="0.1300" height="3.3138" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:582:6:7">
-<g transform="translate(86.4579, 12.1906)">
+<g transform="translate(86.4652, 12.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(101.4506, 25.6906)">
+<g transform="translate(101.4523, 25.6906)">
 <rect x="-0.0650" y="-5.7017" width="0.1300" height="3.5155" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:677:19:20">
-<g transform="translate(100.2114, 23.6906)">
+<g transform="translate(100.2131, 23.6906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(99.0816, 25.6906)">
+<g transform="translate(99.0841, 25.6906)">
 <rect x="-0.0650" y="-5.6557" width="0.1300" height="3.9695" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:677:17:18">
-<g transform="translate(97.8424, 24.1906)">
+<g transform="translate(97.8449, 24.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(96.7126, 25.6906)">
+<g transform="translate(96.7160, 25.6906)">
 <rect x="-0.0650" y="-5.6097" width="0.1300" height="3.4235" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:677:15:16">
-<g transform="translate(95.4734, 23.6906)">
+<g transform="translate(95.4768, 23.6906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(94.3436, 25.6906)">
+<g transform="translate(94.3478, 25.6906)">
 <rect x="-0.0650" y="-5.5637" width="0.1300" height="3.8775" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:677:11:12">
-<g transform="translate(93.1044, 24.1906)">
+<g transform="translate(93.1086, 24.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:663:15:16">
-<g transform="translate(29.3935, 24.6906)">
+<g transform="translate(29.3879, 24.6906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(27.6220, 25.6906)">
+<g transform="translate(27.6167, 25.6906)">
 <rect x="-0.0650" y="-0.3138" width="0.1300" height="3.1238" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:663:13:14">
-<g transform="translate(27.5570, 25.1906)">
+<g transform="translate(27.5517, 25.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(25.7854, 25.6906)">
+<g transform="translate(25.7805, 25.6906)">
 <rect x="-0.0650" y="-0.8138" width="0.1300" height="3.6238" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:663:11:12">
-<g transform="translate(25.7204, 24.6906)">
+<g transform="translate(25.7155, 24.6906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(29.4585, 25.6906)">
+<g transform="translate(29.4529, 25.6906)">
 <rect x="-0.0650" y="-0.8138" width="0.1300" height="3.6238" ry="0.0400" fill="currentColor"/>
 </g>
-<g transform="translate(23.9488, 25.6906)">
+<g transform="translate(23.9444, 25.6906)">
 <rect x="-0.0650" y="-0.3138" width="0.1300" height="3.1238" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:663:6:7">
-<g transform="translate(23.8838, 25.1906)">
+<g transform="translate(23.8794, 25.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(21.1124, 28.1506)">
+<g transform="translate(21.1092, 28.1506)">
 <path transform="scale(0.0040, -0.0040)" d="M0 0h-16v375h16v-375zM0 0v250c97 59 224 148 224 259c0 57 -15 112 -40 163v5c0 14 11 22 23 22c7 0 15 -3 20 -11c25 -56 40 -117 40 -179c0 -203 -267 -306 -267 -509z" fill="currentColor"/>
 </g>
-<g transform="translate(21.0474, 25.6906)">
+<g transform="translate(21.0442, 25.6906)">
 <rect x="-0.0650" y="-0.8138" width="0.1300" height="3.3138" ry="0.0400" fill="currentColor"/>
 </g>
-<g transform="translate(37.0979, 11.6906)">
+<g transform="translate(37.0893, 11.6906)">
 <rect x="-0.0650" y="1.6862" width="0.1300" height="2.6471" ry="0.0400" fill="currentColor"/>
 </g>
-<g transform="translate(38.3453, 11.6906)">
-<rect x="-0.0650" y="-4.3333" width="0.1300" height="2.5743" ry="0.0400" fill="currentColor"/>
+<g transform="translate(38.3367, 11.6906)">
+<rect x="-0.0650" y="-3.6667" width="0.1300" height="2.9077" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:666:6:7">
-<g transform="translate(37.0329, 27.6906)">
+<g transform="translate(37.0243, 27.6906)">
 <path transform="scale(0.0040, -0.0040)" d="M365 0h-355c-6 0 -10 4 -10 10v136c0 6 4 10 10 10h355c6 0 10 -4 10 -10v-136c0 -6 -4 -10 -10 -10z" fill="currentColor"/>
 </g>
 </a>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:653:6:7">
-<g transform="translate(37.0329, 23.6906)">
+<g transform="translate(37.0243, 23.6906)">
 <path transform="scale(0.0040, -0.0040)" d="M303 37c7 9 11 18 11 27c0 22 -20 42 -43 42c-4 0 -7 0 -11 -1c-31 -9 -78 -40 -115 -64s-84 -53 -104 -78c-7 -9 -10 -18 -10 -27c0 -22 20 -42 43 -42c4 0 7 0 11 1c31 9 77 40 114 64s84 53 104 78zM262 136c46 0 82 -21 82 -71c0 -19 -4 -39 -10 -57
 c-12 -37 -32 -72 -64 -94c-53 -36 -113 -50 -187 -50c-46 0 -83 21 -83 71c0 19 5 39 11 57c12 37 31 72 63 94c53 36 114 50 188 50z" fill="currentColor"/>
 </g>
 </a>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:570:6:7">
-<g transform="translate(37.0329, 13.1906)">
+<g transform="translate(37.0243, 13.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:561:6:7">
-<g transform="translate(37.0329, 10.1906)">
+<g transform="translate(37.0243, 11.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M303 37c7 9 11 18 11 27c0 22 -20 42 -43 42c-4 0 -7 0 -11 -1c-31 -9 -78 -40 -115 -64s-84 -53 -104 -78c-7 -9 -10 -18 -10 -27c0 -22 20 -42 43 -42c4 0 7 0 11 1c31 9 77 40 114 64s84 53 104 78zM262 136c46 0 82 -21 82 -71c0 -19 -4 -39 -10 -57
 c-12 -37 -32 -72 -64 -94c-53 -36 -113 -50 -187 -50c-46 0 -83 21 -83 71c0 19 5 39 11 57c12 37 31 72 63 94c53 36 114 50 188 50z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(21.0474, 11.6906)">
+<g transform="translate(21.0442, 11.6906)">
 <rect x="-0.0650" y="1.7590" width="0.1300" height="2.5743" ry="0.0400" fill="currentColor"/>
 </g>
-<g transform="translate(34.1965, 25.6906)">
+<g transform="translate(34.1892, 25.6906)">
 <rect x="-0.0650" y="0.1862" width="0.1300" height="2.8097" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:665:6:7">
-<g transform="translate(34.1315, 25.6906)">
+<g transform="translate(34.1242, 25.6906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(31.2951, 25.6906)">
+<g transform="translate(31.2890, 25.6906)">
 <rect x="-0.0650" y="-0.3138" width="0.1300" height="3.1279" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:664:6:7">
-<g transform="translate(31.2301, 25.1906)">
+<g transform="translate(31.2240, 25.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
@@ -560,45 +560,45 @@ c-12 -37 -32 -72 -64 -94c-53 -36 -113 -50 -187 -50c-46 0 -83 21 -83 71c0 19 5 39
 </g>
 </a>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:583:9:10">
-<g transform="translate(89.8916, 11.6906)">
-<path stroke-width="0.0800" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" fill="currentColor" d="M1.7124 -0.6057C3.1476 -1.5889 16.0309 -1.5889 17.4661 -0.6057L17.4661 -0.6057C16.0309 -1.4689 3.1476 -1.4689 1.7124 -0.6057z"/>
+<g transform="translate(89.8973, 11.6906)">
+<path stroke-width="0.0800" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" fill="currentColor" d="M1.7124 -0.6058C3.1474 -1.5888 16.0254 -1.5888 17.4604 -0.6058L17.4604 -0.6058C16.0254 -1.4688 3.1474 -1.4688 1.7124 -0.6058z"/>
 </g>
 </a>
 <g transform="translate(8.4758, 19.1906)">
 <rect x="0.0000" y="-8.5500" width="0.1600" height="17.1000" ry="0.0500" fill="currentColor"/>
 </g>
-<g transform="translate(22.2948, 11.6906)">
+<g transform="translate(22.2916, 11.6906)">
 <rect x="-0.0650" y="-3.0000" width="0.1300" height="3.2410" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:662:6:7">
-<g transform="translate(20.9824, 24.6906)">
+<g transform="translate(20.9792, 24.6906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:569:6:7">
-<g transform="translate(20.9824, 13.1906)">
+<g transform="translate(20.9792, 13.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M303 37c7 9 11 18 11 27c0 22 -20 42 -43 42c-4 0 -7 0 -11 -1c-31 -9 -78 -40 -115 -64s-84 -53 -104 -78c-7 -9 -10 -18 -10 -27c0 -22 20 -42 43 -42c4 0 7 0 11 1c31 9 77 40 114 64s84 53 104 78zM262 136c46 0 82 -21 82 -71c0 -19 -4 -39 -10 -57
 c-12 -37 -32 -72 -64 -94c-53 -36 -113 -50 -187 -50c-46 0 -83 21 -83 71c0 19 5 39 11 57c12 37 31 72 63 94c53 36 114 50 188 50z" fill="currentColor"/>
 </g>
 </a>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:560:6:7">
-<g transform="translate(20.9824, 12.1906)">
+<g transform="translate(20.9792, 12.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M303 37c7 9 11 18 11 27c0 22 -20 42 -43 42c-4 0 -7 0 -11 -1c-31 -9 -78 -40 -115 -64s-84 -53 -104 -78c-7 -9 -10 -18 -10 -27c0 -22 20 -42 43 -42c4 0 7 0 11 1c31 9 77 40 114 64s84 53 104 78zM262 136c46 0 82 -21 82 -71c0 -19 -4 -39 -10 -57
 c-12 -37 -32 -72 -64 -94c-53 -36 -113 -50 -187 -50c-46 0 -83 21 -83 71c0 19 5 39 11 57c12 37 31 72 63 94c53 36 114 50 188 50z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(18.2110, 28.6506)">
+<g transform="translate(18.2091, 28.6506)">
 <path transform="scale(0.0040, -0.0040)" d="M0 0h-16v375h16v-375zM0 0v250c97 59 224 148 224 259c0 57 -15 112 -40 163v5c0 14 11 22 23 22c7 0 15 -3 20 -11c25 -56 40 -117 40 -179c0 -203 -267 -306 -267 -509z" fill="currentColor"/>
 </g>
-<g transform="translate(18.1460, 25.6906)">
+<g transform="translate(18.1441, 25.6906)">
 <rect x="-0.0650" y="-0.3138" width="0.1300" height="3.3138" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:661:6:7">
-<g transform="translate(18.0810, 25.1906)">
+<g transform="translate(18.0791, 25.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(60.1604, 11.6906)">
+<g transform="translate(60.1782, 11.6906)">
 <rect x="-0.0650" y="2.2590" width="0.1300" height="2.4077" ry="0.0400" fill="currentColor"/>
 </g>
 <g transform="translate(7.6481, 9.6201)">
@@ -612,130 +612,130 @@ c-12 -37 -32 -72 -64 -94c-53 -36 -113 -50 -187 -50c-46 0 -83 21 -83 71c0 19 5 39
 <g transform="translate(16.0900, 26.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M0 0c0 31 25 56 56 56s56 -25 56 -56s-25 -56 -56 -56s-56 25 -56 56z" fill="currentColor"/>
 </g>
-<g transform="translate(50.0076, 25.6906)">
+<g transform="translate(49.9940, 25.6906)">
 <rect x="-0.0650" y="1.7590" width="0.1300" height="2.5743" ry="0.0400" fill="currentColor"/>
 </g>
-<g transform="translate(54.6156, 25.6906)">
+<g transform="translate(54.6003, 25.6906)">
 <rect x="-0.0650" y="-3.8034" width="0.1300" height="2.1172" ry="0.0400" fill="currentColor"/>
 </g>
-<g transform="translate(54.6156, 11.6906)">
-<rect x="-0.0650" y="-3.4934" width="0.1300" height="2.3072" ry="0.0400" fill="currentColor"/>
+<g transform="translate(54.6003, 11.6906)">
+<rect x="-0.0650" y="-2.8034" width="0.1300" height="2.6172" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:655:6:7">
-<g transform="translate(53.3764, 24.1906)">
+<g transform="translate(53.3611, 24.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:563:6:7">
-<g transform="translate(53.3764, 10.6906)">
+<g transform="translate(53.3611, 11.6906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(51.1818, 25.6906)">
+<g transform="translate(51.1682, 25.6906)">
 <rect x="-0.0650" y="-4.6667" width="0.1300" height="2.4805" ry="0.0400" fill="currentColor"/>
 </g>
-<g transform="translate(50.0076, 11.6906)">
+<g transform="translate(49.9940, 11.6906)">
 <rect x="-0.0650" y="2.2590" width="0.1300" height="2.4077" ry="0.0400" fill="currentColor"/>
 </g>
-<g transform="translate(51.1818, 11.6906)">
-<rect x="-0.0650" y="-4.3333" width="0.1300" height="2.6471" ry="0.0400" fill="currentColor"/>
+<g transform="translate(51.1682, 11.6906)">
+<rect x="-0.0650" y="-3.6667" width="0.1300" height="2.9805" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:579:6:7">
-<g transform="translate(60.0954, 11.1906)">
+<g transform="translate(60.1132, 11.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M303 37c7 9 11 18 11 27c0 22 -20 42 -43 42c-4 0 -7 0 -11 -1c-31 -9 -78 -40 -115 -64s-84 -53 -104 -78c-7 -9 -10 -18 -10 -27c0 -22 20 -42 43 -42c4 0 7 0 11 1c31 9 77 40 114 64s84 53 104 78zM262 136c46 0 82 -21 82 -71c0 -19 -4 -39 -10 -57
 c-12 -37 -32 -72 -64 -94c-53 -36 -113 -50 -187 -50c-46 0 -83 21 -83 71c0 19 5 39 11 57c12 37 31 72 63 94c53 36 114 50 188 50z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(61.4078, 11.6906)">
+<g transform="translate(61.4256, 11.6906)">
 <rect x="-0.0650" y="-3.6667" width="0.1300" height="2.9077" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:682:6:7">
-<g transform="translate(60.0954, 27.1906)">
+<g transform="translate(60.1132, 27.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M303 37c7 9 11 18 11 27c0 22 -20 42 -43 42c-4 0 -7 0 -11 -1c-31 -9 -78 -40 -115 -64s-84 -53 -104 -78c-7 -9 -10 -18 -10 -27c0 -22 20 -42 43 -42c4 0 7 0 11 1c31 9 77 40 114 64s84 53 104 78zM262 136c46 0 82 -21 82 -71c0 -19 -4 -39 -10 -57
 c-12 -37 -32 -72 -64 -94c-53 -36 -113 -50 -187 -50c-46 0 -83 21 -83 71c0 19 5 39 11 57c12 37 31 72 63 94c53 36 114 50 188 50z" fill="currentColor"/>
 </g>
 </a>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:675:6:7">
-<g transform="translate(60.0954, 25.1906)">
+<g transform="translate(60.1132, 25.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:592:6:7">
-<g transform="translate(60.0954, 13.6906)">
+<g transform="translate(60.1132, 13.6906)">
 <path transform="scale(0.0040, -0.0040)" d="M303 37c7 9 11 18 11 27c0 22 -20 42 -43 42c-4 0 -7 0 -11 -1c-31 -9 -78 -40 -115 -64s-84 -53 -104 -78c-7 -9 -10 -18 -10 -27c0 -22 20 -42 43 -42c4 0 7 0 11 1c31 9 77 40 114 64s84 53 104 78zM262 136c46 0 82 -21 82 -71c0 -19 -4 -39 -10 -57
 c-12 -37 -32 -72 -64 -94c-53 -36 -113 -50 -187 -50c-46 0 -83 21 -83 71c0 19 5 39 11 57c12 37 31 72 63 94c53 36 114 50 188 50z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(57.5169, 25.6906)">
+<g transform="translate(57.5004, 25.6906)">
 <rect x="-0.0650" y="-3.5066" width="0.1300" height="2.3204" ry="0.0400" fill="currentColor"/>
 </g>
-<g transform="translate(57.5169, 11.6906)">
-<rect x="-0.0650" y="-3.1966" width="0.1300" height="2.5104" ry="0.0400" fill="currentColor"/>
+<g transform="translate(57.5004, 11.6906)">
+<rect x="-0.0650" y="-2.5066" width="0.1300" height="2.8204" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:655:9:10">
-<g transform="translate(56.2777, 24.6906)">
+<g transform="translate(56.2612, 24.6906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
-<a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:563:11:12">
-<g transform="translate(56.2777, 11.1906)">
+<a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:563:10:11">
+<g transform="translate(56.2612, 12.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(45.2696, 11.6906)">
+<g transform="translate(45.2577, 11.6906)">
 <rect x="-0.0650" y="2.1862" width="0.1300" height="2.6238" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:667:6:7">
-<g transform="translate(49.9426, 27.1906)">
+<g transform="translate(49.9290, 27.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M303 37c7 9 11 18 11 27c0 22 -20 42 -43 42c-4 0 -7 0 -11 -1c-31 -9 -78 -40 -115 -64s-84 -53 -104 -78c-7 -9 -10 -18 -10 -27c0 -22 20 -42 43 -42c4 0 7 0 11 1c31 9 77 40 114 64s84 53 104 78zM262 136c46 0 82 -21 82 -71c0 -19 -4 -39 -10 -57
 c-12 -37 -32 -72 -64 -94c-53 -36 -113 -50 -187 -50c-46 0 -83 21 -83 71c0 19 5 39 11 57c12 37 31 72 63 94c53 36 114 50 188 50z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(42.9006, 11.6906)">
+<g transform="translate(42.8895, 11.6906)">
 <rect x="-0.0650" y="1.6862" width="0.1300" height="3.1238" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:571:12:13">
-<g transform="translate(42.8356, 13.1906)">
+<g transform="translate(42.8245, 13.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:571:15:16">
-<g transform="translate(45.2046, 13.6906)">
+<g transform="translate(45.1927, 13.6906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(40.5317, 11.6906)">
+<g transform="translate(40.5214, 11.6906)">
 <rect x="-0.0650" y="2.1862" width="0.1300" height="2.6238" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:571:6:7">
-<g transform="translate(40.4667, 13.6906)">
+<g transform="translate(40.4564, 13.6906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(38.3453, 25.6906)">
+<g transform="translate(38.3367, 25.6906)">
 <rect x="-0.0650" y="-4.6667" width="0.1300" height="2.4077" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:654:6:7">
-<g transform="translate(49.9426, 23.6906)">
+<g transform="translate(49.9290, 23.6906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:572:6:7">
-<g transform="translate(49.9426, 13.6906)">
+<g transform="translate(49.9290, 13.6906)">
 <path transform="scale(0.0040, -0.0040)" d="M303 37c7 9 11 18 11 27c0 22 -20 42 -43 42c-4 0 -7 0 -11 -1c-31 -9 -78 -40 -115 -64s-84 -53 -104 -78c-7 -9 -10 -18 -10 -27c0 -22 20 -42 43 -42c4 0 7 0 11 1c31 9 77 40 114 64s84 53 104 78zM262 136c46 0 82 -21 82 -71c0 -19 -4 -39 -10 -57
 c-12 -37 -32 -72 -64 -94c-53 -36 -113 -50 -187 -50c-46 0 -83 21 -83 71c0 19 5 39 11 57c12 37 31 72 63 94c53 36 114 50 188 50z" fill="currentColor"/>
 </g>
 </a>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:571:18:19">
-<g transform="translate(47.5736, 13.1906)">
+<g transform="translate(47.5608, 13.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
-<g transform="translate(47.6386, 11.6906)">
+<g transform="translate(47.6258, 11.6906)">
 <rect x="-0.0650" y="1.6862" width="0.1300" height="3.1238" ry="0.0400" fill="currentColor"/>
 </g>
 <a style="color:inherit;" xlink:href="textedit://C:/Users/grego/AppData/Local/Temp/lilypond-intavolatura-MeruloI-Itone-02/c-stage5.ly:562:6:7">
-<g transform="translate(49.9426, 10.1906)">
+<g transform="translate(49.9290, 11.1906)">
 <path transform="scale(0.0040, -0.0040)" d="M217 136c56 0 109 -27 109 -89c0 -18 -5 -38 -13 -55c-31 -66 -113 -128 -204 -128c-56 0 -109 27 -109 89c0 18 5 38 13 55c31 66 113 128 204 128z" fill="currentColor"/>
 </g>
 </a>
