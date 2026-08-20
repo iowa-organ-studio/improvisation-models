@@ -103,6 +103,227 @@ $Keys = @(
 
 
 # ---------------------------------------------------------
+# PITCH HELPERS
+# ---------------------------------------------------------
+
+function GetPitchInfo {
+
+    param(
+        [string]$Pitch
+    )
+
+    $match =
+        [regex]::Match(
+            $Pitch,
+            '^([a-g])(is|es)?$'
+        )
+
+    if (!$match.Success) {
+
+        throw `
+            "Unrecognized LilyPond pitch: $Pitch"
+    }
+
+    $letter =
+        $match.Groups[1].Value
+
+    $accidental =
+        $match.Groups[2].Value
+
+
+    $pitchClassByLetter = @{
+        c = 0
+        d = 2
+        e = 4
+        f = 5
+        g = 7
+        a = 9
+        b = 11
+    }
+
+
+    $letterIndex = @{
+        c = 0
+        d = 1
+        e = 2
+        f = 3
+        g = 4
+        a = 5
+        b = 6
+    }
+
+
+    $pitchClass =
+        $pitchClassByLetter[$letter]
+
+
+    if ($accidental -eq "is") {
+
+        $pitchClass++
+    }
+
+    elseif ($accidental -eq "es") {
+
+        $pitchClass--
+    }
+
+
+    $pitchClass =
+        (($pitchClass % 12) + 12) % 12
+
+
+    return @{
+        Letter      = $letter
+        Accidental  = $accidental
+        PitchClass  = $pitchClass
+        LetterIndex = $letterIndex[$letter]
+    }
+}
+
+
+function GetTransposeTarget {
+
+    param(
+        [string]$SourcePitch,
+        [string]$TargetPitch
+    )
+
+
+    $source =
+        GetPitchInfo $SourcePitch
+
+    $target =
+        GetPitchInfo $TargetPitch
+
+
+    # -----------------------------------------------------
+    # Calculate shortest chromatic interval.
+    #
+    # Normally this gives:
+    #
+    #   -5 through +6
+    #
+    # The tritone is handled separately below.
+    # -----------------------------------------------------
+
+    $interval =
+        $target.PitchClass -
+        $source.PitchClass
+
+
+    while ($interval -gt 6) {
+
+        $interval -= 12
+    }
+
+    while ($interval -lt -6) {
+
+        $interval += 12
+    }
+
+
+    # -----------------------------------------------------
+    # Tritone:
+    #
+    # Use the spelling to decide direction.
+    #
+    # C -> F#  = augmented 4th = UP
+    # C -> Gb  = diminished 5th = DOWN
+    #
+    # More generally, if the target letter is a 4th or
+    # closer above the source letter, use +6.
+    # If it is a 5th/6th/7th, use -6.
+    # -----------------------------------------------------
+
+    if (
+        [Math]::Abs($interval) -eq 6
+    ) {
+
+        $diatonicDistance =
+            (
+                $target.LetterIndex -
+                $source.LetterIndex +
+                7
+            ) % 7
+
+
+        if ($diatonicDistance -le 3) {
+
+            $interval = 6
+        }
+        else {
+
+            $interval = -6
+        }
+    }
+
+
+    # -----------------------------------------------------
+    # LilyPond needs octave marks to tell it whether the
+    # target is above or below the source.
+    #
+    # Example:
+    #
+    #   c -> b
+    #
+    # same-octave B is +11 semitones.
+    # Desired interval is -1.
+    #
+    # Therefore LilyPond needs:
+    #
+    #   b,
+    #
+    # -----------------------------------------------------
+
+    $sameOctaveDifference =
+        $target.PitchClass -
+        $source.PitchClass
+
+
+    $octaveAdjustment =
+        (
+            $interval -
+            $sameOctaveDifference
+        ) / 12
+
+
+    if (
+        $octaveAdjustment -ne
+        [Math]::Floor($octaveAdjustment)
+    ) {
+
+        throw `
+            "Could not calculate LilyPond octave adjustment for $SourcePitch -> $TargetPitch"
+    }
+
+
+    $octaveAdjustment =
+        [int]$octaveAdjustment
+
+
+    $result =
+        $target.Letter +
+        $target.Accidental
+
+
+    if ($octaveAdjustment -gt 0) {
+
+        $result +=
+            ("'" * $octaveAdjustment)
+    }
+
+    elseif ($octaveAdjustment -lt 0) {
+
+        $result +=
+            ("," * (-$octaveAdjustment))
+    }
+
+
+    return $result
+}
+
+
+# ---------------------------------------------------------
 # CHECK SOURCE FILE
 # ---------------------------------------------------------
 
@@ -142,7 +363,45 @@ $templateText =
 
 
 # ---------------------------------------------------------
-# GENERATE ALL KEYS × ALL STAGES
+# GET SOURCE PITCH FROM THE TEMPLATE
+#
+# The template should contain something like:
+#
+#   \transpose c TARGET_KEY {
+#
+# or:
+#
+#   \transpose f TARGET_KEY {
+#
+# We preserve that source pitch and only calculate the
+# replacement for TARGET_KEY.
+# ---------------------------------------------------------
+
+$transposeMatch =
+    [regex]::Match(
+        $templateText,
+        '\\transpose\s+([a-g](?:is|es)?)\s+TARGET_KEY'
+    )
+
+
+if (!$transposeMatch.Success) {
+
+    throw `
+        "Could not find '\transpose SOURCE TARGET_KEY' in ${Template}"
+}
+
+
+$sourcePitch =
+    $transposeMatch.Groups[1].Value
+
+
+Write-Host ""
+Write-Host "Source transpose pitch: $sourcePitch"
+Write-Host ""
+
+
+# ---------------------------------------------------------
+# GENERATE ALL KEYS x ALL STAGES
 # ---------------------------------------------------------
 
 foreach ($keyName in $Keys) {
@@ -161,18 +420,29 @@ foreach ($keyName in $Keys) {
     }
 
 
+    # -----------------------------------------------------
+    # CALCULATE THE ACTUAL LILYPOND TARGET PITCH
+    # -----------------------------------------------------
+
+    $transposeTarget =
+        GetTransposeTarget `
+            -SourcePitch $sourcePitch `
+            -TargetPitch $keyName
+
+
     foreach ($stage in @(1, 5)) {
 
         Write-Host ""
         Write-Host "========================================"
         Write-Host "Phrase: $PhraseId"
         Write-Host "Key:    $keyName"
+        Write-Host "Target: $transposeTarget"
         Write-Host "Stage:  $stage"
         Write-Host "========================================"
 
 
         # -------------------------------------------------
-        # START FROM THE ORIGINAL PHRASE SOURCE
+        # START FROM ORIGINAL PHRASE SOURCE
         # -------------------------------------------------
 
         $source =
@@ -186,7 +456,7 @@ foreach ($keyName in $Keys) {
         $source =
             $source.Replace(
                 "TARGET_KEY",
-                $keyName
+                $transposeTarget
             )
 
 
@@ -231,10 +501,10 @@ foreach ($keyName in $Keys) {
         # RUN LILYPOND
         # -------------------------------------------------
 
-      & lilypond `
-    --svg `
-    -o $outputBase `
-    $tempLy
+        & lilypond `
+            --svg `
+            -o $outputBase `
+            $tempLy
 
         if ($LASTEXITCODE -ne 0) {
 
@@ -247,8 +517,8 @@ foreach ($keyName in $Keys) {
         # FIND CROPPED SVG
         # -------------------------------------------------
 
-       $croppedSvg =
-    "$outputBase.svg"
+        $croppedSvg =
+            "$outputBase.svg"
 
         if (!(Test-Path $croppedSvg)) {
 
