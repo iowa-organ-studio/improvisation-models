@@ -477,7 +477,32 @@ h2{
   padding:6px 8px;
 }
 
+/* =====================================================
+   DIFFICULTY FILTER CARD
+===================================================== */
 
+.difficulty-filter-card {
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  background:#2a2a2a;
+
+  border:1px solid rgba(255,255,255,0.08);
+
+  border-radius:10px;
+
+  padding:6px 8px;
+}
+
+
+.difficulty-filter-btn {
+
+  min-width:62px;
+}
 
 
 
@@ -889,6 +914,7 @@ hr{
 
 .key-toolbar-card .key-btn,
 .mode-filter-btn,
+.difficulty-filter-btn,
 .transpose-toolbar-card button,
 #enharmonicBtn,
 .mode-toggle,
@@ -900,6 +926,7 @@ hr{
 
 .key-toolbar-card .key-btn.selected,
 .mode-filter-btn.selected,
+.difficulty-filter-btn.selected,
 #enharmonicBtn,
 .mode-toggle.selected,
 .clef-toggle.selected {
