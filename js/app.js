@@ -36,8 +36,12 @@ let allowMinor = true;
 let enabledVenetianTones =
     new Set([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
+let enabledVenetianDifficulties =
+    new Set(['Easy', 'Medium', 'Difficult']);
+
 let phraseKeyCache = {};
 let phraseToneCache = {};
+let phraseDifficultyCache = {};
 let phraseAccidentalCountCache = {};
 let phraseFinalCache = {};
 
@@ -114,7 +118,9 @@ async function loadPhrases() {
 
     phraseKeyCache = {};
     phraseToneCache = {};
+    phraseDifficultyCache = {};
     phraseAccidentalCountCache = {};
+    phraseFinalCache = {};
 
     for (const family of phrases) {
 
@@ -132,6 +138,9 @@ async function loadPhrases() {
 
                 phraseToneCache[family] =
                     parseVenetianToneFromKrn(text);
+
+                phraseDifficultyCache[family] =
+                    parseVenetianDifficultyFromKrn(text);
 
                 phraseAccidentalCountCache[family] =
                     parseKeySignatureAccidentalCount(text);
@@ -160,10 +169,17 @@ function randomPhrase() {
                 const tone =
                     phraseToneCache[family];
 
+                const difficulty =
+                    phraseDifficultyCache[family];
+
                 return (
                     tone !== null &&
                     tone !== undefined &&
-                    enabledVenetianTones.has(tone)
+                    enabledVenetianTones.has(tone) &&
+
+                    difficulty !== null &&
+                    difficulty !== undefined &&
+                    enabledVenetianDifficulties.has(difficulty)
                 );
             });
 
@@ -223,6 +239,8 @@ function randomPhrase() {
         )
     ];
 }
+
+
 
 async function loadFamily(family) {
 
@@ -303,6 +321,54 @@ function parseKeyFromKrn(krnText) {
 
     return { tonic, mode };
 }
+
+function parseVenetianDifficultyFromKrn(krnText) {
+
+    const difficultyMatch =
+        krnText.match(
+            /^!!!\s*Difficulty:\s*(.*)$/mi
+        );
+
+    if (difficultyMatch) {
+
+        const value =
+            difficultyMatch[1]
+                .trim()
+                .toLowerCase();
+
+        const normalized = {
+            easy: 'Easy',
+            medium: 'Medium',
+            difficult: 'Difficult'
+        };
+
+        if (normalized[value]) {
+            return normalized[value];
+        }
+    }
+
+    const levelMatch =
+        krnText.match(
+            /^!!!\s*Level:\s*(\d+)$/mi
+        );
+
+    if (!levelMatch) {
+        return null;
+    }
+
+    const level =
+        Number(levelMatch[1]);
+
+    const levelMap = {
+        1: 'Easy',
+        2: 'Medium',
+        3: 'Difficult'
+    };
+
+    return levelMap[level] || null;
+}
+
+
 
 function parseVenetianFinalFromKrn(krnText) {
 
@@ -1490,6 +1556,84 @@ function wireKeyButtons() {
         });
 }
 
+function wireDifficultyButtons() {
+
+    const card =
+        document.getElementById('difficultyFilterCard');
+
+    if (!card) {
+        return;
+    }
+
+    if (currentModel !== 'Venetian-Toccata') {
+        card.style.display = 'none';
+        return;
+    }
+
+    const buttons = [
+        {
+            id: 'easyDifficultyBtn',
+            difficulty: 'Easy'
+        },
+        {
+            id: 'mediumDifficultyBtn',
+            difficulty: 'Medium'
+        },
+        {
+            id: 'difficultDifficultyBtn',
+            difficulty: 'Difficult'
+        }
+    ];
+
+    for (const item of buttons) {
+
+        const button =
+            document.getElementById(item.id);
+
+        if (!button) {
+            continue;
+        }
+
+        button.classList.toggle(
+            'selected',
+            enabledVenetianDifficulties.has(
+                item.difficulty
+            )
+        );
+
+        button.addEventListener(
+            'click',
+            () => {
+
+                if (
+                    enabledVenetianDifficulties.has(
+                        item.difficulty
+                    )
+                ) {
+
+                    enabledVenetianDifficulties.delete(
+                        item.difficulty
+                    );
+
+                } else {
+
+                    enabledVenetianDifficulties.add(
+                        item.difficulty
+                    );
+                }
+
+                button.classList.toggle(
+                    'selected',
+                    enabledVenetianDifficulties.has(
+                        item.difficulty
+                    )
+                );
+            }
+        );
+    }
+}
+
+
 function wireModeButtons() {
 
     const card =
@@ -1769,6 +1913,7 @@ async function main() {
     syncClefRadios();
     wireKeyButtons();
     wireModeButtons();
+    wireDifficultyButtons();
     refreshKeyButtonsUI();
     wireFbModeButtons();
     wireScaleSpacing('l0');
