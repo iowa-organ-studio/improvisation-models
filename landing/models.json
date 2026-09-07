@@ -1,5 +1,14 @@
 {
   "models": [
+      {
+      "type": "model",
+      "title": "Merulo Venetian Toccata",
+      "description": "Learn to turn very simple harmony into the ultimate expressive and refined keyboard genre.",
+      "musicImage": "img/music/VenetianToccata.jpg",
+      "composerImage": "img/composers/merulo.jpg",
+      "model": "Venetian-Toccata"
+    },
+   
     {
       "type": "model",
       "title": "Scheidemann Free Praeludia",
@@ -9,14 +18,6 @@
       "model": "Scheidemann-Prelude"
     },
 
-     {
-      "type": "model",
-      "title": "Merulo Venetian Toccata",
-      "description": "Learn to turn very simple harmony into the ultimate expressive and refined keyboard genre.",
-      "musicImage": "img/music/VenetianToccata.jpg",
-      "composerImage": "img/composers/merulo.jpg",
-      "model": "Venetian-Toccata"
-    },
 
     {
       "type": "model",
@@ -26,6 +27,16 @@
       "composerImage": "img/composers/Dieterich_Buxtehude.png",
       "model": "Buxtehude-Chorale-Prelude"
     },
+
+ {
+      "type": "collection",
+      "title": "Pachelbel Aria Variations",
+      "description": "Turn a simple harmonic template into a variation set.",
+      "musicImage": "img/music/sebaldina.png",
+      "composerImage": "img/composers/pachelbel.jpg",
+      "collection": "Pachelbel-Aria"
+    },
+
 
     {
       "type": "collection",
