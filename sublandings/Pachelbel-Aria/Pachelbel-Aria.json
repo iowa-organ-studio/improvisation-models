@@ -1,0 +1,50 @@
+{
+  "title": "Pachelbel Aria",
+  "description": "Choose a variation style.",
+  "heroMusicImage": "img/music/sebaldina.png",
+  "heroComposerImage": "img/composers/pachelbel.jpg",
+
+  "items": [
+    {
+      "title": "Aria",
+      "description": "Simple embellishment",
+      "model": "Pachelbel-Aria-6-01",
+      "musicImage": "img/music/Pachelbel-Aria.png"
+
+    },
+    {
+        "title": "Variation 1",
+      "description": "Flowing 16th notes",
+      "model": "Pachelbel-Aria-6-02",
+      "musicImage": "img/music/Pachelbel-Variation-01.png"
+    },
+    {
+      "title": "Variation 2",
+      "model": "Pachelbel-Aria-6-03"
+    },
+    {
+      "title": "Variation 3",
+      "model": "Pachelbel-Aria-6-04"
+    },
+    {
+      "title": "Variation 4",
+      "model": "Pachelbel-Aria-6-05"
+    },
+    {
+      "title": "Variation 5",
+      "model": "Pachelbel-Aria-6-06"
+    },
+    {
+      "title": "Variation 6",
+      "model": "Pachelbel-Aria-6-07"
+    },
+    {
+      "title": "Variation 7",
+      "model": "Pachelbel-Aria-6-08"
+    },
+     {
+      "title": "Variation 8",
+      "model": "Pachelbel-Aria-6-09"
+    }
+  ]
+}
