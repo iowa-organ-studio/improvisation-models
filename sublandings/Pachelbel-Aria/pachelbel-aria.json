@@ -20,7 +20,9 @@
     },
     {
       "title": "Variation 2",
-      "model": "Pachelbel-Aria-6-03"
+      "description": "Chordal skips",
+      "model": "Pachelbel-Aria-6-03",
+      "musicImage": "img/music/Pachelbel-Variation-02.png"
     },
     {
       "title": "Variation 3",
