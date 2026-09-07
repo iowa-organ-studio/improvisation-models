@@ -1,0 +1,9 @@
+{
+  "name": "Pachelbel Aria",
+
+  "heroMusicImage": "img/music/sebaldina.png",
+
+  "heroComposerImage": "img/composers/pachelbel.jpg",
+
+  "levels": [1, 2]
+}
