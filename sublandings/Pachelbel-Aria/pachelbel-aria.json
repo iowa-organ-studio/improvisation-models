@@ -24,13 +24,17 @@
       "model": "Pachelbel-Aria-6-03",
       "musicImage": "img/music/Pachelbel-Variation-02.png"
     },
-    {
+     {
       "title": "Variation 3",
-      "model": "Pachelbel-Aria-6-04"
+      "description": "Brushed texture",
+      "model": "Pachelbel-Aria-6-04",
+      "musicImage": "img/music/Pachelbel-Variation-03.png"
     },
-    {
+      {
       "title": "Variation 4",
-      "model": "Pachelbel-Aria-6-05"
+      "description": "Contrapuntal stepwise lines",
+      "model": "Pachelbel-Aria-6-05",
+      "musicImage": "img/music/Pachelbel-Variation-04.png"
     },
     {
       "title": "Variation 5",
