@@ -38,11 +38,15 @@
     },
     {
       "title": "Variation 5",
-      "model": "Pachelbel-Aria-6-06"
+      "description": "A weird, shivering sound",
+      "model": "Pachelbel-Aria-6-06",
+      "musicImage": "img/music/Pachelbel-Variation-05.png"
     },
     {
       "title": "Variation 6",
-      "model": "Pachelbel-Aria-6-07"
+      "description": "Light brushstrokes in the Right Hand",
+      "model": "Pachelbel-Aria-6-07",
+      "musicImage": "img/music/Pachelbel-Variation-06.png"
     },
     {
       "title": "Variation 7",
