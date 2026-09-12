@@ -50,11 +50,15 @@
     },
     {
       "title": "Variation 7",
-      "model": "Pachelbel-Aria-6-08"
+      "description": "Lilting triple time",
+      "model": "Pachelbel-Aria-6-08",
+      "musicImage": "img/music/Pachelbel-Variation-07.png"
     },
      {
       "title": "Variation 8",
-      "model": "Pachelbel-Aria-6-09"
+      "description": "Confident, long sixteenth note lines",
+      "model": "Pachelbel-Aria-6-09",
+      "musicImage": "img/music/Pachelbel-Variation-08.png"
     }
   ]
 }
