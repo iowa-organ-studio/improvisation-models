@@ -37,7 +37,14 @@
       "collection": "Pachelbel-Aria"
     },
 
-
+{
+      "type": "model",
+      "title": "French Cantus Firmus in the tenor",
+      "description": "The grandest way to present a cantus firmus",
+      "musicImage": "img/music/pange-lingua.png",
+      "composerImage": "img/composers/degrigny.png",
+      "model": "CF-en-taille"
+    },
     {
       "type": "collection",
       "title": "Böhm Chorale Partita",
