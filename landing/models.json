@@ -45,6 +45,18 @@
       "composerImage": "img/composers/degrigny.png",
       "model": "CF-en-taille"
     },
+
+{
+      "type": "model",
+      "title": "French Tierce en Taille",
+      "description": "The most expressive keyboard genre",
+      "musicImage": "img/music/tierce.png",
+      "composerImage": "img/composers/dumage.png",
+      "model": "Tierce-en-taille"
+    },
+
+
+    
     {
       "type": "collection",
       "title": "Böhm Chorale Partita",
