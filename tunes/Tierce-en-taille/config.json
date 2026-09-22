@@ -1,9 +1,9 @@
 {
-  "name": "Scheidemann Free Praeludia",
+  "name": "French Tierce en taille",
 
-  "heroMusicImage": "img/music/Praeludium.jpg",
+  "heroMusicImage": "img/music/tierce.png",
 
-  "heroComposerImage": "img/composers/Heinrich_Scheidemann.jpg",
+  "heroComposerImage": "img/composers/Dumage.png",
 
   "levels": [1, 2]
 }
