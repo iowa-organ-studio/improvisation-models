@@ -1297,7 +1297,7 @@ function renderAll() {
     }
 }
 
-async function newPhrase() {
+async function newPhrase(recordPractice = false) {
 
     const family = randomPhrase();
 
@@ -1318,6 +1318,20 @@ async function newPhrase() {
     document.getElementById('level2Details').open = false;
 
     renderAll();
+    if (recordPractice) {
+        window.dispatchEvent(new CustomEvent('improv:phrase', {
+            detail: {
+                model: config.name || currentModel,
+                modelId: currentModel,
+                phrase: currentPhraseId,
+                key: document.getElementById('keyDisplay')?.textContent?.trim() || 'Unknown key',
+                ...(currentModel === 'Venetian-Toccata' ? {
+                    venetianTone: parsePhraseInfo(level1Text).tone,
+                    final: currentTargetTonic
+                } : {})
+            }
+        }));
+    }
 }
 
 function updateKeyDisplay() {
@@ -1908,7 +1922,7 @@ async function main() {
     await loadConfig();
     await loadPhrases();
 
-    await newPhrase();
+    await newPhrase(true);
     wireClefOverrideRadios();
     syncClefRadios();
     wireKeyButtons();
@@ -1927,7 +1941,7 @@ async function main() {
     notch?.addEventListener('click', openHelp);
 
     document.getElementById('randomBtn')
-        .addEventListener('click', newPhrase);
+        .addEventListener('click', () => newPhrase(true));
 
     document.getElementById('upKey').addEventListener('click', () => {
 

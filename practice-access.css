@@ -1,0 +1,31 @@
+/* Scoped student controls; existing site styles remain unchanged. */
+#practiceAccessRoot { position:relative; z-index:5; box-sizing:border-box; width:100%; }
+#practiceAccessRoot, #practiceAccessRoot * { box-sizing:border-box; }
+#practiceAccessRoot .pa-bar { display:flex; gap:8px; flex-wrap:wrap; align-items:center; justify-content:flex-end; padding:8px 14px; background:#f5f5f5; border-bottom:1px solid #ddd; font:600 13px system-ui,sans-serif; }
+#practiceAccessRoot button { cursor:pointer; border:1px solid #bbb; background:white; color:#222; border-radius:9px; padding:8px 12px; font:600 13px system-ui,sans-serif; }
+#practiceAccessRoot button:hover { background:#eee; }
+#practiceAccessRoot dialog { max-width:min(94vw,850px); max-height:85vh; border:1px solid #ddd; border-radius:12px; padding:20px; color:#222; background:white; font:14px system-ui,sans-serif; }
+#practiceAccessRoot dialog::backdrop { background:rgba(0,0,0,.4); }
+#practiceAccessRoot .pa-head { display:flex; justify-content:space-between; align-items:center; gap:20px; margin-bottom:14px; }
+#practiceAccessRoot .pa-head h2 { margin:0; font:700 20px system-ui,sans-serif; }
+#practiceAccessRoot input { border:1px solid #aaa; border-radius:7px; padding:9px; font:inherit; max-width:100%; }
+#practiceAccessRoot .pa-status { color:#555; font-weight:400; }
+#practiceAccessRoot .pa-scroll { overflow:auto; max-height:65vh; }
+#practiceAccessRoot table { border-collapse:collapse; width:100%; font:13px system-ui,sans-serif; }
+#practiceAccessRoot th, #practiceAccessRoot td { border-bottom:1px solid #ddd; padding:8px 10px; text-align:left; white-space:nowrap; }
+#practiceAccessRoot th { position:sticky; top:0; background:#f6f6f6; }
+
+/* Practice-history tabs and exercise-by-key grid only. */
+#practiceAccessRoot #pa-history-dialog { width:min(96vw,1200px); max-width:96vw; }
+#practiceAccessRoot .pa-tabs,#practiceAccessRoot .pa-subtabs {display:flex;gap:6px;flex-wrap:wrap;margin:0 0 10px;}
+#practiceAccessRoot .pa-subtabs {padding:9px;background:#f3f4f6;border-radius:9px;}
+#practiceAccessRoot .pa-tabs .pa-active,#practiceAccessRoot .pa-subtabs .pa-active {background:#273b60;color:white;border-color:#273b60;}
+#practiceAccessRoot .pa-grid-scroll {overflow:auto;max-height:58vh;border:1px solid #ddd;border-radius:5px;}
+#practiceAccessRoot .pa-grid {width:max-content;min-width:100%;font-size:11px;border-collapse:collapse;}
+#practiceAccessRoot .pa-grid th,#practiceAccessRoot .pa-grid td {padding:5px 7px;border:1px solid #ddd;text-align:center;white-space:nowrap;}
+#practiceAccessRoot .pa-grid th:first-child,#practiceAccessRoot .pa-grid td:first-child {text-align:left;min-width:200px;position:sticky;left:0;background:#fff;z-index:1;}
+#practiceAccessRoot .pa-grid thead th {background:#dbe7fa;position:sticky;top:0;z-index:2;}
+#practiceAccessRoot .pa-grid thead th:first-child {z-index:3;}
+#practiceAccessRoot .pa-grid .pa-total-row td {background:#e8f0ff;font-weight:700;}
+#practiceAccessRoot .pa-grid .pa-total-row td:first-child {background:#e8f0ff;}
+#practiceAccessRoot .pa-note {font-size:12px;color:#805d24;}
