@@ -362,11 +362,11 @@ foreach ($sourceFile in $SourceFiles) {
     #   \transpose f TARGET_KEY
     # -----------------------------------------------------
 
-    $transposeMatch =
-        [regex]::Match(
-            $templateText,
-            '\\transpose\s+([a-g](?:is|es)?)\s+TARGET_KEY'
-        )
+   $transposeMatch =
+    [regex]::Match(
+        $templateText,
+        '\\transpose\s+([a-g](?:is|es)?)\s+(?:TARGET_KEY|[a-g](?:is|es)?)\b'
+    )
 
 
     if (!$transposeMatch.Success) {
@@ -440,14 +440,18 @@ foreach ($sourceFile in $SourceFiles) {
 
 
             # ---------------------------------------------
-            # REPLACE TARGET_KEY
+            # REPLACE DESTINATION PITCH
             # ---------------------------------------------
 
-            $source =
-                $source.Replace(
-                    "TARGET_KEY",
-                    $transposeTarget
-                )
+           $source =
+    [regex]::Replace(
+        $source,
+        '(\\transpose\s+[a-g](?:is|es)?\s+)(?:TARGET_KEY|[a-g](?:is|es)?)\b',
+        [System.Text.RegularExpressions.MatchEvaluator]{
+            param($m)
+            return $m.Groups[1].Value + $transposeTarget
+        }
+    )
 
 
             # ---------------------------------------------

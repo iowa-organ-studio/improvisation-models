@@ -1101,7 +1101,22 @@ function updateKeyPill() {
 }
 
 function updatePhrasePill() {
+// Venetian Toccata: derive the title from the phrase filename
+if (currentModel === 'Venetian-Toccata') {
 
+    const match = (currentPhraseId || '').match(
+        /^Merulo-Book(\d+)Tocc(\d+)Tone(\d+)-(\d+)$/
+    );
+
+    if (match) {
+        const [, book, toccata, tone, phrase] = match;
+
+        document.getElementById('phraseDisplay').textContent =
+            `Book ${Number(book)} · Toccata ${Number(toccata)} · Tone ${Number(tone)} · Phrase ${Number(phrase)}`;
+
+        return;
+    }
+}
     const info =
         parsePhraseInfo(level1Text);
 

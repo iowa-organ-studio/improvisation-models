@@ -3,15 +3,15 @@
 #
 # Usage:
 #
-#   .\generate.ps1 MeruloXI-Vtone-01
+#   .\generate.ps1 Merulo-Book2Tocc1Tone5-01
 #
 # Input:
 #
-#   ../sources/MeruloXI-Vtone-01.ly
+#   ../sources/Merulo-Book2Tocc1Tone5-01.ly
 #
 # Output:
 #
-#   ../MeruloXI-Vtone-01/
+#   ../Merulo-Book2Tocc1Tone5-01/
 #       c/
 #           stage1.svg
 #           stage5.svg
@@ -36,7 +36,7 @@ if ($args.Count -ne 1) {
     Write-Host "  .\generate.ps1 PHRASE_ID"
     Write-Host ""
     Write-Host "Example:"
-    Write-Host "  .\generate.ps1 MeruloXI-Vtone-01"
+    Write-Host "  .\generate.ps1 Merulo-Book2Tocc1Tone5-01"
     Write-Host ""
 
     exit 1
@@ -380,7 +380,7 @@ $templateText =
 $transposeMatch =
     [regex]::Match(
         $templateText,
-        '\\transpose\s+([a-g](?:is|es)?)\s+TARGET_KEY'
+        '\\transpose\s+([a-g](?:is|es)?)\s+([a-g](?:is|es)?)\b'
     )
 
 
@@ -450,14 +450,18 @@ foreach ($keyName in $Keys) {
 
 
         # -------------------------------------------------
-        # REPLACE TARGET_KEY
+        # REPLACE DESTINATION PITCH
         # -------------------------------------------------
 
         $source =
-            $source.Replace(
-                "TARGET_KEY",
-                $transposeTarget
-            )
+                [regex]::Replace(
+                    $source,
+                    '\\transpose\s+([a-g](?:is|es)?)\s+([a-g](?:is|es)?)\b',
+                    [System.Text.RegularExpressions.MatchEvaluator]{
+                        param($m)
+                        "\transpose $($m.Groups[1].Value) $transposeTarget"
+                    }
+                )
 
 
         # -------------------------------------------------
