@@ -1930,9 +1930,17 @@ let enabledCounts = new Set([0, 1, 2, 3, 4, 5, 6, 7]);
 
 async function main() {
 
-    toolkit0 = await createToolkit();
-    toolkit1 = await createToolkit();
-    toolkit2 = await createToolkit();
+    console.log('Creating toolkit 0');
+toolkit0 = await createToolkit();
+console.log('Toolkit 0 created');
+
+console.log('Creating toolkit 1');
+toolkit1 = await createToolkit();
+console.log('Toolkit 1 created');
+
+console.log('Creating toolkit 2');
+toolkit2 = await createToolkit();
+console.log('Toolkit 2 created');
 
     await loadConfig();
     await loadPhrases();
