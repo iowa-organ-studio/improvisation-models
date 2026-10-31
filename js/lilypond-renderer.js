@@ -1,4 +1,5 @@
 let historicalSliderValue = 0;
+let lilypondViewWidth = 55;
 
 const LILYPOND_KEY_FOLDERS = {
     'C': 'c',
@@ -56,7 +57,7 @@ export function renderLilypondLevel2({
     const stage5Path =
         `./tunes/${currentModel}/lilypond/${phraseId}/${lilypondKeyFolder}/stage5.svg`;
 
-    let viewWidth = 55;
+    let viewWidth = lilypondViewWidth;
 
     container.innerHTML = `
         <div class="lilypond-toolbar">
@@ -69,9 +70,9 @@ export function renderLilypondLevel2({
                     class="lilypond-size-minus"
                 >−</button>
 
-                <span class="lilypond-size-value">
-                    55%
-                </span>
+               <span class="lilypond-size-value">
+    ${viewWidth}%
+</span>
 
                 <button
                     type="button"
@@ -150,10 +151,11 @@ export function renderLilypondLevel2({
 }
 
 
-    function updateViewWidth() {
-        score.style.width = `${viewWidth}%`;
-        sizeValue.textContent = `${viewWidth}%`;
-    }
+  function updateViewWidth() {
+    lilypondViewWidth = viewWidth;
+    score.style.width = `${viewWidth}%`;
+    sizeValue.textContent = `${viewWidth}%`;
+}
 
 
     slider.addEventListener(
