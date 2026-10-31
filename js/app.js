@@ -1945,7 +1945,7 @@ console.log('Toolkit 2 created');
     await loadConfig();
     await loadPhrases();
 
-    await newPhrase(true);
+   await newPhrase();
     wireClefOverrideRadios();
     syncClefRadios();
     wireKeyButtons();
