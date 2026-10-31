@@ -1,12 +1,21 @@
 let lastGoodPageWidth = null;
 
-export async function createToolkit() {
-
-  await waitForVerovio();
-
-  const toolkit = new verovio.toolkit();
-
-  return toolkit;
+export async function createToolkit(timeout = 20000) {
+  const start = performance.now();
+  let lastErr;
+  while (performance.now() - start < timeout) {
+    try {
+      if (typeof window.verovio?.toolkit === 'function') {
+        const tk = new window.verovio.toolkit();
+        tk.getVersion();          // throws if the module isn't really ready
+        return tk;
+      }
+    } catch (err) {
+      lastErr = err;
+    }
+    await new Promise(r => setTimeout(r, 50));
+  }
+  throw lastErr || new Error('Timed out waiting for Verovio');
 }
 
 async function waitForVerovio(timeout = 10000) {
