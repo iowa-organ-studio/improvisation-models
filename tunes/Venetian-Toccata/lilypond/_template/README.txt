@@ -32,3 +32,20 @@ git commit -m "Add new Venetian Toccata phrase"
 Step 5: Push to GitHub
 git push origin main
 
+1. Check what changed:
+git status --short
+
+
+2. Stage only the modified files:
+git add -u
+
+
+3. Commit the change:
+git commit -m "Minor correction"
+
+
+4. Push to GitHub:
+git push origin main
+
+
+Done! Your public website will update after deployment.
