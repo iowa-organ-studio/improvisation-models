@@ -1,3 +1,4 @@
+SEE CLEFS AT BOTTOM
 1. Navigate to the generator folder
 From your repository's main folder (improvisation-models), run:
 cd .\tunes\Venetian-Toccata\lilypond\_template
@@ -49,3 +50,12 @@ git push origin main
 
 
 Done! Your public website will update after deployment.
+
+#(define RH-original
+   '("B4" "G4" "E4" "C4" "A3"))
+
+   #(define RH-original
+   '("D5" "B4" "G4" "E4" "C4"))
+
+   #(define LH-original
+   '("G4" "E4" "C4" "A3" "F3" "D3" "B2" "G2"))
