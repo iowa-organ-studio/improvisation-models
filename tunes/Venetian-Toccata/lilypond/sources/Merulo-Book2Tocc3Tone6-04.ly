@@ -9,7 +9,7 @@
 % Historical/original intavolatura lines, TOP TO BOTTOM.
 
 #(define RH-original
-   '("D5" "B4" "G4" "E4" "C4"))
+   '("B4" "G4" "E4" "C4" "A3"))
 
 #(define LH-original
    '("G4" "E4" "C4" "A3" "F3" "D3" "B2" "G2"))
