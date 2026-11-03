@@ -571,7 +571,7 @@ changeLHStaff =
       \voiceOne
       d''2~
       d''2
-      c''2
+      c''2 \noBreak
     }
     \\
     {

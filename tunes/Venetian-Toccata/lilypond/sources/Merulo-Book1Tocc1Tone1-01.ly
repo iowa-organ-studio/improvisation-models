@@ -574,7 +574,7 @@ changeLHStaff =
     \\
     {
       \voiceTwo
-      f'4 e'16 d' e' d' e'4 d'4
+      f'4 e'16 f' e' f' e'4 d'4
     }
   >>
   %2.5
