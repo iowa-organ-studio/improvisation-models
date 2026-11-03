@@ -565,7 +565,7 @@ changeLHStaff =
     \context Voice = "Soprano" {
       \voiceOne
       bes'2\noBreak
-      a'2 g'2~ g'4 f'4 f'2~
+      a'2 g'2~ g'4 f'4 f'2~ \noBreak
     }
   }
   \\

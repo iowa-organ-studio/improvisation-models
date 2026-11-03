@@ -570,7 +570,7 @@ changeLHStaff =
   {
     \voiceOne
     c''2 c''2 c''2~ c''2 \noBreak
-    b'2~ b'2~ b'2 b'2
+    b'2~ b'2~ b'2 b'2 \noBreak
   }
   \\
   {
@@ -591,7 +591,7 @@ changeLHStaff =
     \voiceOne
     <<a'8 f'8>> g'16[ f' e' d' c' b]
     a'2
-    d''1 \noBreak
+    d''1 
   }
   \\
   {
@@ -625,7 +625,7 @@ changeLHStaff =
   {
     \voiceTwo
     a'2~ a'2
-    gis'2 a'2~
+    gis'2 a'2~ \noBreak
     a'2 gis'2
     a'2
   }
