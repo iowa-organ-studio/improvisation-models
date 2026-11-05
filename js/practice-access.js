@@ -1,3 +1,4 @@
+
 import { initializeApp, getApps, getApp } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js';
 import { getAuth, signInAnonymously, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js';
 import { getFirestore, doc, getDoc, collection, addDoc, updateDoc, getDocs, serverTimestamp } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js';
@@ -13,7 +14,7 @@ const firebaseConfig = {
 };
 const app=getApps().length?getApp():initializeApp(firebaseConfig);
 const auth=getAuth(app), db=getFirestore(app);
-const UID_KEY='iowaOrganStudentUid', ATTEMPT_KEY='iowaOrganImprovisationCurrentAttempt';
+const UID_KEY='iowaOrganStudentUid';
 const APP_ID='improvisation-models', CAP=300;
 const root=document.getElementById('practiceAccessRoot');
 root.innerHTML=`<div class="pa-bar"><button id="pa-login">Student login</button><button id="pa-history">My practice history</button></div>
@@ -35,20 +36,65 @@ async function signInUid(uid){uid=uid.trim();if(!/^\d{8}$/.test(uid)){status('En
   }catch(e){console.error(e);status('Could not connect to Firebase.');}
 }
 el('pa-form').onsubmit=e=>{e.preventDefault();if(!ready){status('Connecting...');return;}signInUid(el('pa-uid').value);};
-el('pa-logout').onclick=()=>{localStorage.removeItem(UID_KEY);localStorage.removeItem(ATTEMPT_KEY);display(null);status('');};
+el('pa-logout').onclick=()=>{localStorage.removeItem(UID_KEY);cancelCreditTimer();activeAttempt=null;display(null);status('');};
 onAuthStateChanged(auth,async user=>{if(!user){try{await signInAnonymously(auth);}catch(e){console.error(e);status('Firebase authentication unavailable.');}return;}ready=true;const uid=localStorage.getItem(UID_KEY);if(uid)await signInUid(uid);else display(null);});
-function elapsed(attempt){return Math.min(CAP,Math.max(0,Math.round((Date.now()-attempt.startedAt)/1000)));}
-async function record(detail){
-  await auth.authStateReady();
-  const uid=localStorage.getItem(UID_KEY);
-  if(!uid||!auth.currentUser)return;
-  const prevText=localStorage.getItem(ATTEMPT_KEY);
-  if(prevText){try{const prev=JSON.parse(prevText);if(prev.uid===uid&&prev.id)await updateDoc(doc(db,'users',uid,'webPractice',prev.id),{durationSeconds:elapsed(prev)});}catch(e){console.warn('Previous attempt could not be completed',e);}}
-  const ref=await addDoc(collection(db,'users',uid,'webPractice'),{app:APP_ID,model:detail.model||'Unknown model',modelId:detail.modelId||'',exercise:detail.phrase||'Unknown phrase',key:detail.key||'Unknown key',venetianTone:detail.venetianTone||null,final:detail.final||null,startedAt:serverTimestamp(),durationSeconds:CAP});
-  localStorage.setItem(ATTEMPT_KEY,JSON.stringify({uid,id:ref.id,startedAt:Date.now()}));
+// Practice is credited only after a continuous 60-second phrase attempt.
+// The initial phrase and every New Phrase event follow the same lifecycle.
+const MIN_SECONDS=60;
+let activeAttempt=null;
+let creditTimer=null;
+function elapsed(attempt){return Math.min(CAP,Math.max(0,Math.floor(((attempt.endedAt||Date.now())-attempt.startedAt)/1000)));}
+function cancelCreditTimer(){if(creditTimer!==null){clearTimeout(creditTimer);creditTimer=null;}}
+async function saveQualifiedAttempt(attempt){
+  if(attempt.saved||attempt.saving||elapsed(attempt)<MIN_SECONDS)return;
+  attempt.saving=true;
+  try{
+    await auth.authStateReady();
+    if(!auth.currentUser||localStorage.getItem(UID_KEY)!==attempt.uid)return;
+    const detail=attempt.detail;
+    const ref=await addDoc(collection(db,'users',attempt.uid,'webPractice'),{
+      app:APP_ID,model:detail.model||'Unknown model',modelId:detail.modelId||'',
+      exercise:detail.phrase||'Unknown phrase',key:detail.key||'Unknown key',
+      venetianTone:detail.venetianTone||null,final:detail.final||null,
+      startedAt:serverTimestamp(),durationSeconds:elapsed(attempt)
+    });
+    attempt.saved=ref.id;
+  }catch(e){console.error('Could not save qualified practice',e);}
+  finally{attempt.saving=false;}
 }
-window.addEventListener('improv:phrase',e=>{queue=queue.then(()=>record(e.detail)).catch(err=>console.error('Practice tracking error',err));});
-
+async function finishAttempt(attempt){
+  if(!attempt)return;
+  // A short attempt is never written, including on New Phrase or navigation.
+  if(elapsed(attempt)<MIN_SECONDS)return;
+  await saveQualifiedAttempt(attempt);
+  if(attempt.saved){
+    try{await updateDoc(doc(db,'users',attempt.uid,'webPractice',attempt.saved),
+      {durationSeconds:elapsed(attempt)});}
+    catch(e){console.warn('Could not finalize practice duration',e);}
+  }
+}
+function startAttempt(detail){
+  cancelCreditTimer();
+  const previous=activeAttempt;
+  const uid=localStorage.getItem(UID_KEY);
+  activeAttempt=uid?{uid,detail,startedAt:Date.now(),saved:null,saving:false}:null;
+  if(previous){previous.endedAt=Date.now();queue=queue.then(()=>finishAttempt(previous)).catch(e=>console.error(e));}
+  if(activeAttempt){
+    const attempt=activeAttempt;
+    creditTimer=setTimeout(()=>{
+      queue=queue.then(()=>saveQualifiedAttempt(attempt)).catch(e=>console.error(e));
+    },MIN_SECONDS*1000);
+  }
+}
+window.addEventListener('improv:phrase',e=>startAttempt(e.detail));
+// Finalize when the page is being hidden. A short phrase produces no write.
+document.addEventListener('visibilitychange',()=>{
+  if(document.visibilityState==='hidden'&&activeAttempt){
+    cancelCreditTimer();
+    const attempt=activeAttempt;attempt.endedAt=Date.now();activeAttempt=null;
+    queue=queue.then(()=>finishAttempt(attempt)).catch(e=>console.error(e));
+  }
+});
 // Build the tabs from the site's actual landing and sublanding JSON.
 const NAV_COLLECTIONS={
   'Pachelbel-Aria':'sublandings/Pachelbel-Aria/pachelbel-aria.json',
@@ -106,7 +152,7 @@ function drawGrid(host,attempts,models){
   const byExercise=new Map();let skipped=0;
   for(const item of attempts){
     const id=item.modelId||resolveOldModel(item.model,models);
-    if(!allowed.has(id))continue;
+    if(!allowed.has(id)||Number(item.durationSeconds)<MIN_SECONDS)continue;
     const key=historyKey(item);
     if(!key){skipped++;continue;}
     const name=names.get(id)||item.model||id;

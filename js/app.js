@@ -1312,7 +1312,7 @@ function renderAll() {
     }
 }
 
-async function newPhrase(recordPractice = false) {
+async function newPhrase(recordPractice = true) {
 
     const family = randomPhrase();
 

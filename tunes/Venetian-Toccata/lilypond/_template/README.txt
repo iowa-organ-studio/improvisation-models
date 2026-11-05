@@ -25,6 +25,7 @@ This shows your new files and any modified files.
 Step 3: Stage the Venetian Toccata changes
 git add -A -- tunes/Venetian-Toccata
 
+   or do this: git add js/app.js js/practice-access.js to stage those two files
 
 Step 4: Commit
 git commit -m "Add new Venetian Toccata phrase"
