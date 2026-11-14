@@ -722,7 +722,7 @@ changeLHStaff =
       d8.[ a16 bes a bes32 a bes c']
       r8
       e8[ f16 e f32 e f g]
-      a16[ a, cis d e a,]  s8
+      a16[ a, cis d e a,]  a8
     }
   }
 >>
