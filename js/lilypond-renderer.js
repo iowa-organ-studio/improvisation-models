@@ -1,5 +1,10 @@
+
 let historicalSliderValue = 0;
-let lilypondViewWidth = 55;
+let lilypondViewWidth = 100;
+
+// Keep one active observer per rendered container.
+// A new phrase replaces its DOM.
+const resizeObservers = new WeakMap();
 
 const LILYPOND_KEY_FOLDERS = {
     'C': 'c',
@@ -19,6 +24,11 @@ const LILYPOND_KEY_FOLDERS = {
     'Cb': 'ces'
 };
 
+function layoutForWidth(width) {
+    if (width >= 1000) return 'wide';
+    if (width >= 600) return 'medium';
+    return 'narrow';
+}
 
 export function renderLilypondLevel2({
     container,
@@ -32,8 +42,11 @@ export function renderLilypondLevel2({
         tonic
     });
 
-    const lilypondKeyFolder =
-        LILYPOND_KEY_FOLDERS[tonic];
+    // Disconnect the previous observer before replacing the DOM.
+    resizeObservers.get(container)?.disconnect();
+    resizeObservers.delete(container);
+
+    const lilypondKeyFolder = LILYPOND_KEY_FOLDERS[tonic];
 
     if (!lilypondKeyFolder) {
         container.innerHTML = `
@@ -51,11 +64,10 @@ export function renderLilypondLevel2({
         return;
     }
 
-    const stage1Path =
-        `./tunes/${currentModel}/lilypond/${phraseId}/${lilypondKeyFolder}/stage1.svg`;
+    const basePath =
+        `./tunes/${currentModel}/lilypond/${phraseId}/${lilypondKeyFolder}`;
 
-    const stage5Path =
-        `./tunes/${currentModel}/lilypond/${phraseId}/${lilypondKeyFolder}/stage5.svg`;
+    const isVenetian = currentModel === 'Venetian-Toccata';
 
     let viewWidth = lilypondViewWidth;
 
@@ -70,9 +82,9 @@ export function renderLilypondLevel2({
                     class="lilypond-size-minus"
                 >−</button>
 
-               <span class="lilypond-size-value">
-    ${viewWidth}%
-</span>
+                <span class="lilypond-size-value">
+                    ${viewWidth}%
+                </span>
 
                 <button
                     type="button"
@@ -102,13 +114,11 @@ export function renderLilypondLevel2({
 
                 <img
                     class="lilypond-stage lilypond-stage1"
-                    src="${stage1Path}"
                     alt="Modern notation"
                 >
 
                 <img
                     class="lilypond-stage lilypond-stage5"
-                    src="${stage5Path}"
                     alt="Historical notation"
                 >
 
@@ -116,6 +126,9 @@ export function renderLilypondLevel2({
 
         </div>
     `;
+
+    const viewport =
+        container.querySelector('.lilypond-viewport');
 
     const score =
         container.querySelector('.lilypond-score');
@@ -138,56 +151,182 @@ export function renderLilypondLevel2({
     const sizeValue =
         container.querySelector('.lilypond-size-value');
 
+    let currentLayout = null;
+    let initialFrame = null;
+    let initialRetryFrame = null;
+    let disposed = false;
+
+    // -----------------------------------------
+    // SVG LAYOUT SELECTION
+    // -----------------------------------------
+
+    function updateSources() {
+
+        if (disposed) return;
+
+        // Measure the available viewport, NOT the score.
+        // The score width is controlled by the View percentage.
+        const availableWidth =
+            viewport.getBoundingClientRect().width ||
+            container.getBoundingClientRect().width;
+
+        // Do not choose a layout while the element has no width.
+        if (!Number.isFinite(availableWidth) ||
+            availableWidth <= 0) {
+            return;
+        }
+
+        const layout =
+            isVenetian
+                ? layoutForWidth(availableWidth)
+                : null;
+
+        // Do not reload the SVGs unless the layout changes.
+        if (layout === currentLayout) return;
+
+        currentLayout = layout;
+
+        const path =
+            layout
+                ? `${basePath}/${layout}`
+                : basePath;
+
+        stage1.src = `${path}/stage1.svg`;
+        stage5.src = `${path}/stage5.svg`;
+
+        console.log(
+            'LilyPond SVG layout:',
+            layout || 'original',
+            'viewport width:',
+            availableWidth
+        );
+    }
+
+    // -----------------------------------------
+    // MODERN / HISTORICAL SLIDER
+    // -----------------------------------------
 
     function updateOpacity() {
-    historicalSliderValue =
-        Number(slider.value);
 
-    const amount =
-        historicalSliderValue / 100;
+        historicalSliderValue = Number(slider.value);
 
-    stage1.style.opacity = 1 - amount;
-    stage5.style.opacity = amount;
-}
+        const amount = historicalSliderValue / 100;
 
+        stage1.style.opacity = 1 - amount;
+        stage5.style.opacity = amount;
+    }
 
-  function updateViewWidth() {
-    lilypondViewWidth = viewWidth;
-    score.style.width = `${viewWidth}%`;
-    sizeValue.textContent = `${viewWidth}%`;
-}
+    // -----------------------------------------
+    // VIEW WIDTH
+    // -----------------------------------------
 
+    function updateViewWidth() {
 
-    slider.addEventListener(
-        'input',
-        updateOpacity
-    );
+        lilypondViewWidth = viewWidth;
 
+        score.style.width = `${viewWidth}%`;
 
-    sizeMinus.addEventListener(
-        'click',
-        () => {
-            viewWidth =
-                Math.max(20, viewWidth - 5);
+        sizeValue.textContent = `${viewWidth}%`;
+    }
 
-            updateViewWidth();
-        }
-    );
+    // -----------------------------------------
+    // EVENT LISTENERS
+    // -----------------------------------------
 
+    slider.addEventListener('input', updateOpacity);
 
-    sizePlus.addEventListener(
-        'click',
-        () => {
-            viewWidth =
-                Math.min(150, viewWidth + 5);
+    sizeMinus.addEventListener('click', () => {
 
-            updateViewWidth();
-        }
-    );
+        viewWidth = Math.max(20, viewWidth - 5);
 
+        updateViewWidth();
+    });
+
+    sizePlus.addEventListener('click', () => {
+
+        viewWidth = Math.min(150, viewWidth + 5);
+
+        updateViewWidth();
+    });
+
+    // -----------------------------------------
+    // INITIALIZE CONTROLS
+    // -----------------------------------------
 
     updateOpacity();
     updateViewWidth();
+
+    // -----------------------------------------
+    // RESPONSIVE RESIZE OBSERVER
+    // -----------------------------------------
+
+    if (isVenetian &&
+        typeof ResizeObserver !== 'undefined') {
+
+        const observer = new ResizeObserver(() => {
+            updateSources();
+        });
+
+        observer.observe(viewport);
+
+        resizeObservers.set(container, observer);
+    }
+
+    // -----------------------------------------
+    // INITIAL MEASUREMENT AFTER LAYOUT
+    // -----------------------------------------
+
+    // Initial measurement after layout
+    function initializeLayout() {
+        if (disposed) return;
+
+        updateSources();
+
+        // Recheck after the page has fully loaded.
+        if (document.readyState === 'complete') {
+            updateSources();
+        } else {
+            window.addEventListener('load', updateSources, {
+                once: true
+            });
+        }
+    }
+
+    requestAnimationFrame(() => {
+        requestAnimationFrame(initializeLayout);
+    });
+
+    // Non-Venetian LilyPond models retain the original
+    // SVG paths and also receive an initial measurement.
+
+    // -----------------------------------------
+    // CLEANUP FOR FUTURE RENDERS
+    // -----------------------------------------
+
+    // Store cleanup information with the observer
+    // so pending animation frames from an old phrase
+    // cannot update a newly rendered phrase.
+
+    const previousObserver = resizeObservers.get(container);
+
+    if (previousObserver) {
+        const originalDisconnect =
+            previousObserver.disconnect.bind(previousObserver);
+
+        previousObserver.disconnect = () => {
+            disposed = true;
+
+            if (initialFrame !== null) {
+                cancelAnimationFrame(initialFrame);
+            }
+
+            if (initialRetryFrame !== null) {
+                cancelAnimationFrame(initialRetryFrame);
+            }
+
+            originalDisconnect();
+        };
+    }
 }
 
 export function lilypondKeyFolderForTonic(tonic) {

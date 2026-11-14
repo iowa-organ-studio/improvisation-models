@@ -1,4 +1,4 @@
-# =========================================================
+﻿# =========================================================
 # Venetian Toccata LilyPond SVG Generator
 #
 # Usage:
@@ -12,13 +12,10 @@
 # Output:
 #
 #   ../Merulo-Book2Tocc1Tone5-01/
-#       c/
-#           stage1.svg
-#           stage5.svg
-#       g/
-#           stage1.svg
-#           stage5.svg
-#       ...
+#       c/wide/stage1.svg, stage5.svg
+#       c/medium/stage1.svg, stage5.svg
+#       c/narrow/stage1.svg, stage5.svg
+#       ... all 15 keys, including cis and des
 #
 # =========================================================
 
@@ -394,11 +391,82 @@ if (!$transposeMatch.Success) {
 $sourcePitch =
     $transposeMatch.Groups[1].Value
 
+if ([regex]::Matches($templateText, '\\transpose\s+[a-g](?:is|es)?\s+[a-g](?:is|es)?\b').Count -lt 1) {
+    throw 'No transposition directives found'
+}
+
 
 Write-Host ""
 Write-Host "Source transpose pitch: $sourcePitch"
 Write-Host ""
 
+
+# ---------------------------------------------------------
+# RESPONSIVE VENETIAN LAYOUTS (all phrases; test one first)
+# ---------------------------------------------------------
+
+$Layouts = @(
+    @{ Name = "wide"; Width = 300 },
+    @{ Name = "medium"; Width = 220 },
+    @{ Name = "narrow"; Width = 155 }
+)
+
+function Set-ResponsiveEngraving {
+    param([string]$Text, [int]$Width)
+
+    # Replace the existing paper block; do not stack paper settings.
+    # This matches the paper block up to the next SCORE heading in
+    # the current Venetian source format.
+    $paperPattern = '(?s)\\paper\s*\{.*?(?=\r?\n% =+\r?\n% SCORE)'
+    $paperReplacement = @"
+\paper {
+  indent = 0
+  paper-width = ${Width}\mm
+  left-margin = 8\mm
+  right-margin = 8\mm
+  top-margin = 8\mm
+  bottom-margin = 8\mm
+  page-breaking = #ly:one-page-breaking
+  ragged-right = ##f
+  ragged-bottom = ##t
+  tagline = ##f
+  system-system-spacing =
+    #'((basic-distance . 18)
+       (minimum-distance . 16)
+       (padding . 3))
+}
+
+"@
+    $matches = [regex]::Matches($Text, $paperPattern)
+    if ($matches.Count -ne 1) {
+        throw "Expected exactly one Venetian paper block; found $($matches.Count)"
+    }
+    $Text = [regex]::Replace($Text, $paperPattern, [System.Text.RegularExpressions.MatchEvaluator]{param($m) $paperReplacement})
+
+    # Remove active explicit breaks only; preserve commented-out examples.
+    # Work one line at a time to avoid accidentally changing comments.
+    $Text = [regex]::Replace($Text, '(?m)^(?!\s*%)([^%\r\n]*?)\\(?:noBreak|break)\b', '$1')
+
+    # Insert the tested spacing overrides into the existing Score context.
+    # The source has one layout block and one PianoStaff context.
+    $layoutPattern = '\\layout\s*\{\s*\\context\s*\{\s*\\PianoStaff'
+    if ([regex]::Matches($Text, $layoutPattern).Count -ne 1) {
+        throw 'Expected one layout/PianoStaff block in Venetian source'
+    }
+    $layoutReplacement = @'
+\layout {
+  \context {
+    \Score
+    \override SpacingSpanner.common-shortest-duration =
+      #(ly:make-moment 1/16)
+    \override SpacingSpanner.shortest-duration-space = #1.5
+  }
+  \context {
+    \PianoStaff
+'@
+    $Text = [regex]::Replace($Text, $layoutPattern, [System.Text.RegularExpressions.MatchEvaluator]{param($m) $layoutReplacement})
+    return $Text
+}
 
 # ---------------------------------------------------------
 # GENERATE ALL KEYS x ALL STAGES
@@ -430,6 +498,8 @@ foreach ($keyName in $Keys) {
             -TargetPitch $keyName
 
 
+    foreach ($layout in $Layouts) {
+
     foreach ($stage in @(1, 5)) {
 
         Write-Host ""
@@ -438,6 +508,7 @@ foreach ($keyName in $Keys) {
         Write-Host "Key:    $keyName"
         Write-Host "Target: $transposeTarget"
         Write-Host "Stage:  $stage"
+        Write-Host "Layout: $($layout.Name) ($($layout.Width) mm)"
         Write-Host "========================================"
 
 
@@ -477,13 +548,15 @@ foreach ($keyName in $Keys) {
 
 
         # -------------------------------------------------
+        $source = Set-ResponsiveEngraving -Text $source -Width $layout.Width
+
         # TEMPORARY LILYPOND SOURCE
         # -------------------------------------------------
 
         $tempLy =
             Join-Path `
                 $TempRoot `
-                "$keyName-stage$stage.ly"
+                "$keyName-$($layout.Name)-stage$stage.ly"
 
         Set-Content `
             -Path $tempLy `
@@ -498,7 +571,7 @@ foreach ($keyName in $Keys) {
         $outputBase =
             Join-Path `
                 $TempRoot `
-                "$keyName-stage$stage"
+                "$keyName-$($layout.Name)-stage$stage"
 
 
         # -------------------------------------------------
@@ -535,10 +608,11 @@ foreach ($keyName in $Keys) {
         # COPY INTO FINAL LOCATION
         # -------------------------------------------------
 
-        $finalSvg =
-            Join-Path `
-                $outputDir `
-                "stage$stage.svg"
+        $layoutDir = Join-Path $outputDir $layout.Name
+        if (!(Test-Path $layoutDir)) {
+            New-Item -ItemType Directory -Path $layoutDir | Out-Null
+        }
+        $finalSvg = Join-Path $layoutDir "stage$stage.svg"
 
         Copy-Item `
             -Path $croppedSvg `
@@ -550,6 +624,8 @@ foreach ($keyName in $Keys) {
         Write-Host "Created:"
         Write-Host "  $finalSvg"
     }
+    } # layout
+
 }
 
 

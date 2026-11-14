@@ -1127,3 +1127,131 @@ hr{
   top: 0;
   left: 0;
 }
+
+/* Venetian LilyPond SVG sizing fix */
+
+.lilypond-score {
+    position: relative;
+}
+
+.lilypond-stage {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+
+/* =========================================
+   Responsive trainer hero
+   ========================================= */
+
+@media (max-width: 700px) {
+
+  .trainer-hero {
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .trainer-hero-left {
+    min-width: 0;
+    width: 100%;
+  }
+
+  /* Allow title and pills to wrap */
+  .trainer-title-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .trainer-model-title {
+    width: 100%;
+    min-width: 0;
+    white-space: normal;
+    overflow-wrap: break-word;
+    font-size: clamp(28px, 7vw, 48px);
+    line-height: 1.05;
+  }
+
+  .hero-key-pill {
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  /* Wrap toolbar groups */
+  .hero-toolbar-row,
+  .hero-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  /* Wrap buttons within each group */
+  .key-toolbar-card,
+  .transpose-toolbar-card,
+  .difficulty-filter-card,
+  .mode-filter-card {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+    min-width: 0;
+    gap: 6px;
+  }
+
+  /* Keep buttons from being compressed */
+  .key-toolbar-card button,
+  .transpose-toolbar-card button,
+  .difficulty-filter-card button,
+  .mode-filter-card button {
+    flex-shrink: 0;
+  }
+
+  /* Keep composer image from dictating layout width */
+  .trainer-hero-right {
+    min-width: 0;
+    max-width: 100%;
+    pointer-events: none;
+  }
+}
+
+
+/* =========================================
+   Trainer title and pills — all models
+   ========================================= */
+
+.trainer-title-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.trainer-model-title {
+    min-width: 0;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: break-word;
+}
+
+.hero-key-pill {
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: break-word;
+}
+
+/* Narrow windows: title gets its own row */
+@media (max-width: 1000px) {
+
+    .trainer-model-title {
+        flex-basis: 100%;
+    }
+
+}

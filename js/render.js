@@ -131,43 +131,23 @@ export async function renderKrn(
   options,
   transposeValue = ''
 ) {
+  const rect = targetElement.getBoundingClientRect();
 
-  const available =
-    viewerAvailableWidth(targetElement);
+  // Use the actual available container width.
+  const availableWidth = Math.max(
+    100,
+    Math.floor(rect.width)
+  );
 
-  const hardMax =
-    Math.floor(available - 6);
-
-  const FILL_TARGET = 0.92;
-
-  let pageWidth =
-    lastGoodPageWidth || available;
+  console.log('Verovio rendering at width:', availableWidth);
 
   await renderWithPageWidth(
     toolkit,
     krnText,
     targetElement,
     options,
-    pageWidth,
+    availableWidth,
     transposeValue
   );
-
-  let width =
-    svgIntrinsicWidthPx(targetElement);
-
-  let tries = 0;
-
-
-  pageWidth = available;
-
-  await renderWithPageWidth(
-    toolkit,
-    krnText,
-    targetElement,
-    options,
-    pageWidth,
-    transposeValue
-  );
-
-  lastGoodPageWidth = pageWidth;
 }
+

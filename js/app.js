@@ -1957,6 +1957,29 @@ console.log('Toolkit 2 created');
     wireScaleSpacing('l1');
     wireScaleSpacing('l2');
 
+// Re-render Verovio notation when the available width changes.
+let resizeTimer;
+
+const notationResizeObserver = new ResizeObserver(() => {
+    clearTimeout(resizeTimer);
+
+    resizeTimer = setTimeout(() => {
+        if (level1Text) {
+            renderAll();
+        }
+    }, 150);
+});
+
+notationResizeObserver.observe(
+    document.getElementById('level1')
+);
+
+if (config.levels.includes(0)) {
+    notationResizeObserver.observe(
+        document.getElementById('level0')
+    );
+}
+
 
 
     const notch = document.getElementById('helpNotch');
