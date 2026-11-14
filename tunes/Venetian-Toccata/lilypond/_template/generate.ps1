@@ -5,6 +5,12 @@
 #
 #   .\generate.ps1 Merulo-Book2Tocc1Tone5-01
 #
+# Optional: generate only some keys (comma-separated LilyPond
+# folder names) instead of all 15:
+#
+#   .\generate.ps1 Merulo-Book2Tocc1Tone5-01 ces
+#   .\generate.ps1 Merulo-Book2Tocc1Tone5-01 ces,cis
+#
 # Input:
 #
 #   ../sources/Merulo-Book2Tocc1Tone5-01.ly
@@ -26,14 +32,15 @@ $ErrorActionPreference = "Stop"
 # GET PHRASE ID FROM COMMAND LINE
 # ---------------------------------------------------------
 
-if ($args.Count -ne 1) {
+if ($args.Count -lt 1 -or $args.Count -gt 2) {
 
     Write-Host ""
     Write-Host "Usage:"
-    Write-Host "  .\generate.ps1 PHRASE_ID"
+    Write-Host "  .\generate.ps1 PHRASE_ID [KEY[,KEY...]]"
     Write-Host ""
-    Write-Host "Example:"
+    Write-Host "Examples:"
     Write-Host "  .\generate.ps1 Merulo-Book2Tocc1Tone5-01"
+    Write-Host "  .\generate.ps1 Merulo-Book2Tocc1Tone5-01 ces"
     Write-Host ""
 
     exit 1
@@ -97,6 +104,34 @@ $Keys = @(
     "cis",
     "ces"
 )
+
+
+# ---------------------------------------------------------
+# OPTIONAL KEY FILTER
+#
+# A second argument limits generation to the named keys,
+# e.g.  ces   or   ces,cis
+# ---------------------------------------------------------
+
+if ($args.Count -eq 2) {
+
+    $AllKeys = $Keys
+
+    $Keys =
+        @(
+            (@($args[1]) -join ',') -split '[,\s]+' |
+            Where-Object { $_ }
+        )
+
+    foreach ($requestedKey in $Keys) {
+
+        if ($AllKeys -notcontains $requestedKey) {
+
+            throw `
+                "Unknown key '$requestedKey'. Valid keys: $($AllKeys -join ', ')"
+        }
+    }
+}
 
 
 # ---------------------------------------------------------
@@ -165,6 +200,18 @@ function GetPitchInfo {
     }
 
 
+    # Unwrapped semitone value relative to the pitch's own
+    # LilyPond octave (no modulo). For example:
+    #
+    #   c   =  0
+    #   ces = -1   (a semitone BELOW c, same octave number)
+    #   b   = 11
+    #
+    # This matters for ces: its pitch class is 11, but in
+    # LilyPond it sits just below c, not eleven semitones above.
+    $semitones =
+        $pitchClass
+
     $pitchClass =
         (($pitchClass % 12) + 12) % 12
 
@@ -173,6 +220,7 @@ function GetPitchInfo {
         Letter      = $letter
         Accidental  = $accidental
         PitchClass  = $pitchClass
+        Semitones   = $semitones
         LetterIndex = $letterIndex[$letter]
     }
 }
@@ -270,11 +318,17 @@ function GetTransposeTarget {
     #
     #   b,
     #
+    # But c -> ces: ces is already -1 semitone from c in the
+    # same octave, so no octave mark is needed.
+    #
     # -----------------------------------------------------
 
+    # Use the unwrapped semitone values (not pitch classes).
+    # Otherwise ces (pitch class 11, but written just below c)
+    # comes out an octave too low.
     $sameOctaveDifference =
-        $target.PitchClass -
-        $source.PitchClass
+        $target.Semitones -
+        $source.Semitones
 
 
     $octaveAdjustment =

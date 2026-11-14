@@ -465,6 +465,107 @@ function pitchClass(tonic) {
     return values[normalized];
 }
 
+// The 15 major keys that have LilyPond SVGs, with their accidentals.
+const VENETIAN_MAJOR_KEYS = {
+    'C':  { name: 'C',  sharps: 0, flats: 0 },
+    'G':  { name: 'G',  sharps: 1, flats: 0 },
+    'D':  { name: 'D',  sharps: 2, flats: 0 },
+    'A':  { name: 'A',  sharps: 3, flats: 0 },
+    'E':  { name: 'E',  sharps: 4, flats: 0 },
+    'B':  { name: 'B',  sharps: 5, flats: 0 },
+    'F#': { name: 'F#', sharps: 6, flats: 0 },
+    'C#': { name: 'C#', sharps: 7, flats: 0 },
+
+    'F':  { name: 'F',  sharps: 0, flats: 1 },
+    'Bb': { name: 'Bb', sharps: 0, flats: 2 },
+    'Eb': { name: 'Eb', sharps: 0, flats: 3 },
+    'Ab': { name: 'Ab', sharps: 0, flats: 4 },
+    'Db': { name: 'Db', sharps: 0, flats: 5 },
+    'Gb': { name: 'Gb', sharps: 0, flats: 6 },
+    'Cb': { name: 'Cb', sharps: 0, flats: 7 }
+};
+
+// Every spelling a target final can have, by pitch class.
+const VENETIAN_FINAL_SPELLINGS = {
+    0:  ['C', 'B#'],
+    1:  ['Db', 'C#'],
+    2:  ['D'],
+    3:  ['Eb', 'D#'],
+    4:  ['E', 'Fb'],
+    5:  ['F', 'E#'],
+    6:  ['F#', 'Gb'],
+    7:  ['G'],
+    8:  ['Ab', 'G#'],
+    9:  ['A'],
+    10: ['Bb', 'A#'],
+    11: ['B', 'Cb']
+};
+
+const SPELLING_LETTERS = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+
+const SPELLING_NATURAL_PC = {
+    C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11
+};
+
+// Applies the *spelled* interval fromKey -> toKey to `note`.
+// e.g. (F, C, C#) -> F#   and   (D, C, Cb) -> Db.
+// Returns null if the result needs a double accidental or a
+// name is not recognised.
+function transposeSpelledNote(note, fromKey, toKey) {
+
+    if (
+        !note || !fromKey || !toKey ||
+        pitchClass(note) === undefined ||
+        pitchClass(fromKey) === undefined ||
+        pitchClass(toKey) === undefined
+    ) {
+        return null;
+    }
+
+    const steps =
+        (
+            SPELLING_LETTERS.indexOf(toKey.charAt(0)) -
+            SPELLING_LETTERS.indexOf(fromKey.charAt(0)) +
+            7
+        ) % 7;
+
+    const semitones =
+        (pitchClass(toKey) - pitchClass(fromKey) + 12) % 12;
+
+    const letter =
+        SPELLING_LETTERS[
+            (
+                SPELLING_LETTERS.indexOf(note.charAt(0)) +
+                steps
+            ) % 7
+        ];
+
+    let accidental =
+        (
+            (
+                pitchClass(note) +
+                semitones -
+                SPELLING_NATURAL_PC[letter]
+            ) % 12 + 12
+        ) % 12;
+
+    if (accidental > 6) {
+        accidental -= 12;
+    }
+
+    if (accidental === 1) return letter + '#';
+    if (accidental === -1) return letter + 'b';
+    if (accidental === 0) return letter;
+
+    return null;
+}
+
+// The LilyPond key (and its signature) that goes with a target
+// final, found by transposing the source key by the same
+// SPELLED interval as the final. This keeps the SVGs in the same
+// spelling as the Verovio reduction (Eb vs D#, Db vs C#, ...).
+// keyInfo is null when that spelling would need more than
+// 7 accidentals (e.g. D# major).
 function getVenetianTargetKeySignatureInfo(
     targetFinal
 ) {
@@ -509,14 +610,22 @@ function getVenetianTargetKeySignatureInfo(
             interval
         ) % 12;
 
-    const keyInfo =
-        getMajorKeySignatureInfo(
-            targetLilypondPC
+    const lilypondKey =
+        transposeSpelledNote(
+            venetianSourceLilypondKey,
+            venetianSourceFinal,
+            targetFinal
         );
+
+    const keyInfo =
+        (lilypondKey &&
+            VENETIAN_MAJOR_KEYS[lilypondKey]) ||
+        null;
 
     return {
         interval,
         targetLilypondPC,
+        lilypondKey,
         keyInfo
     };
 }
@@ -531,32 +640,19 @@ function normalizeVenetianTargetTonic(
         return targetFinal;
     }
 
-    const candidates = [
-        targetFinal
-    ];
+    // Keep the requested spelling if it has a usable LilyPond key;
+    // otherwise try the enharmonic spellings of the same pitch.
+    const pc = pitchClass(targetFinal);
 
-    const enharmonicMap = {
-        'C#': 'Db',
-        'Db': 'C#',
+    const candidates = [targetFinal];
 
-        'D#': 'Eb',
-        'Eb': 'D#',
-
-        'F#': 'Gb',
-        'Gb': 'F#',
-
-        'G#': 'Ab',
-        'Ab': 'G#',
-
-        'A#': 'Bb',
-        'Bb': 'A#'
-    };
-
-    const alternative =
-        enharmonicMap[targetFinal];
-
-    if (alternative) {
-        candidates.push(alternative);
+    for (
+        const alt of
+        (VENETIAN_FINAL_SPELLINGS[pc] || [])
+    ) {
+        if (!candidates.includes(alt)) {
+            candidates.push(alt);
+        }
     }
 
     for (const candidate of candidates) {
@@ -566,14 +662,7 @@ function normalizeVenetianTargetTonic(
                 candidate
             );
 
-        if (!info || !info.keyInfo) {
-            continue;
-        }
-
-        if (
-            info.keyInfo.sharps <= 7 &&
-            info.keyInfo.flats <= 7
-        ) {
+        if (info && info.keyInfo) {
             return candidate;
         }
     }
@@ -619,60 +708,16 @@ function getVenetianLevel2Tonic() {
         return currentTargetTonic;
     }
 
-    const sourceFinalPC =
-        pitchClass(
-            venetianSourceFinal
-        );
-
-    const targetFinalPC =
-        pitchClass(
+    const info =
+        getVenetianTargetKeySignatureInfo(
             currentTargetTonic
         );
 
-    const sourceLilypondPC =
-        pitchClass(
-            venetianSourceLilypondKey
-        );
-
-    if (
-        sourceFinalPC === undefined ||
-        targetFinalPC === undefined ||
-        sourceLilypondPC === undefined
-    ) {
+    if (!info || !info.keyInfo) {
         return null;
     }
 
-    const interval =
-        (
-            targetFinalPC -
-            sourceFinalPC +
-            12
-        ) % 12;
-
-    const targetLilypondPC =
-        (
-            sourceLilypondPC +
-            interval
-        ) % 12;
-
-    const canonicalMajorKeys = {
-        0: 'C',
-        1: 'Db',
-        2: 'D',
-        3: 'Eb',
-        4: 'E',
-        5: 'F',
-        6: 'F#',
-        7: 'G',
-        8: 'Ab',
-        9: 'A',
-        10: 'Bb',
-        11: 'B'
-    };
-
-    return canonicalMajorKeys[
-        targetLilypondPC
-    ] || null;
+    return info.keyInfo.name;
 }
 
 function chooseMajorTonicSpelling(
@@ -1020,6 +1065,19 @@ function stepCurrentTonic(direction) {
     let index =
         list.indexOf(currentTargetTonic);
 
+    // A spelling that is not in the stepper (e.g. C#, D#) is
+    // located by pitch class so stepping continues from it.
+    if (
+        index < 0 &&
+        currentModel === 'Venetian-Toccata'
+    ) {
+        const pc = pitchClass(currentTargetTonic);
+
+        index = list.findIndex(
+            item => pitchClass(item) === pc
+        );
+    }
+
     if (index < 0) {
         index = 0;
     }
@@ -1157,13 +1215,47 @@ function toggleEnharmonic() {
 
     if (currentModel === 'Venetian-Toccata') {
 
-        map = {
-            'Db': 'C#',
-            'C#': 'Db',
+        // Switch to the next enharmonic spelling of the final that
+        // has a usable LilyPond key (e.g. Eb <-> D#, Db <-> C#).
+        // The SVG key and the Verovio reduction both follow it.
+        const spellings =
+            VENETIAN_FINAL_SPELLINGS[
+                pitchClass(currentTargetTonic)
+            ] || [];
 
-            'Ab': 'G#',
-            'G#': 'Ab'
-        };
+        const start =
+            spellings.indexOf(currentTargetTonic);
+
+        let replacement = null;
+
+        for (let i = 1; i < spellings.length; i++) {
+
+            const candidate =
+                spellings[
+                    (start + i + spellings.length) %
+                    spellings.length
+                ];
+
+            const info =
+                getVenetianTargetKeySignatureInfo(
+                    candidate
+                );
+
+            if (info && info.keyInfo) {
+                replacement = candidate;
+                break;
+            }
+        }
+
+        if (!replacement) {
+            return;
+        }
+
+        currentTargetTonic = replacement;
+
+        updateKeyPill();
+        renderAll();
+        return;
 
     } else {
 
@@ -1796,36 +1888,39 @@ function chooseRandomTargetKey() {
         currentModel === 'Venetian-Toccata'
     ) {
 
+        // All 15 major keys that have SVGs, filtered by the
+        // accidental-count buttons. The target final is spelled
+        // to match each key, so notation and label agree.
         const candidates = [];
 
         for (
-            const candidate of STEPPER_VENETIAN
+            const keyInfo of
+            Object.values(VENETIAN_MAJOR_KEYS)
         ) {
 
-            const info =
-                getVenetianTargetKeySignatureInfo(
-                    candidate
+            const accidentalCount =
+                Math.max(
+                    keyInfo.sharps,
+                    keyInfo.flats
                 );
 
             if (
-                !info ||
-                !info.keyInfo
+                !enabledCounts.has(
+                    accidentalCount
+                )
             ) {
                 continue;
             }
 
-            const accidentalCount =
-                Math.max(
-                    info.keyInfo.sharps,
-                    info.keyInfo.flats
+            const final =
+                transposeSpelledNote(
+                    venetianSourceFinal,
+                    venetianSourceLilypondKey,
+                    keyInfo.name
                 );
 
-            if (
-                enabledCounts.has(
-                    accidentalCount
-                )
-            ) {
-                candidates.push(candidate);
+            if (final) {
+                candidates.push(final);
             }
         }
 
@@ -1836,18 +1931,13 @@ function chooseRandomTargetKey() {
             return;
         }
 
-        const candidate =
+        currentTargetTonic =
             candidates[
                 Math.floor(
                     Math.random() *
                     candidates.length
                 )
             ];
-
-        currentTargetTonic =
-            normalizeVenetianTargetTonic(
-                candidate
-            );
 
         return;
     }

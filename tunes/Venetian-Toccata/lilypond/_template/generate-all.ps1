@@ -1,6 +1,14 @@
 # Venetian Toccata: generate wide, medium, and narrow SVGs
 # for every .ly source in ../sources using the existing generate.ps1.
 # Run from any directory: .\generate-all.ps1
+#
+# Optional: limit to some keys (comma-separated folder names):
+#   .\generate-all.ps1 ces
+#   .\generate-all.ps1 ces,cis
+
+param(
+    [string]$Keys = ''
+)
 
 $ErrorActionPreference = 'Stop'
 
@@ -20,7 +28,15 @@ if ($files.Count -eq 0) {
 }
 
 Write-Host "Found $($files.Count) Venetian .ly source file(s)."
-Write-Host 'Each phrase will generate 15 keys x 3 layouts x 2 stages = 90 SVGs.'
+if ($Keys) {
+    $keyCount = @($Keys -split '[,\s]+' | Where-Object { $_ }).Count
+    Write-Host "Keys: $Keys"
+    Write-Host "Each phrase will generate $keyCount key(s) x 3 layouts x 2 stages = $($keyCount * 6) SVGs."
+}
+else {
+    $keyCount = 15
+    Write-Host 'Each phrase will generate 15 keys x 3 layouts x 2 stages = 90 SVGs.'
+}
 Write-Host ''
 
 $completed = 0
@@ -29,7 +45,12 @@ foreach ($file in $files) {
     Write-Host "[$($completed + 1)/$($files.Count)] Generating $phraseId ..."
 
     # Use the generator you have already tested successfully.
-    & $generator $phraseId
+    if ($Keys) {
+        & $generator $phraseId $Keys
+    }
+    else {
+        & $generator $phraseId
+    }
 
     # The generator calls the native LilyPond executable and throws
     # if LilyPond fails. Stop here if any unexpected native failure occurs.
@@ -41,4 +62,4 @@ foreach ($file in $files) {
 }
 
 Write-Host ''
-Write-Host "Finished: $completed phrase(s); expected $($completed * 90) SVGs."
+Write-Host "Finished: $completed phrase(s); expected $($completed * $keyCount * 6) SVGs."
