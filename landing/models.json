@@ -1,6 +1,6 @@
 {
   "models": [
-      {
+    {
       "type": "model",
       "title": "Merulo Venetian Toccata",
       "description": "Learn to turn very simple harmony into the ultimate expressive and refined keyboard genre.",
@@ -8,7 +8,6 @@
       "composerImage": "img/composers/merulo.jpg",
       "model": "Venetian-Toccata"
     },
-   
     {
       "type": "model",
       "title": "Scheidemann Free Praeludia",
@@ -17,8 +16,6 @@
       "composerImage": "img/composers/Heinrich_Scheidemann.jpg",
       "model": "Scheidemann-Prelude"
     },
-
-
     {
       "type": "model",
       "title": "Buxtehude Chorale Preludes",
@@ -27,8 +24,15 @@
       "composerImage": "img/composers/Dieterich_Buxtehude.png",
       "model": "Buxtehude-Chorale-Prelude"
     },
-
- {
+    {
+      "type": "external",
+      "title": "Pachelbel Magnificat Fugues",
+      "description": "Practice subjects, answers, and contrapuntal entries in Pachelbel's Magnificat fugues.",
+      "musicImage": "img/music/magnificat.jpg",
+      "composerImage": "img/composers/pachelbel.jpg",
+      "url": "https://iowa-organ-studio.github.io/magnificat-fugues/"
+    },
+    {
       "type": "collection",
       "title": "Pachelbel Aria Variations",
       "description": "Turn a simple harmonic template into a variation set.",
@@ -36,8 +40,7 @@
       "composerImage": "img/composers/pachelbel.jpg",
       "collection": "Pachelbel-Aria"
     },
-
-{
+    {
       "type": "model",
       "title": "French Cantus Firmus in the tenor",
       "description": "The grandest way to present a cantus firmus",
@@ -45,8 +48,7 @@
       "composerImage": "img/composers/degrigny.png",
       "model": "CF-en-taille"
     },
-
-{
+    {
       "type": "model",
       "title": "French Tierce en Taille",
       "description": "The most expressive keyboard genre",
@@ -54,9 +56,6 @@
       "composerImage": "img/composers/dumage.png",
       "model": "Tierce-en-taille"
     },
-
-
-    
     {
       "type": "collection",
       "title": "Böhm Chorale Partita",
@@ -65,8 +64,7 @@
       "composerImage": "img/composers/boehm.png",
       "collection": "Boehm-Chorale-Partita"
     },
-
-     {
+    {
       "type": "collection",
       "title": "JS Bach Well-Tempered Clavier Preludes",
       "description": "The ultimate collection of prelude styles.",
