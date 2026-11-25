@@ -551,45 +551,53 @@ changeLHStaff =
       \time 4/2
       \omit Staff.TimeSignature
 
+\partial 1
 
-\set Score.currentBarNumber = #4
  
-    
-  %3
   <<
-    {
-      \voiceOne
-      c''2~
-      c''4
-      bes'4
-    }
-    \\
-    {
-      \voiceTwo
-      f'4
-      f'8
-      e'32[ f' e' f']
-      e'2
-      
-    }
-  >>
-  %3.3
-  
-   <<
-    {
-      \voiceOne
-      <f' a'~>2
-      
-    }
-    \\
-    {
-      \voiceTwo
-      c'2
-    }
-  >>
-
+  {
+    \voiceOne
+    a'2~ a'2
+  }
+  \\
+  {
+    \voiceTwo
+    f'2~ f'2
+  }
+  \\
+  {
+    \voiceTwo
+    c'2~ c'4 r4
+  }
+>>
+\set Score.currentBarNumber = #4
   %
-  
+ <<
+  {
+    \voiceOne
+    g'2~ g'2
+    a'2 f'2
+    g'8 d'16[ e' f' g' a' bes']
+    c''2~ c''4
+    bes'8 a'8
+    g'2
+    <a' f'>2
+  }
+  \\
+  {
+    \voiceTwo
+    d'4. d'8
+    e'8 f'16[ e' f' e' d' e']
+    f'2 d'2
+    e'8 s8 s4
+    f'2~ f'2
+    e'16[ f' e' f']
+    e'4
+    c'2
+  }
+>>
+ 
+ 
 }
     }
 
@@ -633,39 +641,40 @@ changeLHStaff =
       \time 4/2
       \omit Staff.TimeSignature
 
+ \partial 1
  
-     
-  %3
-     <<
-    {
-      \voiceOne
-      a2
-      g2
-    }
-    \\
-    {
-      \voiceTwo
-      a,2
-      c2
-    }
-  >>
-  %3.3
-     <<
-    {
-      \voiceOne
-      s2
-     
-    }
-    \\
-    {
-      \voiceTwo
-      f2
-    }
-  >>
-  %4
+   {
+  \voiceOne
+  f,8 e8 f8 g8
+}  
+ %
+ <<
+  {
+    \voiceOne
+    a8 b8 c'8 a8
+    b16[ c' b c'] b!4
+    c'2~ c'4
+    b!16[ c' b c']
+    b8[ c'16 b c' b a b]
+    c'2
+    bes4 a4 g2
+    c'2
+    s2
+  }
+  \\
+  {
+    \voiceTwo
+    f2~ f2
+    e2
+    d2~ d2
+    c2~ c2~ c2
+    c2
+    f,2
+  }
+>>
   
   
-  
+  %
 }
     }
   >>
