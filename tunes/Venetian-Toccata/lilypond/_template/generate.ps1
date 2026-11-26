@@ -55,27 +55,27 @@ $PhraseId = $args[0]
 # ---------------------------------------------------------
 
 $TemplateDirectory =
-    $PSScriptRoot
+$PSScriptRoot
 
 $SourcesDirectory =
-    Join-Path `
-        $TemplateDirectory `
-        "..\sources"
+Join-Path `
+    $TemplateDirectory `
+    "..\sources"
 
 $Template =
-    Join-Path `
-        $SourcesDirectory `
-        "$PhraseId.ly"
+Join-Path `
+    $SourcesDirectory `
+    "$PhraseId.ly"
 
 $OutputRoot =
-    Join-Path `
-        $TemplateDirectory `
-        "..\$PhraseId"
+Join-Path `
+    $TemplateDirectory `
+    "..\$PhraseId"
 
 $TempRoot =
-    Join-Path `
-        $env:TEMP `
-        "lilypond-intavolatura-$PhraseId"
+Join-Path `
+    $env:TEMP `
+    "lilypond-intavolatura-$PhraseId"
 
 
 # ---------------------------------------------------------
@@ -118,10 +118,10 @@ if ($args.Count -eq 2) {
     $AllKeys = $Keys
 
     $Keys =
-        @(
-            (@($args[1]) -join ',') -split '[,\s]+' |
-            Where-Object { $_ }
-        )
+    @(
+        (@($args[1]) -join ',') -split '[,\s]+' |
+        Where-Object { $_ }
+    )
 
     foreach ($requestedKey in $Keys) {
 
@@ -145,10 +145,10 @@ function GetPitchInfo {
     )
 
     $match =
-        [regex]::Match(
-            $Pitch,
-            '^([a-g])(is|es)?$'
-        )
+    [regex]::Match(
+        $Pitch,
+        '^([a-g])(is|es)?$'
+    )
 
     if (!$match.Success) {
 
@@ -157,10 +157,10 @@ function GetPitchInfo {
     }
 
     $letter =
-        $match.Groups[1].Value
+    $match.Groups[1].Value
 
     $accidental =
-        $match.Groups[2].Value
+    $match.Groups[2].Value
 
 
     $pitchClassByLetter = @{
@@ -186,7 +186,7 @@ function GetPitchInfo {
 
 
     $pitchClass =
-        $pitchClassByLetter[$letter]
+    $pitchClassByLetter[$letter]
 
 
     if ($accidental -eq "is") {
@@ -210,10 +210,10 @@ function GetPitchInfo {
     # This matters for ces: its pitch class is 11, but in
     # LilyPond it sits just below c, not eleven semitones above.
     $semitones =
-        $pitchClass
+    $pitchClass
 
     $pitchClass =
-        (($pitchClass % 12) + 12) % 12
+    (($pitchClass % 12) + 12) % 12
 
 
     return @{
@@ -235,10 +235,10 @@ function GetTransposeTarget {
 
 
     $source =
-        GetPitchInfo $SourcePitch
+    GetPitchInfo $SourcePitch
 
     $target =
-        GetPitchInfo $TargetPitch
+    GetPitchInfo $TargetPitch
 
 
     # -----------------------------------------------------
@@ -252,8 +252,8 @@ function GetTransposeTarget {
     # -----------------------------------------------------
 
     $interval =
-        $target.PitchClass -
-        $source.PitchClass
+    $target.PitchClass -
+    $source.PitchClass
 
 
     while ($interval -gt 6) {
@@ -285,11 +285,11 @@ function GetTransposeTarget {
     ) {
 
         $diatonicDistance =
-            (
-                $target.LetterIndex -
-                $source.LetterIndex +
-                7
-            ) % 7
+        (
+            $target.LetterIndex -
+            $source.LetterIndex +
+            7
+        ) % 7
 
 
         if ($diatonicDistance -le 3) {
@@ -327,15 +327,15 @@ function GetTransposeTarget {
     # Otherwise ces (pitch class 11, but written just below c)
     # comes out an octave too low.
     $sameOctaveDifference =
-        $target.Semitones -
-        $source.Semitones
+    $target.Semitones -
+    $source.Semitones
 
 
     $octaveAdjustment =
-        (
-            $interval -
-            $sameOctaveDifference
-        ) / 12
+    (
+        $interval -
+        $sameOctaveDifference
+    ) / 12
 
 
     if (
@@ -349,24 +349,24 @@ function GetTransposeTarget {
 
 
     $octaveAdjustment =
-        [int]$octaveAdjustment
+    [int]$octaveAdjustment
 
 
     $result =
-        $target.Letter +
-        $target.Accidental
+    $target.Letter +
+    $target.Accidental
 
 
     if ($octaveAdjustment -gt 0) {
 
         $result +=
-            ("'" * $octaveAdjustment)
+        ("'" * $octaveAdjustment)
     }
 
     elseif ($octaveAdjustment -lt 0) {
 
         $result +=
-            ("," * (-$octaveAdjustment))
+        ("," * (-$octaveAdjustment))
     }
 
 
@@ -400,7 +400,7 @@ if (Test-Path $TempRoot) {
 New-Item `
     -ItemType Directory `
     -Path $TempRoot `
-    | Out-Null
+| Out-Null
 
 
 # ---------------------------------------------------------
@@ -408,9 +408,9 @@ New-Item `
 # ---------------------------------------------------------
 
 $templateText =
-    Get-Content `
-        -Path $Template `
-        -Raw
+Get-Content `
+    -Path $Template `
+    -Raw
 
 
 # ---------------------------------------------------------
@@ -429,10 +429,10 @@ $templateText =
 # ---------------------------------------------------------
 
 $transposeMatch =
-    [regex]::Match(
-        $templateText,
-        '\\transpose\s+([a-g](?:is|es)?)\s+([a-g](?:is|es)?)\b'
-    )
+[regex]::Match(
+    $templateText,
+    '\\transpose\s+([a-g](?:is|es)?)\s+([a-g](?:is|es)?)\b'
+)
 
 
 if (!$transposeMatch.Success) {
@@ -443,7 +443,7 @@ if (!$transposeMatch.Success) {
 
 
 $sourcePitch =
-    $transposeMatch.Groups[1].Value
+$transposeMatch.Groups[1].Value
 
 if ([regex]::Matches($templateText, '\\transpose\s+[a-g](?:is|es)?\s+[a-g](?:is|es)?\b').Count -lt 1) {
     throw 'No transposition directives found'
@@ -495,7 +495,7 @@ function Set-ResponsiveEngraving {
     if ($matches.Count -ne 1) {
         throw "Expected exactly one Venetian paper block; found $($matches.Count)"
     }
-    $Text = [regex]::Replace($Text, $paperPattern, [System.Text.RegularExpressions.MatchEvaluator]{param($m) $paperReplacement})
+    $Text = [regex]::Replace($Text, $paperPattern, [System.Text.RegularExpressions.MatchEvaluator] { param($m) $paperReplacement })
 
     # Remove active explicit breaks only; preserve commented-out examples.
     # Work one line at a time to avoid accidentally changing comments.
@@ -518,7 +518,7 @@ function Set-ResponsiveEngraving {
   \context {
     \PianoStaff
 '@
-    $Text = [regex]::Replace($Text, $layoutPattern, [System.Text.RegularExpressions.MatchEvaluator]{param($m) $layoutReplacement})
+    $Text = [regex]::Replace($Text, $layoutPattern, [System.Text.RegularExpressions.MatchEvaluator] { param($m) $layoutReplacement })
     return $Text
 }
 
@@ -529,16 +529,16 @@ function Set-ResponsiveEngraving {
 foreach ($keyName in $Keys) {
 
     $outputDir =
-        Join-Path `
-            $OutputRoot `
-            $keyName
+    Join-Path `
+        $OutputRoot `
+        $keyName
 
     if (!(Test-Path $outputDir)) {
 
         New-Item `
             -ItemType Directory `
             -Path $outputDir `
-            | Out-Null
+        | Out-Null
     }
 
 
@@ -547,53 +547,53 @@ foreach ($keyName in $Keys) {
     # -----------------------------------------------------
 
     $transposeTarget =
-        GetTransposeTarget `
-            -SourcePitch $sourcePitch `
-            -TargetPitch $keyName
+    GetTransposeTarget `
+        -SourcePitch $sourcePitch `
+        -TargetPitch $keyName
 
 
     foreach ($layout in $Layouts) {
 
-    foreach ($stage in @(1, 5)) {
+        foreach ($stage in @(1, 5)) {
 
-        Write-Host ""
-        Write-Host "========================================"
-        Write-Host "Phrase: $PhraseId"
-        Write-Host "Key:    $keyName"
-        Write-Host "Target: $transposeTarget"
-        Write-Host "Stage:  $stage"
-        Write-Host "Layout: $($layout.Name) ($($layout.Width) mm)"
-        Write-Host "========================================"
+            Write-Host ""
+            Write-Host "========================================"
+            Write-Host "Phrase: $PhraseId"
+            Write-Host "Key:    $keyName"
+            Write-Host "Target: $transposeTarget"
+            Write-Host "Stage:  $stage"
+            Write-Host "Layout: $($layout.Name) ($($layout.Width) mm)"
+            Write-Host "========================================"
 
 
-        # -------------------------------------------------
-        # START FROM ORIGINAL PHRASE SOURCE
-        # -------------------------------------------------
+            # -------------------------------------------------
+            # START FROM ORIGINAL PHRASE SOURCE
+            # -------------------------------------------------
 
-        $source =
+            $source =
             $templateText
 
 
-        # -------------------------------------------------
-        # REPLACE DESTINATION PITCH
-        # -------------------------------------------------
+            # -------------------------------------------------
+            # REPLACE DESTINATION PITCH
+            # -------------------------------------------------
 
-        $source =
-                [regex]::Replace(
-                    $source,
-                    '\\transpose\s+([a-g](?:is|es)?)\s+([a-g](?:is|es)?)\b',
-                    [System.Text.RegularExpressions.MatchEvaluator]{
-                        param($m)
-                        "\transpose $($m.Groups[1].Value) $transposeTarget"
-                    }
-                )
+            $source =
+            [regex]::Replace(
+                $source,
+                '\\transpose\s+([a-g](?:is|es)?)\s+([a-g](?:is|es)?)\b',
+                [System.Text.RegularExpressions.MatchEvaluator] {
+                    param($m)
+                    "\transpose $($m.Groups[1].Value) $transposeTarget"
+                }
+            )
 
 
-        # -------------------------------------------------
-        # REPLACE STAGE
-        # -------------------------------------------------
+            # -------------------------------------------------
+            # REPLACE STAGE
+            # -------------------------------------------------
 
-        $source =
+            $source =
             [regex]::Replace(
                 $source,
                 '(?m)^\s*#\(define stage [1-5]\).*$',
@@ -601,92 +601,131 @@ foreach ($keyName in $Keys) {
             )
 
 
-        # -------------------------------------------------
-        $source = Set-ResponsiveEngraving -Text $source -Width $layout.Width
+            # -------------------------------------------------
+            $source = Set-ResponsiveEngraving -Text $source -Width $layout.Width
 
-        # TEMPORARY LILYPOND SOURCE
-        # -------------------------------------------------
 
-        $tempLy =
+            # ---------------------------------------------------------
+            # FORCE CLEFS AT HISTORICAL STAFF CHANGES
+            # ---------------------------------------------------------
+
+            foreach ($staffChange in @(
+                    @{ FunctionName = 'changeRHStaff'; Clef = 'treble' },
+                    @{ FunctionName = 'changeLHStaff'; Clef = 'bass' }
+                )) {
+
+                $pattern =
+                '(?s)(' +
+                [regex]::Escape($staffChange.FunctionName) +
+                '\s*=\s*#\(define-music-function\b.*?\\startStaff)(\s*#\})'
+
+                $matches = [regex]::Matches($source, $pattern)
+
+                if ($matches.Count -ne 1) {
+                    throw "Expected exactly one $($staffChange.FunctionName) definition; found $($matches.Count)"
+                }
+
+                $clef = $staffChange.Clef
+
+                $source = [regex]::Replace(
+                    $source,
+                    $pattern,
+                    [System.Text.RegularExpressions.MatchEvaluator] {
+                        param($m)
+
+                        $m.Groups[1].Value +
+                        "`n    \set Staff.forceClef = ##t" +
+                        "`n    \clef $clef" +
+                        $m.Groups[2].Value
+                    }
+                )
+            }
+
+
+
+            # TEMPORARY LILYPOND SOURCE
+            # -------------------------------------------------
+
+            $tempLy =
             Join-Path `
                 $TempRoot `
                 "$keyName-$($layout.Name)-stage$stage.ly"
 
-        Set-Content `
-            -Path $tempLy `
-            -Value $source `
-            -Encoding UTF8
+            Set-Content `
+                -Path $tempLy `
+                -Value $source `
+                -Encoding UTF8
 
 
-        # -------------------------------------------------
-        # LILYPOND OUTPUT BASENAME
-        # -------------------------------------------------
+            # -------------------------------------------------
+            # LILYPOND OUTPUT BASENAME
+            # -------------------------------------------------
 
-        $outputBase =
+            $outputBase =
             Join-Path `
                 $TempRoot `
                 "$keyName-$($layout.Name)-stage$stage"
 
 
-        # -------------------------------------------------
-        # RUN LILYPOND
-        # -------------------------------------------------
+            # -------------------------------------------------
+            # RUN LILYPOND
+            # -------------------------------------------------
 
-    $previousPreference = $ErrorActionPreference
+            $previousPreference = $ErrorActionPreference
 
-try {
-    $ErrorActionPreference = 'Continue'
+            try {
+                $ErrorActionPreference = 'Continue'
 
-    & lilypond `
-        --svg `
-        -o $outputBase `
-        $tempLy
+                & lilypond `
+                    --svg `
+                    -o $outputBase `
+                    $tempLy
 
-    $lilypondExitCode = $LASTEXITCODE
-}
-finally {
-    $ErrorActionPreference = $previousPreference
-}
+                $lilypondExitCode = $LASTEXITCODE
+            }
+            finally {
+                $ErrorActionPreference = $previousPreference
+            }
 
-if ($lilypondExitCode -ne 0) {
-    throw "LilyPond failed for $PhraseId / $keyName / stage $stage (exit code $lilypondExitCode)"
-}
+            if ($lilypondExitCode -ne 0) {
+                throw "LilyPond failed for $PhraseId / $keyName / stage $stage (exit code $lilypondExitCode)"
+            }
 
 
-        # -------------------------------------------------
-        # FIND CROPPED SVG
-        # -------------------------------------------------
+            # -------------------------------------------------
+            # FIND CROPPED SVG
+            # -------------------------------------------------
 
-        $croppedSvg =
+            $croppedSvg =
             "$outputBase.svg"
 
-        if (!(Test-Path $croppedSvg)) {
+            if (!(Test-Path $croppedSvg)) {
 
-            throw `
-                "Cropped SVG not found: $croppedSvg"
+                throw `
+                    "Cropped SVG not found: $croppedSvg"
+            }
+
+
+            # -------------------------------------------------
+            # COPY INTO FINAL LOCATION
+            # -------------------------------------------------
+
+            $layoutDir = Join-Path $outputDir $layout.Name
+            if (!(Test-Path $layoutDir)) {
+                New-Item -ItemType Directory -Path $layoutDir | Out-Null
+            }
+            $finalSvg = Join-Path $layoutDir "stage$stage.svg"
+
+            Copy-Item `
+                -Path $croppedSvg `
+                -Destination $finalSvg `
+                -Force
+
+
+            Write-Host ""
+            Write-Host "Created:"
+            Write-Host "  $finalSvg"
         }
-
-
-        # -------------------------------------------------
-        # COPY INTO FINAL LOCATION
-        # -------------------------------------------------
-
-        $layoutDir = Join-Path $outputDir $layout.Name
-        if (!(Test-Path $layoutDir)) {
-            New-Item -ItemType Directory -Path $layoutDir | Out-Null
-        }
-        $finalSvg = Join-Path $layoutDir "stage$stage.svg"
-
-        Copy-Item `
-            -Path $croppedSvg `
-            -Destination $finalSvg `
-            -Force
-
-
-        Write-Host ""
-        Write-Host "Created:"
-        Write-Host "  $finalSvg"
-    }
     } # layout
 
 }
