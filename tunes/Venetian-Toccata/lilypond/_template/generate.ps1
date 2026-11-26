@@ -632,16 +632,25 @@ foreach ($keyName in $Keys) {
         # RUN LILYPOND
         # -------------------------------------------------
 
-        & lilypond `
-            --svg `
-            -o $outputBase `
-            $tempLy
+    $previousPreference = $ErrorActionPreference
 
-        if ($LASTEXITCODE -ne 0) {
+try {
+    $ErrorActionPreference = 'Continue'
 
-            throw `
-                "LilyPond failed for $PhraseId / $keyName / stage $stage"
-        }
+    & lilypond `
+        --svg `
+        -o $outputBase `
+        $tempLy
+
+    $lilypondExitCode = $LASTEXITCODE
+}
+finally {
+    $ErrorActionPreference = $previousPreference
+}
+
+if ($lilypondExitCode -ne 0) {
+    throw "LilyPond failed for $PhraseId / $keyName / stage $stage (exit code $lilypondExitCode)"
+}
 
 
         # -------------------------------------------------
